@@ -1,0 +1,110 @@
+/* Forms */
+.formCollapse {
+  background: #333;
+  border: 1px solid #ddd;
+  text-decoration: none !important;
+  color: #fff !important;
+  padding: 10px;
+  display: block;
+  margin-bottom: 0px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+  border-bottom-right-radius: 0px;
+  border-bottom-left-radius: 0px;
+  &.collapsed {
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+}
+.roundContainer {
+  border: 1px solid #ddd;
+  padding: 10px;
+  margin-bottom: 20px;
+  border-bottom-right-radius: 5px;
+  border-bottom-left-radius: 5px;
+  margin-bottom: 20px;
+}
+.form-group {
+  margin-bottom: 1.5rem;
+}
+.input-group-append,
+.input-group-prepend {
+  color: $input-placeholder-color;
+  width: auto;
+  border: none;
+
+  .input-group-text {
+    border-color: $border-color;
+    padding: .5rem .75rem;
+    color: $input-placeholder-color;
+  }
+}
+.form-control {
+  border: 1px solid $border-color;
+  font-weight: 400;
+  font-size: $input-font-size;
+  border-radius: 4px;
+  height: $input-height;
+  padding: .4375rem .75rem;
+  &:disabled,
+    &:read-only {
+      background-color: transparent;
+      border: none;
+    }
+}
+
+select {
+  &.form-control {
+    padding: .4375rem .75rem;
+    border: 0;
+    background-color: #fff !important;
+    outline: 1px solid $border-color;
+    color: $input-placeholder-color;
+    &:focus {
+      outline: 1px solid $border-color;
+    }
+    @each $color, $value in $theme-colors {
+      &.border-#{$color} {
+        outline: 1px solid $value;
+        &:focus {
+          outline: 1px solid $value;
+        }
+      }
+    }
+  }
+}
+.form-group {
+  label {
+    line-height: 1.4rem;
+    vertical-align: top;
+    margin-bottom: .5rem;
+    color: #A3A3A3;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 11px;
+    line-height: 15px;
+    text-transform: uppercase;
+    padding-right: 5px;
+    padding-left: 0;
+
+  }
+  &.has-danger {
+    .form-control {
+      border-color: $danger;
+    }
+  }
+  .file-upload-default {
+    visibility: hidden;
+    position: absolute;
+  }
+  .file-upload-info {
+    background: transparent;
+  }
+  .submit {
+    margin-top: 1rem;
+  }
+}
+textarea.form-control {
+  padding: 10px;
+  min-height: 4em;
+}

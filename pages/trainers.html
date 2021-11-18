@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>NexGen Fitness | Trainers</title>
+  <!-- plugins:css -->
+  <link rel="stylesheet" href="../../vendors/feather/feather.css">
+  <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+  <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+  <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+  <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+  <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+  <!-- endinject -->
+  <!-- Plugin css for this page -->
+  <!-- End plugin css for this page -->
+  <!-- inject:css -->
+  <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+  <!-- endinject -->
+  <link rel="shortcut icon" href="../../images/favicon.png" />
+</head>
+
+<body class="trainersPage">
+  <div class="container-scroller">
+    <!-- partial:../../partials/_navbar.html -->
+    <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+      <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+        <div>
+          <a class="navbar-brand brand-logo" href="../../index.html">
+            <img src="../../images/logo-mobile.png" alt="logo" />
+          </a>
+          <a class="navbar-brand brand-logo-mini" href="../../index.html">
+            <img src="../../images/logo-mobile.png" alt="logo" />
+          </a>
+        </div>
+      </div>
+      <div class="navbar-menu-wrapper d-flex align-items-top">
+        <ul class="navbar-nav">
+        </ul>
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item dropdown d-lg-block user-dropdown">
+            <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+              <div class="acronym rounded-circle"></div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+              <div class="dropdown-header text-center">
+                <div class="acronym rounded-circle"></div>
+                <p class="mb-1 mt-3 font-weight-semibold" id="trainerName">Craig Tyler</p>
+                <p class="fw-light text-muted mb-0" id="trainerEmail">craig.tyler@nexgenfitness.com</p>
+              </div>
+              <a class="dropdown-item" id="profile_link"><i class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My
+                Profile
+                <a class="dropdown-item logout"><i
+                    class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+            </div>
+          </li>
+        </ul>
+        <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+          data-bs-toggle="offcanvas">
+          <span class="mdi mdi-menu"></span>
+        </button>
+      </div>
+    </nav>
+    <!-- partial -->
+    <div class="container-fluid page-body-wrapper">
+      <!-- partial -->
+      <!-- partial:../../partials/_sidebar.html -->
+      <nav class="sidebar sidebar-offcanvas" id="sidebar">
+        <ul class="nav">
+          <li class="nav-item">
+            <a class="nav-link" href="../../index.html">
+              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <span class="menu-title">Dashboard</span>
+            </a>
+          </li>
+          <li class="nav-item nav-category">Actions</li>
+          <li class="nav-item">
+            <a class="nav-link" href="log_appointment.html">
+              <i class="mdi mdi-calendar-text menu-icon"></i>
+              <span class="menu-title">Log Appointment</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="add_client.html">
+              <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+              <span class="menu-title">Add Client</span>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="add_staff.html">
+              <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+              <span class="menu-title">Add Staff</span>
+            </a>
+          </li>
+          <li class="nav-item nav-category">Lists</li>
+          <li class="nav-item">
+            <a class="nav-link" href="locations.html" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-map-marker-radius"></i>
+              <span class="menu-title">Locations</span>
+              <i class="menu-arrow"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="clients.html" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-account-multiple"></i>
+              <span class="menu-title">Clients</span>
+              <i class="menu-arrow"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="trainers.html" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-account-circle"></i>
+              <span class="menu-title">Trainers</span>
+              <i class="menu-arrow"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="exercises.html" aria-expanded="false" aria-controls="ui-basic">
+              <i class="menu-icon mdi mdi-human-handsup"></i>
+              <span class="menu-title">Exercises</span>
+              <i class="menu-arrow"></i>
+            </a>
+          </li>
+        </ul>
+      </nav> <!-- partial -->
+      <div class="main-panel">
+        <div class="content-wrapper">
+
+          <div class="row">
+            <div class="col-lg-12 grid-margin stretch-card">
+              <div class="card">
+                <div class="card-body">
+                  <h4 class="card-title">Trainer List</h4>
+                  <div class="table-responsive">
+                    <table class="table trainerTable">
+                      <thead>
+                        <tr class="headers">
+                          <td>Name</td>
+                          <td>Gender</td>
+                          <td>Age</td>
+                          <td>Tenure (yrs)</td>
+                          <td>Location</td>
+                          <td>Appointments</td>
+                          <td>Status</td>
+                        </tr>
+                      </thead>
+                      <tbody>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- content-wrapper ends -->
+        <!-- partial:../../partials/_footer.html -->
+        <footer class="footer">
+          <div class="d-sm-flex justify-content-center justify-content-sm-between">
+            <span class="text-center text-sm-left d-block d-sm-inline-block">NexGenFitness</span>
+            <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © <span
+                class="copyrightYear"></span>. All rights
+              reserved.</span>
+          </div>
+        </footer>
+        <!-- partial -->
+      </div>
+      <!-- main-panel ends -->
+      <!-- The Modal -->
+      <div class="modal" id="myModal">
+        <div class="modal-dialog">
+          <div class="modal-content">
+
+            <!-- Modal Header -->
+            <div class="modal-header">
+              <h4 class="modal-title">Client Information</h4>
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+
+            <!-- Modal body -->
+            <div class="modal-body clientNotes"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- page-body-wrapper ends -->
+  </div>
+  <!-- container-scroller -->
+  <!-- plugins:js -->
+  <script src="../../vendors/js/vendor.bundle.base.js"></script>
+  <!-- endinject -->
+  <!-- Plugin js for this page -->
+  <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+  <!-- End plugin js for this page -->
+  <!-- inject:js -->
+  <script src="../../js/off-canvas.js"></script>
+  <script src="../../js/hoverable-collapse.js"></script>
+  <script src="../../js/template.js"></script>
+  <script src="../../js/settings.js"></script>
+  <script src="../../js/todolist.js"></script>
+  <!-- endinject -->
+  <script src="../../js/file-upload.js"></script>
+  <script src="../../js/typeahead.js"></script>
+  <script src="../../js/select2.js"></script>
+  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+  <script src="../js/custom.js"></script>
+  <script src="../js/fancyTable.js"></script>
+  <script src="../js/login.js"></script>
+  <script>
+    $(".trainerTable").fancyTable({
+      inputStyle: "",
+      inputPlaceholder: "Search trainers...",
+      sortColumn: 0,
+      sortOrder: 'asc',
+      pagination: true,
+      sortable: true,
+      searchable: true,
+      globalSearch: true,
+      paginationClass: "btn btn-light",
+      paginationClassActive: "active",
+      pagClosest: 3,
+      perPage: 20,
+    });
+
+    setTimeout(() => {
+      $('.trainerDetailLink').click(function (e) {
+        console.log(e.target.innerHTML);
+        let trainerName = e.target.innerHTML;
+        window.location.replace('/pages/trainer-detail.html?trainer=' +  trainerName);
+      });
+    }, 1000);
+
+  </script>
+  <!-- Custom js for this page-->
+  <!-- End custom js for this page-->
+</body>
+
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NexGen Fitness | Add Client</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../../vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../../vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../../vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="../../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../../css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../../images/favicon.png" />
+</head>
+
+<body class="addClientPage">
+    <div class="container-scroller">
+        <!-- partial:../../partials/_navbar.html -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+                <div>
+                    <a class="navbar-brand brand-logo" href="../../index.html">
+                        <img src="../../images/logo-mobile.png" alt="logo" />
+                    </a>
+                    <a class="navbar-brand brand-logo-mini" href="../../index.html">
+                        <img src="../../images/logo-mobile.png" alt="logo" />
+                    </a>
+                </div>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-top">
+                <ul class="navbar-nav">
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown d-lg-block user-dropdown">
+                        <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="acronym rounded-circle"></div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                            <div class="dropdown-header text-center">
+                                <div class="acronym rounded-circle"></div>
+                                <p class="mb-1 mt-3 font-weight-semibold" id="trainerName">Craig Tyler</p>
+                                <p class="fw-light text-muted mb-0" id="trainerEmail">craig.tyler@nexgenfitness.com</p>
+                            </div>
+                            <a class="dropdown-item" id="profile_link"><i
+                                    class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile
+                                <a class="dropdown-item logout"><i
+                                        class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+                        </div>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-bs-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial -->
+            <!-- partial:../../partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="../../index.html">
+                            <i class="mdi mdi-chart-bar menu-icon"></i>
+                            <span class="menu-title">Dashboard</span>
+                        </a>
+                    </li>
+                    <li class="nav-item nav-category">Actions</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="log_appointment.html">
+                            <i class="mdi mdi-calendar-text menu-icon"></i>
+                            <span class="menu-title">Log Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add_client.html">
+                            <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+                            <span class="menu-title">Add Client</span>
+                        </a>
+                      </li>            
+                      <li class="nav-item">
+                        <a class="nav-link" href="add_staff.html">
+                          <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+                          <span class="menu-title">Add Staff</span>
+                        </a>
+                      </li>            
+                    <li class="nav-item nav-category">Lists</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="locations.html" aria-expanded="false" aria-controls="ui-basic">
+                          <i class="menu-icon mdi mdi-map-marker-radius"></i>
+                          <span class="menu-title">Locations</span>
+                          <i class="menu-arrow"></i>
+                        </a>
+                      </li>  
+                    <li class="nav-item">
+                        <a class="nav-link" href="clients.html" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="menu-icon mdi mdi-account-multiple"></i>
+                            <span class="menu-title">Clients</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="trainers.html" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="menu-icon mdi mdi-account-circle"></i>
+                            <span class="menu-title">Trainers</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="exercises.html" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="menu-icon mdi mdi-human-handsup"></i>
+                            <span class="menu-title">Exercises</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                    </li>          
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body form-group">
+                                    <h4 class="card-title">Add Client</h4>
+                                    <div class="row">
+                                        <div class="col-6 form-group">
+                                            <label for="exampleInputEmail1">First and Last Name</label>
+                                            <input type="text" class="form-control" placeholder="John Doe">
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <label for="exampleInputEmail1">Email</label>
+                                            <input id="email" type="email" class="form-control" name="email" placeholder="john.doe@nexgenfitness.com">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 form-group">
+                                            <label for="exampleInputEmail1">Gender</label>
+                                            <select class="form-control reps" id="exampleSelectGender">
+                                                <option>---</option>
+                                                <option>Male</option>
+                                                <option>Female</option>
+                                                <option>Not Provided</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <label for="exampleInputEmail1">DOB</label>
+                                            <input id="dob" type="date" class="form-control" name="dob" placeholder="mm/dd/yyy">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 form-group">
+                                            <label for="exampleInputEmail1">Height</label>
+                                            <select class="form-control reps" id="exampleSelectGender">
+                                                <option>---</option>
+                                                <option>4'10"</option>
+                                                <option>4'11"</option>
+                                                <option>5'0"</option>
+                                                <option>5'1"</option>
+                                                <option>5'2"</option>
+                                                <option>5'3"</option>
+                                                <option>5'4"</option>
+                                                <option>5'5"</option>
+                                                <option>5'6"</option>
+                                                <option>5'7"</option>
+                                                <option>5'8"</option>
+                                                <option>5'9"</option>
+                                                <option>5'10"</option>
+                                                <option>5'11"</option>
+                                                <option>6'0"</option>
+                                                <option>6'1"</option>
+                                                <option>6'2"</option>
+                                                <option>6'3"</option>
+                                                <option>6'4"</option>
+                                                <option>6'5"</option>
+                                                <option>6'6"</option>
+                                                <option>6'7"</option>
+                                                <option>6'8"</option>
+                                                <option>6'9"</option>
+                                                <option>6'10"</option>
+                                                <option>6'11"</option>
+                                                <option>7'0"</option>
+                                                <option>7'1"</option>
+                                                <option>7'2"</option>
+                                                <option>7'3"</option>
+                                                <option>7'4"</option>
+                                                <option>7'5"</option>
+                                                <option>7'6"</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <label for="physicalProblems">Physical Problems</label>
+                                            <textarea class="form-control" placeholder="Add any physical ailments."></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-12 form-group">
+                                            <label for="exampleInputEmail1">Notes</label>
+                                            <textarea class="form-control"
+                                                placeholder="Add notes that may be useful for other trainers."></textarea>
+                                        </div>
+                                    </div>
+                                    <!-- Modal footer -->
+                                    <button type="button" style="width:100%" class="btn btn-primary submit"
+                                        data-dismiss="modal">Add</button>
+        
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:../../partials/_footer.html -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-center text-sm-left d-block d-sm-inline-block">NexGenFitness</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © <span class="copyrightYear"></span>. All rights reserved.</span>
+                              </div>
+                </footer>
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../../vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../../vendors/typeahead.js/typeahead.bundle.min.js"></script>
+    <script src="../../vendors/select2/select2.min.js"></script>
+    <script src="../../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../../js/off-canvas.js"></script>
+    <script src="../../js/hoverable-collapse.js"></script>
+    <script src="../../js/template.js"></script>
+    <script src="../../js/settings.js"></script>
+    <script src="../../js/todolist.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="../../js/file-upload.js"></script>
+    <script src="../../js/typeahead.js"></script>
+    <script src="../../js/select2.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+    <script src="../js/custom.js"></script>
+    <script src="../js/login.js"></script>
+    <!-- End custom js for this page-->
+
+</body>
+
+</html>

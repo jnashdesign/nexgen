@@ -1,0 +1,52 @@
+/* Modals */
+
+.modal{
+  background: rgba(0,0,0,0.75);
+  .modal-dialog{
+    margin-top: 20px;
+    .modal-content{
+      .modal-header{
+        background-color: #222;
+        padding: $modal-header-padding-y $modal-header-padding-x;
+        h4 {
+          color: $white;
+        }
+        .close{
+          border: none;
+          background: transparent;
+          color: $white;
+          font-size: 2em;
+          span{
+            font-size: 20px;
+            font-weight: 400;
+            color: #6a6a6a;
+          }
+        }
+      }
+      .modal-body{
+        padding: $modal-body-padding-y $modal-body-padding-x;
+        .row {
+          margin-bottom: 20px;
+          label {
+            padding-left: 0;
+          }
+        }
+      }
+      .modal-footer{
+        padding: $modal-footer-padding-y $modal-footer-padding-x;
+        @media(max-width: 400px) {
+          padding-left: .25rem;
+          padding-right: .25rem;
+          flex-direction: column;
+          >:not(:last-child) {
+            margin-right: 0;
+            margin-bottom: .7rem;
+          }
+          >:not(:first-child) {
+            margin-left: 0;
+          }
+        }
+      }
+    }
+  }
+}
