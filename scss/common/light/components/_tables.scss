@@ -84,7 +84,7 @@
       }
     }
     td {
-      font-family: Manrope;
+      font-family: Roboto;
       font-style: normal;
       font-weight: normal;
       font-size: 12px;
@@ -162,7 +162,7 @@
 @media screen and (max-width:700px){
   .clientTable td:nth-child(2), .clientTable td:nth-child(4),
   .exerciseTable td:nth-child(3), .exerciseTable td:nth-child(4),
-  .trainerTable td:nth-child(3), .trainerTable td:nth-child(5){
+  .staffTable td:nth-child(3), .staffTable td:nth-child(5){
     display:none;
   }
 }

@@ -41,7 +41,7 @@ $colors: (
 
 
 $theme-colors: (
-  primary: #1F3BB3, 
+  primary: #242cea, 
   secondary: #F1F1F1, 
   success:#34B1AA, 
   info: #52CDFF, 
@@ -51,7 +51,7 @@ $theme-colors: (
   dark: #1E283D
 );
 
-$primary: #1F3BB3; 
+$primary: #242cea; 
 $secondary: #F1F1F1; 
 $success:#34B1AA; 
 $info: #52CDFF; 
@@ -123,9 +123,9 @@ $social-colors: (
 
 ////////// FONTS//
 
-$type1:     'Manrope', sans-serif;
+$type1:     'Roboto', sans-serif;
 
-$default-font-size: .812rem; // 14px as base font size
+$default-font-size: 1rem; // 14px as base font size
 
 $text-muted: #737F8B;
 $body-color: #1F1F1F;

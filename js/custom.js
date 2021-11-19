@@ -116,10 +116,7 @@ exerciseRef.on('value', function (snapshot) {
             })
         }
     });
-
     exerciseArray.forEach(function (res) {
-
-        // console.log(res);
 
         // Create badge colors
         let levelColor;
@@ -185,11 +182,11 @@ trainerRef.on('value', function (snapshot) {
         }
 
         // Clear all data in table
-        $('.trainerTable tbody').html('');
+        $('.staffTable tbody').html('');
 
         // Fill in data after 100ms
         setTimeout(() => {
-            $('.trainerTable tbody').append('<tr> <td class="trainerDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td> <td>' + res.tenure + '</td>  <td>' + res.location + '</td> <td>' + res.appointments + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>')
+            $('.staffTable tbody').append('<tr> <td class="trainerDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td> <td>' + res.tenure + '</td>  <td>' + res.location + '</td> <td>' + res.appointments + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>')
         }, 100);
     });
 });
@@ -419,8 +416,9 @@ rounds.forEach(function(res){
 
 if (localStorage.getItem('name') && localStorage.getItem('email')){
     $('#trainerName').text(localStorage.getItem('name'));
+    $('.trainerName').val(localStorage.getItem('name'));
     $('#trainerEmail').text(localStorage.getItem('email'));
-    $('#profile_link').attr('href','../../pages/trainer-detail.html?trainer=' + localStorage.getItem('name'));
+    $('#profile_link').attr('href','../../pages/staff-detail.html?trainer=' + localStorage.getItem('name'));
 
     // Generate acronym
     var matches = localStorage.getItem('name').match(/\b(\w)/g);

@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>NexGen Fitness | Add Client</title>
+    <title>NexGen Fitness | Add Exercise</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../../vendors/feather/feather.css">
     <link rel="stylesheet" href="../../vendors/mdi/css/materialdesignicons.min.css">
@@ -101,7 +101,7 @@
                           <i class="mdi mdi-human-handsup menu-icon"></i>
                           <span class="menu-title">Add Exercise</span>
                         </a>
-                      </li>         
+                      </li>            
                     <li class="nav-item nav-category">Lists</li>
                     <li class="nav-item">
                         <a class="nav-link" href="locations.html" aria-expanded="false" aria-controls="ui-basic">
@@ -139,82 +139,46 @@
                         <div class="col-md-12 grid-margin stretch-card">
                             <div class="card">
                                 <div class="card-body form-group">
-                                    <h4 class="card-title">Add Client</h4>
+                                    <h4 class="card-title">Add Exercise</h4>
                                     <div class="row">
                                         <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">First and Last Name</label>
-                                            <input type="text" class="form-control" placeholder="John Doe">
+                                            <label for="name">Name</label>
+                                            <input type="text" id="name" class="form-control" placeholder="Seated Calf Raise">
                                         </div>
                                         <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">Email</label>
-                                            <input id="email" type="email" class="form-control" name="email" placeholder="john.doe@nexgenfitness.com">
+                                            <label for="exampleInputEmail1">Muscle Group</label>
+                                            <input id="muscleGroup" type="text" class="form-control" name="muscleGroup" placeholder="Calves - Soleus">
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">Gender</label>
-                                            <select class="form-control reps" id="exampleSelectGender">
-                                                <option>---</option>
-                                                <option>Male</option>
-                                                <option>Female</option>
-                                                <option>Not Provided</option>
+                                            <label for="exampleInputEmail1">ULC</label>
+                                            <select class="form-control ulc" id="ulc">
+                                                <option></option>
+                                                <option>Upper</option>
+                                                <option>Lower</option>
+                                                <option>Core</option>
                                             </select>
                                         </div>
                                         <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">DOB</label>
-                                            <input id="dob" type="date" class="form-control" name="dob" placeholder="mm/dd/yyy">
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">Height</label>
-                                            <select class="form-control reps" id="exampleSelectGender">
-                                                <option>---</option>
-                                                <option>4'10"</option>
-                                                <option>4'11"</option>
-                                                <option>5'0"</option>
-                                                <option>5'1"</option>
-                                                <option>5'2"</option>
-                                                <option>5'3"</option>
-                                                <option>5'4"</option>
-                                                <option>5'5"</option>
-                                                <option>5'6"</option>
-                                                <option>5'7"</option>
-                                                <option>5'8"</option>
-                                                <option>5'9"</option>
-                                                <option>5'10"</option>
-                                                <option>5'11"</option>
-                                                <option>6'0"</option>
-                                                <option>6'1"</option>
-                                                <option>6'2"</option>
-                                                <option>6'3"</option>
-                                                <option>6'4"</option>
-                                                <option>6'5"</option>
-                                                <option>6'6"</option>
-                                                <option>6'7"</option>
-                                                <option>6'8"</option>
-                                                <option>6'9"</option>
-                                                <option>6'10"</option>
-                                                <option>6'11"</option>
-                                                <option>7'0"</option>
-                                                <option>7'1"</option>
-                                                <option>7'2"</option>
-                                                <option>7'3"</option>
-                                                <option>7'4"</option>
-                                                <option>7'5"</option>
-                                                <option>7'6"</option>
+                                            <label for="exampleInputEmail1">Modality</label>
+                                            <select class="form-control modality" id="modality">
+                                                <option></option>
+                                                <option>Cables</option>
+                                                <option>Free Weights</option>
+                                                <option>Machine</option>
                                             </select>
                                         </div>
-                                        <div class="col-6 form-group">
-                                            <label for="physicalProblems">Physical Problems</label>
-                                            <textarea class="form-control" placeholder="Add any physical ailments."></textarea>
-                                        </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-12 form-group">
-                                            <label for="exampleInputEmail1">Notes</label>
-                                            <textarea class="form-control"
-                                                placeholder="Add notes that may be useful for other trainers."></textarea>
+                                        <div class="col-6 form-group">
+                                            <label for="exampleInputEmail1">Status</label>
+                                            <select class="form-control status" id="status">
+                                                <option></option>
+                                                <option>Beginner</option>
+                                                <option>Intermediate</option>
+                                                <option>Advanced</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <!-- Modal footer -->

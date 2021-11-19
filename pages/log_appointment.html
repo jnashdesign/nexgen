@@ -96,6 +96,12 @@
                             <span class="menu-title">Add Staff</span>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="add_exercise.html">
+                          <i class="mdi mdi-human-handsup menu-icon"></i>
+                          <span class="menu-title">Add Exercise</span>
+                        </a>
+                      </li>         
                     <li class="nav-item nav-category">Lists</li>
                     <li class="nav-item">
                         <a class="nav-link" href="locations.html" aria-expanded="false" aria-controls="ui-basic">
@@ -113,9 +119,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="trainers.html" aria-expanded="false" aria-controls="ui-basic">
+                        <a class="nav-link" href="staff.html" aria-expanded="false" aria-controls="ui-basic">
                             <i class="menu-icon mdi mdi-account-circle"></i>
-                            <span class="menu-title">Trainers</span>
+                            <span class="menu-title">Staff</span>
                             <i class="menu-arrow"></i>
                         </a>
                     </li>
@@ -149,9 +155,8 @@
                                         </div>
                                         <div class="row">
                                             <div class="form-group col-md-6 grid-margin">
-                                                <label for="exampleInputUsername1">Trainer</label>
-                                                <input disabled type="text" class="form-control trainerName"
-                                                    value="Craig Tyler">
+                                                <label for="trainerName">Trainer</label>
+                                                <input disabled type="text" class="form-control trainerName" name="trainerName">
                                             </div>
                                             <div class="form-group col-md-6 grid-margin">
                                                 <label for="exampleInputUsername1">Location</label>
@@ -168,11 +173,6 @@
                                                     <input style="display: inline-block;" id="clientName" type="text"
                                                         class="form-control" name="myCountry" placeholder="Jane Doe"
                                                         autocomplete="off">
-                                                    <button id="addClient"
-                                                        style="position:absolute; right: 0px; padding: 6px 15px;"
-                                                        class="btn btn-primary text-white mb-0 me-0" data-toggle="modal"
-                                                        data-target="#myModal" type="button"><i
-                                                            class="mdi mdi-account-plus"></i></button>
                                                 </div>
                                             </div>
 
@@ -959,103 +959,6 @@
                 <!-- partial -->
             </div>
             <!-- main-panel ends -->
-
-            <!-- The Modal -->
-            <div class="modal" id="myModal">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-
-                        <!-- Modal Header -->
-                        <div class="modal-header">
-                            <h4 class="modal-title">Add New Client</h4>
-                            <button type="button" class="close" data-dismiss="modal">&times;</button>
-                        </div>
-
-                        <!-- Modal body -->
-                        <div class="modal-body addClientModal">
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="exampleInputEmail1">First and Last Name</label>
-                                    <input type="text" class="form-control" placeholder="John Doe">
-                                </div>
-                                <div class="col-6">
-                                    <label for="addClientSelectGender">Gender</label>
-                                    <select class="form-control reps" id="addClientSelectGender">
-                                        <option></option>
-                                        <option>Male</option>
-                                        <option>Female</option>
-                                        <option>Not Provided</option>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-6">
-                                    <label for="addClientSelectHeight">Height</label>
-                                    <select class="form-control weight" id="addClientSelectHeight">
-                                        <option></option>
-                                        <option>4'10"</option>
-                                        <option>4'11"</option>
-                                        <option>5'0"</option>
-                                        <option>5'1"</option>
-                                        <option>5'2"</option>
-                                        <option>5'3"</option>
-                                        <option>5'4"</option>
-                                        <option>5'5"</option>
-                                        <option>5'6"</option>
-                                        <option>5'7"</option>
-                                        <option>5'8"</option>
-                                        <option>5'9"</option>
-                                        <option>5'10"</option>
-                                        <option>5'11"</option>
-                                        <option>6'0"</option>
-                                        <option>6'1"</option>
-                                        <option>6'2"</option>
-                                        <option>6'3"</option>
-                                        <option>6'4"</option>
-                                        <option>6'5"</option>
-                                        <option>6'6"</option>
-                                        <option>6'7"</option>
-                                        <option>6'8"</option>
-                                        <option>6'9"</option>
-                                        <option>6'10"</option>
-                                        <option>6'11"</option>
-                                        <option>7'0"</option>
-                                        <option>7'1"</option>
-                                        <option>7'2"</option>
-                                        <option>7'3"</option>
-                                        <option>7'4"</option>
-                                        <option>7'5"</option>
-                                        <option>7'6"</option>
-                                    </select>
-                                </div>
-                                <div class="col-6">
-                                    <label for="dob">DOB</label>
-                                    <input id="dob" type="date" class="form-control" name="dob" placeholder="mm/dd/yyy">
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="physicalProblems">Physical Problems</label>
-                                    <textarea class="form-control" name="physicalProblems" placeholder="Add any physical ailments."></textarea>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-12">
-                                    <label for="notes">Notes</label>
-                                    <textarea class="form-control" name="notes"
-                                        placeholder="Add notes about family or preferences."></textarea>
-                                </div>
-                            </div>
-                            <!-- Modal footer -->
-                            <button type="button" style="width:100%" class="btn btn-primary"
-                                data-dismiss="modal">Add</button>
-
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
         </div>
         <!-- page-body-wrapper ends -->
     </div>

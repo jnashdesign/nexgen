@@ -95,7 +95,13 @@
                           <i class="mdi mdi-account-multiple-plus menu-icon"></i>
                           <span class="menu-title">Add Staff</span>
                         </a>
-                      </li>            
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="add_exercise.html">
+                          <i class="mdi mdi-human-handsup menu-icon"></i>
+                          <span class="menu-title">Add Exercise</span>
+                        </a>
+                      </li>                    
                     <li class="nav-item nav-category">Lists</li>
                     <li class="nav-item">
                         <a class="nav-link" href="locations.html" aria-expanded="false" aria-controls="ui-basic">
@@ -112,9 +118,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="trainers.html" aria-expanded="false" aria-controls="ui-basic">
+                        <a class="nav-link" href="staff.html" aria-expanded="false" aria-controls="ui-basic">
                             <i class="menu-icon mdi mdi-account-circle"></i>
-                            <span class="menu-title">Trainers</span>
+                            <span class="menu-title">Staff</span>
                             <i class="menu-arrow"></i>
                         </a>
                     </li>
@@ -138,45 +144,48 @@
                                             <h4 class="card-title">Client Details</h4>
                                         </div>
                                         <div class="col-2">
-                                            <a class="backBtn btn btn-primary" href="/pages/clients.html"> < Client List</a>
+                                            <a class="backBtn btn" href="/pages/clients.html"> < Clients</a>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <h2 class="name"></h2>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-2">
+                                            <span class="status"></span>
+                                        </div>
                                     </div>
                                     <div class="row" style="margin-top: 20px;">
                                         <div class="col-12">
                                             <h4 class="detailHeaders">Personal</h4>
                                         </div>
                                         <div class="col-6 form-group">
-                                            <div class="col-6">
-                                                <label for="exampleInputEmail1">Status</label>
-                                                <span class="status"></span>
-                                            </div>
+                                            <label for="email">Email</label>
+                                            <p class="email" name="email"></p>
                                         </div>
                                         <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">Email</label>
-                                            <p class="email"></p>
+                                            <label for="gender">Gender</label>
+                                            <p class="gender" name="gender"></p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">Age</label>
-                                            <p class="age"></p>
+                                            <label for="age">Age</label>
+                                            <p class="age" name="age"></p>
                                         </div>
                                         <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">DOB</label>
-                                            <p class="dob"></p>
+                                            <label for="dob">DOB</label>
+                                            <p class="dob" name="dob"></p>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">Gender</label>
-                                            <p class="gender"></p>
+                                            <label for="height">Height</label>
+                                            <p class="height" name="height"></p>
                                         </div>
                                         <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">Height</label>
-                                            <p class="height"></p>
+                                            <label for="weight">Weight</label>
+                                            <p class="weight" name="weight"></p>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -184,11 +193,11 @@
                                             <h4 class="detailHeaders">Client Notes</h4>
                                         </div>
                                         <div class="col-6 form-group">
-                                            <label for="physicalProblems">Physical Problems</label>
-                                            <p class="problems"></p>
+                                            <label for="problems">Physical Problems</label>
+                                            <p class="problems" name="problems"></p>
                                         </div>
                                         <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">Notes</label>
+                                            <label for="notes">Notes</label>
                                             <strong>General</strong>
                                             <p class="notes general"></p>
                                             <strong>Family</strong>
@@ -267,6 +276,7 @@
           $('.clientDetailPage .gender').html(result[clientInfo].personal.gender);
           $('.clientDetailPage .problems').html(result[clientInfo].physical_problems);
           $('.clientDetailPage .height').html(result[clientInfo].personal.height);
+          $('.clientDetailPage .weight').html(result[clientInfo].personal.weight + ' lbs');
           $('.clientDetailPage .notes.general').html(result[clientInfo].client_notes.general);
           $('.clientDetailPage .notes.family').html(result[clientInfo].client_notes.family);
           $('.clientDetailPage .status').addClass('badge badge-' + statusColor);
