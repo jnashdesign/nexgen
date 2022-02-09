@@ -23214,7 +23214,6 @@ select.tt-hint {
   border: 0;
   background-color: #fff !important;
   outline: 1px solid #dee2e6;
-  color: #c9c8c8;
 }
 
 select.form-control:focus, select.asColorPicker-input:focus, .dataTables_wrapper select:focus, .select2-container--default select.select2-selection--single:focus, .select2-container--default .select2-selection--single select.select2-search__field:focus, select.typeahead:focus,
@@ -25297,6 +25296,9 @@ dl li {
   border-radius: 0;
   border: 1px solid #dee2e6;
   padding: .75rem 1.5rem;
+  margin-right: 5px;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
 }
 
 @media (max-width: 767px) {
@@ -25471,7 +25473,6 @@ dl li {
   border: 1px solid #dee2e6;
   border-top: 0;
   padding: 2rem 1rem;
-  text-align: justify;
 }
 
 .tab-content.tab-content-vertical {
@@ -28554,12 +28555,22 @@ div.tagsinput span.tag a {
   cursor: pointer;
 }
 
+.alignRight {
+  float: right;
+}
+
 .backBtn {
   text-decoration: none;
   cursor: pointer;
   font-weight: bold;
   background: #333;
   color: #fff;
+}
+
+@media screen and (max-width: 700px) {
+  .backBtn {
+    display: none;
+  }
 }
 
 .gender {
@@ -28595,6 +28606,69 @@ table.table.locationsTable td {
 
 .signInFeedback.success {
   color: green;
+}
+
+.appointmentTable {
+  margin-bottom: 60px;
+}
+
+.panel-group .panel-heading {
+  background: #444;
+  display: block;
+  z-index: 999999;
+  border: 1px solid #ddd;
+}
+
+.panel-group .panel-heading a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 20px 10px 20px;
+}
+
+.panel-body {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: -15px;
+  padding: 20px;
+}
+
+.panel-body h5, .panel-body .h5 {
+  margin-top: 20px;
+}
+
+button.nav-link i {
+  color: #888;
+  opacity: 0.2;
+}
+
+.exerciseLog.noShow nav, .exerciseLog.noShow .tab-content {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.exerciseName {
+  cursor: pointer;
+}
+
+.ui-accordion .ui-accordion-header {
+  background: #242cea !important;
+  padding: 20px !important;
+  border-radius: 7px;
+  color: #fff;
+  font-weight: bold;
+}
+.ui-accordion .ui-accordion-content {
+  overflow: hidden !important;
+}
+.ui-accordion .ui-accordion-header .ui-icon-triangle-1-e, .ui-accordion .ui-accordion-header.ui-state-active .ui-icon {
+  display: none;
 }
 
 /* Sidebar */

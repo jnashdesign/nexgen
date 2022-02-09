@@ -59,7 +59,7 @@ select {
     border: 0;
     background-color: #fff !important;
     outline: 1px solid $border-color;
-    color: $input-placeholder-color;
+    // color: $input-placeholder-color;
     &:focus {
       outline: 1px solid $border-color;
     }

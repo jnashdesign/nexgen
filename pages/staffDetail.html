@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NexGen Fitness | Staff Details</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../images/favicon.png" />
+</head>
+
+<body class="trainerDetailPage">
+    <div class="container-scroller">
+        <!-- partial:../../partials/_navbar.html -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+                <div>
+                    <a class="navbar-brand brand-logo" href="../index.html">
+                        <img src="../images/logo-mobile.png" alt="logo" />
+                    </a>
+                    <a class="navbar-brand brand-logo-mini" href="../index.html">
+                        <img src="../images/logo-mobile.png" alt="logo" />
+                    </a>
+                </div>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-top">
+                <ul class="navbar-nav">
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown d-lg-block user-dropdown">
+                        <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="acronym rounded-circle"></div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                            <div class="dropdown-header text-center">
+                                <div class="acronym rounded-circle"></div>
+                            </div>
+                            <a class="dropdown-item" id="profile_link"><i
+                                    class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i>My Profile
+                                <a class="dropdown-item logout"><i
+                                        class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+                        </div>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-bs-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial -->
+            <!-- partial:../../partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+
+                    <li class="nav-item nav-category">Actions</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="planAppointment.html">
+                            <i class="mdi mdi-calendar-text menu-icon"></i>
+                            <span class="menu-title">Plan Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="addClient.html">
+                            <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+                            <span class="menu-title">Add Client</span>
+                        </a>
+                      </li>            
+                      <li class="nav-item">
+                        <a class="nav-link" href="addStaff.html">
+                          <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+                          <span class="menu-title">Add Staff</span>
+                        </a>
+                      </li>   
+                      <li class="nav-item">
+                        <a class="nav-link" href="addExercise.html">
+                          <i class="mdi mdi-human-handsup menu-icon"></i>
+                          <span class="menu-title">Add Exercise</span>
+                        </a>
+                      </li>                  
+                    <li class="nav-item nav-category">Lists</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="locations.html" aria-expanded="false" aria-controls="ui-basic">
+                          <i class="menu-icon mdi mdi-map-marker-radius"></i>
+                          <span class="menu-title">Locations</span>
+                          <i class="menu-arrow"></i>
+                        </a>
+                      </li>  
+                    <li class="nav-item">
+                        <a class="nav-link" href="clients.html" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="menu-icon mdi mdi-account-multiple"></i>
+                            <span class="menu-title">Clients</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="staff.html" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="menu-icon mdi mdi-account-circle"></i>
+                            <span class="menu-title">Staff</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="exercises.html" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="menu-icon mdi mdi-human-handsup"></i>
+                            <span class="menu-title">Exercises</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                    </li>          
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body form-group">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <h4 class="card-title">Staff Details</h4>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <h2 class="name"></h2>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 form-group">
+                                            <div class="col-3">
+                                                <span class="status"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" style="margin-top: 20px;">
+                                        <nav style="padding:0">
+                                            <div class="nav nav-tabs" id="nav-tabs" role="tablist">
+                                              <button class="nav-link active" id="nav-personal" data-bs-toggle="tab" data-bs-target="#personal" type="button" role="tab" aria-controls="personal" aria-selected="true">Personal</button>
+                                              <button class="nav-link" id="nav-appointments" data-bs-toggle="tab" data-bs-target="#appointments" type="button" role="tab" aria-controls="appointments" aria-selected="false">Appointments</button>
+                                            </div>
+                                          </nav>
+                                          <div class="tab-content" id="nav-tabContent">
+                                            <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="nav-personal">
+                                            <div class="col-12">
+                                                <h4 class="detailHeaders">Personal</h4>
+                                            </div>
+                                            <div class="col-6 form-group">
+                                                <label for="email">Email</label>
+                                                <p class="email" name="email"></p>
+                                            </div>
+                                            <div class="col-6 form-group">
+                                                <label for="phone">Phone</label>
+                                                <p class="phone" name="phone"></p>
+                                            </div>
+                                        <div class="row">
+                                            <div class="col-6 form-group">
+                                                <label for="location">Location</label>
+                                                <p class="location" name="location"></p>
+                                            </div>
+                                            <div class="col-6 form-group">
+                                                <label for="start_date">Start Date</label>
+                                                <p class="start_date" name="start_date"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6 form-group">
+                                                <label for="exampleInputEmail1">Age</label>
+                                                <p class="age"></p>
+                                            </div>
+                                            <div class="col-6 form-group">
+                                                <label for="exampleInputEmail1">DOB</label>
+                                                <p class="dob"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-6 form-group">
+                                                <label for="exampleInputEmail1">Gender</label>
+                                                <p class="gender"></p>
+                                            </div>
+                                            <div class="col-6 form-group">
+                                                <label for="access">Access</label>
+                                                <p class="access" name="access"></p>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <h4 class="detailHeaders">Trainer Notes</h4>
+                                            </div>
+                                            <div class="col-6 form-group">
+                                                <label for="physicalProblems">Specialties</label>
+                                                <p class="specialties"></p>
+                                            </div>
+                                            <div class="col-6 form-group">
+                                                <label for="exampleInputEmail1">Notes</label>
+                                                <p class="notes"></p>
+                                            </div>
+                                        </div>
+                                    <button type="button" style="width:100%" class="btn btn-primary submit"
+                                        data-dismiss="modal">Edit</button>
+                                </div>
+                                <div class="tab-pane fade show" id="appointments" role="tabpanel" aria-labelledby="nav-appointments">
+                                    <div class="row appointments">
+                                        <div class="col-12">
+                                            <h4 class="detailHeaders">Appointment Info</h4>
+                                        </div>
+                                        <div class="col-md-12">
+                                            <table class="table appointmentTable">
+                                                <thead>
+                                                  <tr class="headers">
+                                                    <td>Date</td>
+                                                    <td>Location</td>
+                                                    <td>Client</td>
+                                                    <td>Last Updated</td>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                <!-- content-wrapper ends -->
+                <!-- partial:../../partials/_footer.html -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-center text-sm-left d-block d-sm-inline-block">NexGenFitness</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © <span class="copyrightYear"></span>. All rights reserved.</span>
+                              </div>
+                </footer>
+                <!-- partial -->
+            <!-- main-panel ends -->
+        <!-- page-body-wrapper ends -->
+    </div>
+
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../vendors/typeahead.js/typeahead.bundle.min.js"></script>
+    <script src="../vendors/select2/select2.min.js"></script>
+    <script src="../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../js/off-canvas.js"></script>
+    <script src="../js/hoverable-collapse.js"></script>
+    <script src="../js/template.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/todolist.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="../js/file-upload.js"></script>
+    <script src="../js/typeahead.js"></script>
+    <script src="../js/select2.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+    <script src="../js/custom.js"></script>
+    <script src="../js/login.js"></script>
+    <script>
+        // Look through client node
+        trainerRef.on('value', function (snapshot) {
+          // Get snapshot value
+          let result = snapshot.val();
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          let trainerInfo = urlParams.get('trainer');
+
+
+          let statusColor;
+            if (result[trainerInfo].status == 'Active') {
+                statusColor = 'success';
+            } else {
+                statusColor = 'danger';
+            }
+        //   console.log(result[trainerInfo]);
+
+          let age = getAge(result[trainerInfo].personal.dob)
+
+          $('.trainerDetailPage .name').html(result[trainerInfo].personal.name);
+          $('.trainerDetailPage .access').html(result[trainerInfo].access);
+          $('.trainerDetailPage .age').html(age);
+          $('.trainerDetailPage .dob').html(result[trainerInfo].personal.dob);
+          $('.trainerDetailPage .start_date').html(result[trainerInfo].start_date);
+          $('.trainerDetailPage .location').html(result[trainerInfo].location);
+          $('.trainerDetailPage .specialties').html(result[trainerInfo].specialties);
+          $('.trainerDetailPage .email').html(result[trainerInfo].personal.email);
+          $('.trainerDetailPage .phone').html(result[trainerInfo].personal.phone);
+          $('.trainerDetailPage .gender').html(result[trainerInfo].personal.gender);
+          $('.trainerDetailPage .notes').html(result[trainerInfo].notes);
+          $('.trainerDetailPage .status').addClass('badge badge-' + statusColor);
+          $('.trainerDetailPage .status').html(result[trainerInfo].status);
+        });
+
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = urlSearchParams.get('trainer');
+
+        // // Look through appointments node
+        appointmentsRef.on('value', function (snapshot) {
+        // Get snapshot value
+        let result = snapshot.val();
+        // console.log(result);
+        let exerciseLog = [];
+
+        // Loop through the keys
+        for (const [key, value] of Object.entries(result)) {
+            let clientKey = `${key}`;
+            let info = clientKey.split('|');
+            // console.log(params)
+            // console.log(info[4])
+            if (info[4] == params){
+                let matchingEntry = (result[clientKey]);
+                console.log('matchingEntry')
+                console.log(matchingEntry.info);
+                $('.appointmentTable tbody').append('<tr><td><a href="./editAppointment.html?appointment=' + info[0] + '">' +  matchingEntry.info.date + '</a></td><td><a href="./editAppointment.html?appointment=' + info[0] + '">' +  matchingEntry.info.location.replace('-',' ') + '</a></td><td><a href="./editAppointment.html?appointment=' + info[0] + '">' +  matchingEntry.info.client.replace('-',' ') + '</a></td><td><a href="./editAppointment.html?appointment=' + info[0] + '">' + matchingEntry.info.last_updated + '</a><td></tr>');
+            }
+        }
+    });
+
+        // Function to get years from today
+        function getAge(dateString) {
+            var today = new Date();
+            var birthDate = new Date(dateString);
+            var age = today.getFullYear() - birthDate.getFullYear();
+            var m = today.getMonth() - birthDate.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+                age--;
+            }
+            return age;
+        }
+
+        setTimeout(() => {
+      $('.trainerDetailLink').click(function (e) {
+        // console.log(e.target.innerHTML);
+        let trainerName = e.target.innerHTML;
+        trainerName = trainerName.replace(/\s/g, '_')
+        window.location.replace('/pages/staffDetail.html?trainer=' +  trainerName);
+      });
+    }, 1000);
+    </script>
+    <!-- End custom js for this page-->
+
+</body>
+
+</html>

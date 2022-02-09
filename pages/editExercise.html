@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NexGen Fitness | Edit Exercise</title>
+    <!-- plugins:css -->
+    <link rel="stylesheet" href="../vendors/feather/feather.css">
+    <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css">
+    <link rel="stylesheet" href="../vendors/ti-icons/css/themify-icons.css">
+    <link rel="stylesheet" href="../vendors/typicons/typicons.css">
+    <link rel="stylesheet" href="../vendors/simple-line-icons/css/simple-line-icons.css">
+    <link rel="stylesheet" href="../vendors/css/vendor.bundle.base.css">
+    <!-- endinject -->
+    <!-- Plugin css for this page -->
+    <link rel="stylesheet" href="../vendors/select2/select2.min.css">
+    <link rel="stylesheet" href="../vendors/select2-bootstrap-theme/select2-bootstrap.min.css">
+    <!-- End plugin css for this page -->
+    <!-- inject:css -->
+    <link rel="stylesheet" href="../css/vertical-layout-light/style.css">
+    <!-- endinject -->
+    <link rel="shortcut icon" href="../images/favicon.png" />
+</head>
+
+<body class="editExercisePage">
+    <div class="container-scroller">
+        <!-- partial:../../partials/_navbar.html -->
+        <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
+            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
+                <div>
+                    <a class="navbar-brand brand-logo" href="../index.html">
+                        <img src="../images/logo-mobile.png" alt="logo" />
+                    </a>
+                    <a class="navbar-brand brand-logo-mini" href="../index.html">
+                        <img src="../images/logo-mobile.png" alt="logo" />
+                    </a>
+                </div>
+            </div>
+            <div class="navbar-menu-wrapper d-flex align-items-top">
+                <ul class="navbar-nav">
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown d-lg-block user-dropdown">
+                        <a class="nav-link" id="UserDropdown" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                            <div class="acronym rounded-circle"></div>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="UserDropdown">
+                            <div class="dropdown-header text-center">
+                                <div class="acronym rounded-circle"></div>
+                            </div>
+                            <a class="dropdown-item" id="profile_link"><i
+                                    class="dropdown-item-icon mdi mdi-account-outline text-primary me-2"></i> My Profile
+                                <a class="dropdown-item logout"><i
+                                        class="dropdown-item-icon mdi mdi-power text-primary me-2"></i>Sign Out</a>
+                        </div>
+                    </li>
+                </ul>
+                <button class="navbar-toggler navbar-toggler-right d-lg-none align-self-center" type="button"
+                    data-bs-toggle="offcanvas">
+                    <span class="mdi mdi-menu"></span>
+                </button>
+            </div>
+        </nav>
+        <!-- partial -->
+        <div class="container-fluid page-body-wrapper">
+            <!-- partial -->
+            <!-- partial:../../partials/_sidebar.html -->
+            <nav class="sidebar sidebar-offcanvas" id="sidebar">
+                <ul class="nav">
+
+                    <li class="nav-item nav-category">Actions</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="planAppointment.html">
+                            <i class="mdi mdi-calendar-text menu-icon"></i>
+                            <span class="menu-title">Plan Appointment</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="addClient.html">
+                            <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+                            <span class="menu-title">Add Client</span>
+                        </a>
+                      </li>            
+                      <li class="nav-item">
+                        <a class="nav-link" href="addStaff.html">
+                          <i class="mdi mdi-account-multiple-plus menu-icon"></i>
+                          <span class="menu-title">Add Staff</span>
+                        </a>
+                      </li>
+                      <li class="nav-item">
+                        <a class="nav-link" href="addExercise.html">
+                          <i class="mdi mdi-human-handsup menu-icon"></i>
+                          <span class="menu-title">Add Exercise</span>
+                        </a>
+                      </li>            
+                    <li class="nav-item nav-category">Lists</li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="locations.html" aria-expanded="false" aria-controls="ui-basic">
+                          <i class="menu-icon mdi mdi-map-marker-radius"></i>
+                          <span class="menu-title">Locations</span>
+                          <i class="menu-arrow"></i>
+                        </a>
+                      </li>  
+                    <li class="nav-item">
+                        <a class="nav-link" href="clients.html" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="menu-icon mdi mdi-account-multiple"></i>
+                            <span class="menu-title">Clients</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="staff.html" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="menu-icon mdi mdi-account-circle"></i>
+                            <span class="menu-title">Staff</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="exercises.html" aria-expanded="false" aria-controls="ui-basic">
+                            <i class="menu-icon mdi mdi-human-handsup"></i>
+                            <span class="menu-title">Exercises</span>
+                            <i class="menu-arrow"></i>
+                        </a>
+                    </li>          
+                </ul>
+            </nav>
+            <!-- partial -->
+            <div class="main-panel">
+                <div class="content-wrapper">
+                        <div class="col-md-12 grid-margin stretch-card">
+                            <div class="card">
+                                <div class="card-body form-group">
+                                    <h4 class="card-title">Edit Exercise</h4>
+                                    <div class="row">
+                                        <div class="col-6 form-group">
+                                            <label for="name">Name</label>
+                                            <input type="text" id="name" class="form-control" placeholder="Seated Calf Raise">
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <label for="exampleInputEmail1">Muscle Group</label>
+                                            <input id="muscleGroup" type="text" class="form-control" name="muscleGroup" placeholder="Calves - Soleus">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 form-group">
+                                            <label for="exampleInputEmail1">ULC</label>
+                                            <select class="form-control ulc" id="ulc">
+                                                <option></option>
+                                                <option>Upper</option>
+                                                <option>Lower</option>
+                                                <option>Core</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <label for="exampleInputEmail1">Modality</label>
+                                            <select class="form-control modality" id="modality">
+                                                <option></option>
+                                                <option>Cables</option>
+                                                <option>Free Weights</option>
+                                                <option>Machine</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-6 form-group">
+                                            <label for="exampleInputEmail1">Difficulty</label>
+                                            <select class="form-control status" id="difficulty" placeholder="Beginner">
+                                                <option></option>
+                                                <option>Beginner</option>
+                                                <option>Intermediate</option>
+                                                <option>Advanced</option>
+                                            </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <label for="name">Video Link</label>
+                                            <input type="text" id="video" class="form-control" placeholder="https://www.youtube.com/watch?v=JbyjNymZOt0">
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                    <button type="button" style="width:100%" disabled class="btn btn-primary submit"
+                                        data-dismiss="modal">Update</button>
+                                    </div>
+                                        <div class="row">
+                                            <div style="margin-top: 10px;" class="alert alert-danger" role="alert">
+                                                This feature is still in progress.
+                                              </div>
+                                        </div>
+           
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- content-wrapper ends -->
+                <!-- partial:../../partials/_footer.html -->
+                <footer class="footer">
+                    <div class="d-sm-flex justify-content-center justify-content-sm-between">
+                        <span class="text-center text-sm-left d-block d-sm-inline-block">NexGenFitness</span>
+                        <span class="float-none float-sm-right d-block mt-1 mt-sm-0 text-center">Copyright © <span class="copyrightYear"></span>. All rights reserved.</span>
+                              </div>
+                </footer>
+                <!-- partial -->
+            </div>
+            <!-- main-panel ends -->
+        </div>
+        <!-- page-body-wrapper ends -->
+    </div>
+
+    <!-- container-scroller -->
+    <!-- plugins:js -->
+    <script src="../vendors/js/vendor.bundle.base.js"></script>
+    <!-- endinject -->
+    <!-- Plugin js for this page -->
+    <script src="../vendors/typeahead.js/typeahead.bundle.min.js"></script>
+    <script src="../vendors/select2/select2.min.js"></script>
+    <script src="../vendors/bootstrap-datepicker/bootstrap-datepicker.min.js"></script>
+    <!-- End plugin js for this page -->
+    <!-- inject:js -->
+    <script src="../js/off-canvas.js"></script>
+    <script src="../js/hoverable-collapse.js"></script>
+    <script src="../js/template.js"></script>
+    <script src="../js/settings.js"></script>
+    <script src="../js/todolist.js"></script>
+    <script src="../js/dashboard.js"></script>
+    <script src="../js/Chart.roundedBarCharts.js"></script>
+    <script src="../js/firebase-app.js"></script>
+    <script src="../js/firebase-database.js"></script>
+    <script src="../js/firebase-auth.js"></script>
+    <script src="../js/custom.js"></script>
+    <script src="../js/login.js"></script>
+    <!-- endinject -->
+    <!-- Custom js for this page-->
+    <script src="../js/file-upload.js"></script>
+    <script src="../js/typeahead.js"></script>
+    <script src="../js/select2.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+    <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/3.1.0/firebase-database.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.6.0/firebase-auth.js"></script>
+    <script src="../js/custom.js"></script>
+    <script src="../js/login.js"></script>
+    <!-- End custom js for this page-->
+    <script>
+        const urlSearchParams = new URLSearchParams(window.location.search);
+        const params = urlSearchParams.get('exercise');
+
+        $('.editExercisePage .submit').click(function(){
+
+           let eid = 'ID_' + params + '';
+           let exerciseUpdate = {
+               [eid] : {
+                "Exercise" : $('#name').val(),
+                "Difficulty" : $('#difficulty').val(),
+                "Modality" : $('#modality').val(),
+                "Muscle_Group" : $('#muscleGroup').val(),
+                "U_L_C" : $('#ulc').val(),
+                "video" : $('#video').val()
+                }
+            }
+            exerciseRef.update(exerciseUpdate)
+        });
+    </script>
+</body>
+
+</html>

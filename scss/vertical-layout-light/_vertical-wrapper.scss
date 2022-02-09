@@ -48,6 +48,9 @@
 .clientDetailLink, .trainerDetailLink {
   cursor: pointer;
 }
+.alignRight {
+  float:right;
+}
 
 .backBtn {
   text-decoration: none;
@@ -55,6 +58,12 @@
   font-weight: bold;
   background: #333;
   color: #fff;
+}
+
+@media screen and (max-width: 700px) {
+  .backBtn {
+    display: none;
+  }
 }
 
 .gender {
@@ -90,4 +99,60 @@ table.table.locationsTable td {
 
 .signInFeedback.success {
   color: green;
+}
+
+.appointmentTable {
+  margin-bottom: 60px;
+}
+
+.panel-group .panel-heading {
+  background: #444;
+  display: block;
+  z-index: 999999;
+  border: 1px solid #ddd;
+}
+.panel-group .panel-heading a {
+  color: #fff;
+  text-decoration: none;
+  display: block;
+  padding: 20px 10px 20px;
+}
+.panel-body {
+  border-left: 1px solid #ddd;
+  border-right: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+  margin-top: -15px;
+  padding: 20px;
+}
+.panel-body h5 {
+  margin-top: 20px;
+}
+
+button.nav-link i {
+  color: #888;
+  opacity:0.2;
+}
+
+.exerciseLog.noShow nav, .exerciseLog.noShow .tab-content {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+.exerciseName {
+  cursor: pointer;
+}
+
+.ui-accordion .ui-accordion-header {
+  background: #242cea !important;
+  padding: 20px !important;
+  border-radius: 7px;
+}
+
+.ui-accordion .ui-accordion-header .ui-icon-triangle-1-e, .ui-accordion .ui-accordion-header.ui-state-active .ui-icon {
+  display: none;
 }

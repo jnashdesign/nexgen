@@ -1,4 +1,13 @@
+// const { local } = require("d3");
 const auth = firebase.auth();
+
+// Check login status
+console.log('loggedIn = ' + localStorage.getItem('loggedIn'))
+
+// If not logged in, send to login page
+if (document.location.href.indexOf('login.html') === -1 && localStorage.getItem('loggedIn') == 'false') {
+        location.replace(baseURL + '/pages/login.html');
+}
 
 // listen for auth status changes
 auth.onAuthStateChanged(user => {
@@ -15,6 +24,11 @@ auth.onAuthStateChanged(user => {
     localStorage.setItem('loggedIn','false');
     }
 });
+
+// Redirect if you land on the index for now
+    if (window.location.href.indexOf("index.html") > -1 || document.location.href.indexOf('pages') === -1) {
+      location.replace(baseURL + '/pages/planAppointment.html');
+    }
 
 // Login
 $('.loginPage #submit').click(function(e){
@@ -40,8 +54,8 @@ $('.loginPage #submit').click(function(e){
 
     // Redirect to the index page
     setTimeout(() => {
-        location.replace('/index.html');
-    }, 2000);
+        location.replace(baseURL + '/pages/planAppointment.html');
+    }, 2000)
     }).catch(function(error) {
     // Display feedback
     $('.loginPage .signInFeedback').css('display','block');
@@ -65,38 +79,42 @@ $('.logout').click(function(e) {
 
     // Redirect back to login page
     setTimeout(() => {
-        location.replace('../../login.html');
+        location.replace('./login.html');
     }, 1000);
 });
 
 // Add User
-$('.addStaffPage .submit').click(function(){
+$('.addStaffPage .submit').click(function(e){
+    console.log(e)
+    e.preventDefault();
+
     let access = $('.addStaffPage #access').val();
     let dob = $('.addStaffPage #dob').val();
     let phone = $('.addStaffPage #phone').val();
     let email = $('.addStaffPage #email').val();
     let password = $('.addStaffPage #password').val();
     let name = $('.addStaffPage #name').val();
+    let key = $('.addStaffPage #name').val().replace(/ /g,"_");
     let location = $('.addStaffPage #locationName').val();
     let gender = $('.addStaffPage #gender').val();
     let start_date = $('.addStaffPage #start_date').val();
     let specialties = $('.addStaffPage #specialties').val();
     let notes = $('.addStaffPage #notes').val();
-
-    // if (!email || !password || !name || !location || !gender || !start_date || !dob || !phone || !access){
-    //     $('.addStaffPage .signInFeedback').css('display','block');
-    //     let error = 'Some required fields are empty.';
-    //     $('.addStaffPage .signInFeedback').addClass('error').text(error);
-    // }else{
-        firebase.auth().createUserWithEmailAndPassword(email, password)
-        .then(function(result) {
+    console.log('click')
+        auth.createUserWithEmailAndPassword(email, password)
+        .then(function(res) {
+            var user = auth.currentUser;
+            user.updateProfile({
+                displayName: name
+            })
+            console.log(res.user)
             let success = 'Success! ' + name + ' has been added.';
-            $('.addStaffPage .signInFeedback').css('display','none');
+            $('.addStaffPage .signInFeedback').css('display','block');
             $('.addStaffPage .signInFeedback').addClass('success').text(success);
-
+            
             // Add trainer to DB
-            firebase.database().ref('/people/staff/').update({
-                [name]: {
+            trainerRef.update({
+                [key]: {
                     access: access,
                     location: location,
                     notes: notes,
@@ -112,14 +130,8 @@ $('.addStaffPage .submit').click(function(){
                     status: 'Active'
                 }
             });
-            setTimeout(() => {
-                return result.user.updateProfile({
-                    displayName: name
-                })
-            }, 1000);
         }).catch(function(error) {
-            $('.addStaffPage .signInFeedback').css('display','block');
-            $('.addStaffPage .signInFeedback').addClass('error').text(error);
+            alert(error);
+            console.log(error);
         });
-    // }
 })

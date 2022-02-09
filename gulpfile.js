@@ -11,6 +11,22 @@ var inject = require('gulp-inject');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var merge = require('merge-stream');
+var vftp = require("vinyl-ftp");
+
+
+var ftp = function() {
+    var conn = vftp.create({
+      host: "ftp.nupenetwork.com",
+      user: "jnashdesign@nupenetwork.com",
+      pass: "LKNupe#1911",
+      parallel: 1,
+      log: util.log
+    });
+    return gulp.src(["build/**"],{base:"build",dot:true})
+      .pipe(conn.newer("/jnashdev/consulting/nexgenfitness"))
+      .pipe(conn.dest("/jnashdev/consulting/nexgenfitness"));
+  };
+
 
 gulp.paths = {
     dist: 'dist',
@@ -27,6 +43,15 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./css'))
         .pipe(browserSync.stream());
 });
+
+gulp.task('minifyCSS', function(){
+    gulp.src('/css/**/*.css', '/scss/**/**/*.scss')
+    .pipe(minifyCSS())
+    .pipe(autoprefixer('last 2 version', 'safari 5', 'ie 8', 'ie 9'))
+    .pipe(concat('style.min.css'))
+    .pipe(gulp.dest('/css'))
+});
+
 
 // Static Server + watching scss/html files
 gulp.task('serve', gulp.series('sass', function() {
@@ -58,7 +83,7 @@ gulp.task('serve:lite', function() {
     gulp.watch('**/*.css').on('change', browserSync.reload);
     gulp.watch('**/*.html').on('change', browserSync.reload);
     gulp.watch('js/**/*.js').on('change', browserSync.reload);
-
+    gulp.dest('./build/css');
 });
 
 
@@ -75,6 +100,11 @@ gulp.task('injectPartial', function () {
     .pipe(gulp.dest("."));
 });
 
+gulp.task('buildCSS', function(){
+    return gulp.src('./scss/**/*.scss')
+    .pipe(minifyCSS())
+    .pipe(gulp.dest('./build/css'))
+})
 
 
 /* inject Js and CCS assets into HTML */
@@ -95,7 +125,14 @@ gulp.task('injectCommonAssets', function () {
         './js/hoverable-collapse.js', 
         './js/template.js', 
         './js/settings.js', 
-        './js/todolist.js'
+        './js/todolist.js',
+        './js/dashboard.js',
+        './js/Chart.roundedBarCharts.js',
+        './js/firebase-app.js',
+        './js/firebase-database.js',
+        './js/firebase-auth.js',
+        './js/custom.js',
+        './js/login.js'
     ], {read: false}), {relative: true}))
     .pipe(gulp.dest('.'));
 });
