@@ -154,12 +154,28 @@
                                             </select>
                                         </div>
                                         <div class="form-group col-md-6 grid-margin">
-                                            <label for="date">DOB</label>
-                                            <input id="date" type="date" class="form-control" name="date"
-                                                placeholder="mm/dd/yyy">
+                                            <label for="exampleInputUsername1">Location</label>
+                                            <div class="autocomplete">
+                                                <input type="text" class="form-control round-3" id="locationName"
+                                                    placeholder="South Lake" autocomplete="off">
+                                            </div>
                                         </div>
+                                    </div>
+                                <div class="row">
+                                    <div class="form-group col-md-6 grid-margin">
+                                        <label for="date">DOB</label>
+                                        <input id="date" type="date" class="form-control" name="date"
+                                            placeholder="mm/dd/yyy">
+                                    </div>
+
+                                    <div class="col-6 form-group">
+                                        <label for="notes">Notes</label>
+                                        <textarea class="form-control notes"
+                                            placeholder="Add notes that may be useful for other trainers."></textarea>
+                                    </div>
+
                                 </div>
-                                    <div class="row">
+                                <div class="row">
                                         <div class="col-6 form-group">
                                             <label for="height">Height</label>
                                             <select class="form-control height" id="exampleSelectGender">
@@ -209,11 +225,6 @@
                                             <label for="physicalProblems">Physical Problems</label>
                                             <textarea class="form-control physicalProblems" placeholder="Add any physical ailments."></textarea>
                                         </div>
-                                        <div class="col-6 form-group">
-                                            <label for="notes">Notes</label>
-                                            <textarea class="form-control notes"
-                                                placeholder="Add notes that may be useful for other trainers."></textarea>
-                                        </div>
                                     </div>
                                     <!-- Modal footer -->
                                     <button type="button" style="width:100%" class="btn btn-primary submit"
@@ -256,7 +267,6 @@
     <script src="../js/settings.js"></script>
     <script src="../js/todolist.js"></script>
     <script src="../js/dashboard.js"></script>
-    <script src="../js/Chart.roundedBarCharts.js"></script>
     <script src="../js/firebase-app.js"></script>
     <script src="../js/firebase-database.js"></script>
     <script src="../js/firebase-auth.js"></script>
@@ -276,7 +286,31 @@
     <script src="../js/custom.js"></script>
     <script src="../js/login.js"></script>
     <!-- End custom js for this page-->
+    <script>
+                $(document).ready(function(){
+        const auth = firebase.auth();
+        // logout
+        $('.logout').click(function(e) {
+            console.log('logout');
+            e.preventDefault();
+            auth.signOut();
 
+            // Clear storage items
+            localStorage.removeItem('email'),
+            localStorage.removeItem('name'),
+            localStorage.removeItem('firebaseUID'),
+            localStorage.removeItem('uid')
+
+            localStorage.setItem('loggedIn','false');
+
+            // Redirect back to login page
+            setTimeout(() => {
+                location.replace('./login.html');
+            }, 1000);
+        });
+    });
+
+    </script>
 </body>
 
 </html>

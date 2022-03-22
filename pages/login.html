@@ -37,23 +37,27 @@
                   <label for="email">Email</label>
                   <input type="email" class="form-control form-control-lg" id="email">
                 </div>
-                <div class="form-group">
+                <div class="form-group passwordGroup">
                   <label for="password">Password</label>
                   <input type="password" class="form-control form-control-lg" id="password">
                 </div>
                 <div class="mt-3">
                   <a id="submit" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">SIGN IN</a>
                 </div>
+                <div class="mt-3">
+                  <a id="sendResetEmail" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn hide">SEND RESET EMAIL</a>
+                </div>
                 <div class="my-2 d-flex justify-content-between align-items-center">
                   <div class="form-check">
-                    <label class="form-check-label text-muted">
-                      <input type="checkbox" class="form-check-input">
-                      Keep me signed in
-                    </label>
-                  </div>
-                  <a href="#" class="auth-link text-black">Forgot password?</a>
+                    </div>
+
+                  <div class="form-check">
+                  <a style="cursor: pointer;" class="auth-link text-black forgotPassword">Forgot password?</a>
                 </div>
-                <div class="signInFeedback"></div>
+                </div>
+                <div class="mt-3">
+                  <div class="signInFeedback"></div>
+                  </div>
               </form>
             </div>
           </div>
@@ -77,7 +81,6 @@
   <script src="../js/settings.js"></script>
   <script src="../js/todolist.js"></script>
   <script src="../js/dashboard.js"></script>
-  <script src="../js/Chart.roundedBarCharts.js"></script>
   <script src="../js/firebase-app.js"></script>
   <script src="../js/firebase-database.js"></script>
   <script src="../js/firebase-auth.js"></script>

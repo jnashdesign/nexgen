@@ -25,16 +25,18 @@ appointmentsRef.on('value', function (snapshot) {
             $('#date').val(matchingEntryInfo.date);
             $('#locationName').val(matchingEntryInfo.location + ', ' + matchingEntryInfo.state);
             $('#trainerName').val(matchingEntryInfo.trainer);
+            $('#appointmentNotes').val(matchingEntryInfo.notes);
             if (matchingEntryInfo.no_show == 'true') {
                 $('#noShow').prop('checked', 'true');
             }
 
-            exercises.forEach(function(num){
+            exercises.forEach(function(res){
                 $('#exercise-1 .exercises').val(matchingEntryExercises.round1.exercise1.exercise);
                 $('#exercise-1 .u_l_c').val(matchingEntryExercises.round1.exercise1.ulc);
                 $('#exercise-1 .muscleGroups').val(matchingEntryExercises.round1.exercise1.musclGroups);
                 $('#exercise-1 .modality').val(matchingEntryExercises.round1.exercise1.modality);
                 $('#exercise-1 .level').val(matchingEntryExercises.round1.exercise1.level);
+                $('#exercise-1 .notes').val(matchingEntryExercises.round1.exercise1.notes);
                 $('#exercise-1 #round1SelectReps').val(matchingEntryExercises.round1.exercise1.reps);
                 $('#exercise-1 #round1SelectWeight').val(matchingEntryExercises.round1.exercise1.weight);
 
@@ -43,6 +45,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-2 .muscleGroups').val(matchingEntryExercises.round1.exercise2.musclGroups);
                 $('#exercise-2 .modality').val(matchingEntryExercises.round1.exercise2.modality);
                 $('#exercise-2 .level').val(matchingEntryExercises.round1.exercise2.level);
+                $('#exercise-2 .notes').val(matchingEntryExercises.round1.exercise2.notes);
                 $('#exercise-2 #round1SelectReps').val(matchingEntryExercises.round1.exercise2.reps);
                 $('#exercise-2 #round1SelectWeight').val(matchingEntryExercises.round1.exercise2.weight);
 
@@ -51,6 +54,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-3 .muscleGroups').val(matchingEntryExercises.round1.exercise3.musclGroups);
                 $('#exercise-3 .modality').val(matchingEntryExercises.round1.exercise3.modality);
                 $('#exercise-3 .level').val(matchingEntryExercises.round1.exercise3.level);
+                $('#exercise-3 .notes').val(matchingEntryExercises.round1.exercise3.notes);
                 $('#exercise-3 #round1SelectReps').val(matchingEntryExercises.round1.exercise3.reps);
                 $('#exercise-3 #round1SelectWeight').val(matchingEntryExercises.round1.exercise3.weight);
 
@@ -59,6 +63,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-4 .muscleGroups').val(matchingEntryExercises.round1.exercise4.musclGroups);
                 $('#exercise-4 .modality').val(matchingEntryExercises.round1.exercise4.modality);
                 $('#exercise-4 .level').val(matchingEntryExercises.round1.exercise4.level);
+                $('#exercise-4 .notes').val(matchingEntryExercises.round1.exercise4.notes);
                 $('#exercise-4 #round1SelectReps').val(matchingEntryExercises.round1.exercise4.reps);
                 $('#exercise-4 #round1SelectWeight').val(matchingEntryExercises.round1.exercise4.weight);
 
@@ -67,6 +72,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-5 .muscleGroups').val(matchingEntryExercises.round2.exercise1.musclGroups);
                 $('#exercise-5 .modality').val(matchingEntryExercises.round2.exercise1.modality);
                 $('#exercise-5 .level').val(matchingEntryExercises.round2.exercise1.level);
+                $('#exercise-5 .notes').val(matchingEntryExercises.round2.exercise1.notes);
                 $('#exercise-5 #round1SelectReps').val(matchingEntryExercises.round2.exercise1.reps);
                 $('#exercise-5 #round1SelectWeight').val(matchingEntryExercises.round2.exercise1.weight);
 
@@ -75,6 +81,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-6 .muscleGroups').val(matchingEntryExercises.round2.exercise2.musclGroups);
                 $('#exercise-6 .modality').val(matchingEntryExercises.round2.exercise2.modality);
                 $('#exercise-6 .level').val(matchingEntryExercises.round2.exercise2.level);
+                $('#exercise-6 .notes').val(matchingEntryExercises.round2.exercise2.notes);
                 $('#exercise-6 #round1SelectReps').val(matchingEntryExercises.round2.exercise2.reps);
                 $('#exercise-6 #round1SelectWeight').val(matchingEntryExercises.round2.exercise2.weight);
 
@@ -83,6 +90,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-7 .muscleGroups').val(matchingEntryExercises.round2.exercise3.musclGroups);
                 $('#exercise-7 .modality').val(matchingEntryExercises.round2.exercise3.modality);
                 $('#exercise-7 .level').val(matchingEntryExercises.round2.exercise3.level);
+                $('#exercise-7 .notes').val(matchingEntryExercises.round2.exercise3.notes);
                 $('#exercise-7 #round1SelectReps').val(matchingEntryExercises.round2.exercise3.reps);
                 $('#exercise-7 #round1SelectWeight').val(matchingEntryExercises.round2.exercise3.weight);
 
@@ -91,6 +99,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-8 .muscleGroups').val(matchingEntryExercises.round2.exercise4.musclGroups);
                 $('#exercise-8 .modality').val(matchingEntryExercises.round2.exercise4.modality);
                 $('#exercise-8 .level').val(matchingEntryExercises.round2.exercise4.level);
+                $('#exercise-8 .notes').val(matchingEntryExercises.round2.exercise4.notes);
                 $('#exercise-8 #round1SelectReps').val(matchingEntryExercises.round2.exercise4.reps);
                 $('#exercise-8 #round1SelectWeight').val(matchingEntryExercises.round2.exercise4.weight);
 
@@ -99,6 +108,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-9 .muscleGroups').val(matchingEntryExercises.round3.exercise1.musclGroups);
                 $('#exercise-9 .modality').val(matchingEntryExercises.round3.exercise1.modality);
                 $('#exercise-9 .level').val(matchingEntryExercises.round3.exercise1.level);
+                $('#exercise-9 .notes').val(matchingEntryExercises.round3.exercise1.notes);
                 $('#exercise-9 #round1SelectReps').val(matchingEntryExercises.round3.exercise1.reps);
                 $('#exercise-9 #round1SelectWeight').val(matchingEntryExercises.round3.exercise1.weight);
 
@@ -107,6 +117,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-10 .muscleGroups').val(matchingEntryExercises.round3.exercise2.musclGroups);
                 $('#exercise-10 .modality').val(matchingEntryExercises.round3.exercise2.modality);
                 $('#exercise-10 .level').val(matchingEntryExercises.round3.exercise2.level);
+                $('#exercise-10 .notes').val(matchingEntryExercises.round3.exercise2.notes);
                 $('#exercise-10 #round1SelectReps').val(matchingEntryExercises.round3.exercise2.reps);
                 $('#exercise-10 #round1SelectWeight').val(matchingEntryExercises.round3.exercise2.weight);
 
@@ -115,6 +126,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-11 .muscleGroups').val(matchingEntryExercises.round3.exercise3.musclGroups);
                 $('#exercise-11 .modality').val(matchingEntryExercises.round3.exercise3.modality);
                 $('#exercise-11 .level').val(matchingEntryExercises.round3.exercise3.level);
+                $('#exercise-11 .notes').val(matchingEntryExercises.round3.exercise3.notes);
                 $('#exercise-11 #round1SelectReps').val(matchingEntryExercises.round3.exercise3.reps);
                 $('#exercise-11 #round1SelectWeight').val(matchingEntryExercises.round3.exercise3.weight);
 
@@ -123,6 +135,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-12 .muscleGroups').val(matchingEntryExercises.round3.exercise4.musclGroups);
                 $('#exercise-12 .modality').val(matchingEntryExercises.round3.exercise4.modality);
                 $('#exercise-12 .level').val(matchingEntryExercises.round3.exercise4.level);
+                $('#exercise-12 .notes').val(matchingEntryExercises.round3.exercise4.notes);
                 $('#exercise-12 #round1SelectReps').val(matchingEntryExercises.round3.exercise4.reps);
                 $('#exercise-12 #round1SelectWeight').val(matchingEntryExercises.round3.exercise4.weight);
 
@@ -131,6 +144,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-13 .muscleGroups').val(matchingEntryExercises.round4.exercise1.musclGroups);
                 $('#exercise-13 .modality').val(matchingEntryExercises.round4.exercise1.modality);
                 $('#exercise-13 .level').val(matchingEntryExercises.round4.exercise1.level);
+                $('#exercise-13 .notes').val(matchingEntryExercises.round4.exercise1.notes);
                 $('#exercise-13 #round1SelectReps').val(matchingEntryExercises.round4.exercise1.reps);
                 $('#exercise-13 #round1SelectWeight').val(matchingEntryExercises.round4.exercise1.weight);
 
@@ -139,6 +153,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-14 .muscleGroups').val(matchingEntryExercises.round4.exercise2.musclGroups);
                 $('#exercise-14 .modality').val(matchingEntryExercises.round4.exercise2.modality);
                 $('#exercise-14 .level').val(matchingEntryExercises.round4.exercise2.level);
+                $('#exercise-14 .notes').val(matchingEntryExercises.round4.exercise2.notes);
                 $('#exercise-14 #round1SelectReps').val(matchingEntryExercises.round4.exercise2.reps);
                 $('#exercise-14 #round1SelectWeight').val(matchingEntryExercises.round4.exercise2.weight);
 
@@ -147,6 +162,7 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-15 .muscleGroups').val(matchingEntryExercises.round4.exercise3.musclGroups);
                 $('#exercise-15 .modality').val(matchingEntryExercises.round4.exercise3.modality);
                 $('#exercise-15 .level').val(matchingEntryExercises.round4.exercise3.level);
+                $('#exercise-15 .notes').val(matchingEntryExercises.round4.exercise3.notes);
                 $('#exercise-15 #round1SelectReps').val(matchingEntryExercises.round4.exercise3.reps);
                 $('#exercise-15 #round1SelectWeight').val(matchingEntryExercises.round4.exercise3.weight);
 
@@ -155,17 +171,15 @@ appointmentsRef.on('value', function (snapshot) {
                 $('#exercise-16 .muscleGroups').val(matchingEntryExercises.round4.exercise4.musclGroups);
                 $('#exercise-16 .modality').val(matchingEntryExercises.round4.exercise4.modality);
                 $('#exercise-16 .level').val(matchingEntryExercises.round4.exercise4.level);
+                $('#exercise-16 .notes').val(matchingEntryExercises.round4.exercise4.notes);
                 $('#exercise-16 #round1SelectReps').val(matchingEntryExercises.round4.exercise4.reps);
                 $('#exercise-16 #round1SelectWeight').val(matchingEntryExercises.round4.exercise4.weight);
             });
         }
     }
 
-    // console.log(clientKey);
-
     // Listen for submission
     $(".editAppointmentsPage .submit").click(function () {
-        console.log(matchingEntry);
         // Check if name, location or date are empty
         if ($('#clientName').val() == '' || $('#date').val() == '' || $('#locationName').val() == '') {
             alert('Name location and date are required.')
@@ -398,36 +412,36 @@ appointmentsRef.on('value', function (snapshot) {
                                 ulc: $('.u_l_c.exercise-1').val(),
                                 musclGroups: $('.muscleGroups.exercise-1').val(),
                                 modality: $('.modality.exercise-1').val(),
-                                level: $('.level.exercise-1').val(),
                                 reps: $('.reps.exercise-1').val(),
-                                weight: $('.weight.exercise-1').val()
+                                weight: $('.weight.exercise-1').val(),
+                                notes: $('.notes.exercise-1').val()
                             },
                             exercise2: {
                                 exercise: $('.exercises.exercise-2').val(),
                                 ulc: $('.u_l_c.exercise-2').val(),
                                 musclGroups: $('.muscleGroups.exercise-2').val(),
                                 modality: $('.modality.exercise-2').val(),
-                                level: $('.level.exercise-2').val(),
                                 reps: $('.reps.exercise-2').val(),
-                                weight: $('.weight.exercise-2').val()
+                                weight: $('.weight.exercise-2').val(),
+                                notes: $('.notes.exercise-2').val()
                             },
                             exercise3: {
                                 exercise: $('.exercises.exercise-3').val(),
                                 ulc: $('.u_l_c.exercise-3').val(),
                                 musclGroups: $('.muscleGroups.exercise-3').val(),
                                 modality: $('.modality.exercise-3').val(),
-                                level: $('.level.exercise-3').val(),
                                 reps: $('.reps.exercise-3').val(),
-                                weight: $('.weight.exercise-3').val()
+                                weight: $('.weight.exercise-3').val(),
+                                notes: $('.notes.exercise-3').val()
                             },
                             exercise4: {
                                 exercise: $('.exercises.exercise-4').val(),
                                 ulc: $('.u_l_c.exercise-4').val(),
                                 musclGroups: $('.muscleGroups.exercise-4').val(),
                                 modality: $('.modality.exercise-4').val(),
-                                level: $('.level.exercise-4').val(),
                                 reps: $('.reps.exercise-4').val(),
-                                weight: $('.weight.exercise-4').val()
+                                weight: $('.weight.exercise-4').val(),
+                                notes: $('.notes.exercise-4').val()
                             },
                         },
                         round2: {
@@ -436,36 +450,36 @@ appointmentsRef.on('value', function (snapshot) {
                                 ulc: $('.u_l_c.exercise-5').val(),
                                 musclGroups: $('.muscleGroups.exercise-5').val(),
                                 modality: $('.modality.exercise-5').val(),
-                                level: $('.level.exercise-5').val(),
                                 reps: $('.reps.exercise-5').val(),
-                                weight: $('.weight.exercise-5').val()
+                                weight: $('.weight.exercise-5').val(),
+                                notes: $('.notes.exercise-5').val()
                             },
                             exercise2: {
                                 exercise: $('.exercises.exercise-6').val(),
                                 ulc: $('.u_l_c.exercise-6').val(),
                                 musclGroups: $('.muscleGroups.exercise-6').val(),
                                 modality: $('.modality.exercise-6').val(),
-                                level: $('.level.exercise-6').val(),
                                 reps: $('.reps.exercise-6').val(),
-                                weight: $('.weight.exercise-6').val()
+                                weight: $('.weight.exercise-6').val(),
+                                notes: $('.notes.exercise-6').val()
                             },
                             exercise3: {
                                 exercise: $('.exercises.exercise-7').val(),
                                 ulc: $('.u_l_c.exercise-7').val(),
                                 musclGroups: $('.muscleGroups.exercise-7').val(),
                                 modality: $('.modality.exercise-7').val(),
-                                level: $('.level.exercise-7').val(),
                                 reps: $('.reps.exercise-7').val(),
-                                weight: $('.weight.exercise-7').val()
+                                weight: $('.weight.exercise-7').val(),
+                                notes: $('.notes.exercise-7').val()
                             },
                             exercise4: {
                                 exercise: $('.exercises.exercise-8').val(),
                                 ulc: $('.u_l_c.exercise-8').val(),
                                 musclGroups: $('.muscleGroups.exercise-8').val(),
                                 modality: $('.modality.exercise-8').val(),
-                                level: $('.level.exercise-8').val(),
                                 reps: $('.reps.exercise-8').val(),
-                                weight: $('.weight.exercise-8').val()
+                                weight: $('.weight.exercise-8').val(),
+                                notes: $('.notes.exercise-8').val()
                             },
                         },
                         round3: {
@@ -474,36 +488,36 @@ appointmentsRef.on('value', function (snapshot) {
                                 ulc: $('.u_l_c.exercise-9').val(),
                                 musclGroups: $('.muscleGroups.exercise-9').val(),
                                 modality: $('.modality.exercise-9').val(),
-                                level: $('.level.exercise-9').val(),
                                 reps: $('.reps.exercise-9').val(),
-                                weight: $('.weight.exercise-9').val()
+                                weight: $('.weight.exercise-9').val(),
+                                notes: $('.notes.exercise-9').val()
                             },
                             exercise2: {
                                 exercise: $('.exercises.exercise-10').val(),
                                 ulc: $('.u_l_c.exercise-10').val(),
                                 musclGroups: $('.muscleGroups.exercise-10').val(),
                                 modality: $('.modality.exercise-10').val(),
-                                level: $('.level.exercise-10').val(),
                                 reps: $('.reps.exercise-10').val(),
-                                weight: $('.weight.exercise-10').val()
+                                weight: $('.weight.exercise-10').val(),
+                                notes: $('.notes.exercise-10').val()
                             },
                             exercise3: {
                                 exercise: $('.exercises.exercise-11').val(),
                                 ulc: $('.u_l_c.exercise-11').val(),
                                 musclGroups: $('.muscleGroups.exercise-11').val(),
                                 modality: $('.modality.exercise-11').val(),
-                                level: $('.level.exercise-11').val(),
                                 reps: $('.reps.exercise-11').val(),
-                                weight: $('.weight.exercise-11').val()
+                                weight: $('.weight.exercise-11').val(),
+                                notes: $('.notes.exercise-11').val()
                             },
                             exercise4: {
                                 exercise: $('.exercises.exercise-12').val(),
                                 ulc: $('.u_l_c.exercise-12').val(),
                                 musclGroups: $('.muscleGroups.exercise-12').val(),
                                 modality: $('.modality.exercise-12').val(),
-                                level: $('.level.exercise-12').val(),
                                 reps: $('.reps.exercise-12').val(),
-                                weight: $('.weight.exercise-12').val()
+                                weight: $('.weight.exercise-12').val(),
+                                notes: $('.notes.exercise-12').val()
                             },
                         },
                         round4: {
@@ -512,40 +526,40 @@ appointmentsRef.on('value', function (snapshot) {
                                 ulc: $('.u_l_c.exercise-13').val(),
                                 musclGroups: $('.muscleGroups.exercise-13').val(),
                                 modality: $('.modality.exercise-13').val(),
-                                level: $('.level.exercise-13').val(),
                                 reps: $('.reps.exercise-13').val(),
-                                weight: $('.weight.exercise-13').val()
+                                weight: $('.weight.exercise-13').val(),
+                                notes: $('.notes.exercise-13').val()
                             },
                             exercise2: {
                                 exercise: $('.exercises.exercise-14').val(),
                                 ulc: $('.u_l_c.exercise-14').val(),
                                 musclGroups: $('.muscleGroups.exercise-14').val(),
                                 modality: $('.modality.exercise-14').val(),
-                                level: $('.level.exercise-14').val(),
                                 reps: $('.reps.exercise-14').val(),
-                                weight: $('.weight.exercise-14').val()
+                                weight: $('.weight.exercise-14').val(),
+                                notes: $('.notes.exercise-14').val()
                             },
                             exercise3: {
                                 exercise: $('.exercises.exercise-15').val(),
                                 ulc: $('.u_l_c.exercise-15').val(),
                                 musclGroups: $('.muscleGroups.exercise-15').val(),
                                 modality: $('.modality.exercise-15').val(),
-                                level: $('.level.exercise-15').val(),
                                 reps: $('.reps.exercise-15').val(),
-                                weight: $('.weight.exercise-15').val()
+                                weight: $('.weight.exercise-15').val(),
+                                notes: $('.notes.exercise-15').val()
                             },
                             exercise4: {
                                 exercise: $('.exercises.exercise-16').val(),
                                 ulc: $('.u_l_c.exercise-16').val(),
                                 musclGroups: $('.muscleGroups.exercise-16').val(),
                                 modality: $('.modality.exercise-16').val(),
-                                level: $('.level.exercise-16').val(),
                                 reps: $('.reps.exercise-16').val(),
-                                weight: $('.weight.exercise-16').val()
+                                weight: $('.weight.exercise-16').val(),
+                                notes: $('.notes.exercise-16').val()
                             },
                         },
                     }
-                }
+                    }
             }
             // Log results to the console for now
             console.log(exerciseLog);

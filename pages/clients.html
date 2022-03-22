@@ -138,7 +138,7 @@
                           <td>Name</td>
                           <td>Gender</td>
                           <td>Age</td>
-                          <td>DOB</td>
+                          <td>Location</td>
                           <td>Status</td>
                         </tr>
                       </thead>
@@ -193,7 +193,7 @@
                   <p class="age"></p>
                 </div>
                 <div class="form-group col-md-6 grid-margin">
-                  <label for="exampleInputUsername1">DOB</label>
+                  <label for="exampleInputUsername1">Location</label>
                   <p class="dob"></p>
                 </div>
               </div>
@@ -252,9 +252,33 @@
         console.log(e.target.innerHTML);
         let clientName = e.target.innerHTML;
         clientName = clientName.replace(/\s/g, '_')
-        window.location.replace(baseURL + '/pages/client-detail.html?client=' +  clientName);
+        window.location.replace('./client-detail.html?client=' +  clientName);
       });
     }, 1000);
+
+    $(document).ready(function(){
+        const auth = firebase.auth();
+        // logout
+        $('.logout').click(function(e) {
+            console.log('logout');
+            e.preventDefault();
+            auth.signOut();
+
+            // Clear storage items
+            localStorage.removeItem('email'),
+            localStorage.removeItem('name'),
+            localStorage.removeItem('firebaseUID'),
+            localStorage.removeItem('uid')
+
+            localStorage.setItem('loggedIn','false');
+
+            // Redirect back to login page
+            setTimeout(() => {
+                location.replace('./login.html');
+            }, 1000);
+        });
+    });
+
   </script>
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->

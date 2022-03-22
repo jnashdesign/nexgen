@@ -140,7 +140,6 @@
                           <td>Muscle Group</td>
                           <td>ULC</td>
                           <td>Modality</td>
-                          <td>Difficulty</td>
                           <td>Video</td>
                         </tr>
                       </thead>
@@ -183,7 +182,6 @@
   <script src="../js/settings.js"></script>
   <script src="../js/todolist.js"></script>
   <script src="../js/dashboard.js"></script>
-  <script src="../js/Chart.roundedBarCharts.js"></script>
   <script src="../js/firebase-app.js"></script>
   <script src="../js/firebase-database.js"></script>
   <script src="../js/firebase-auth.js"></script>
@@ -233,11 +231,33 @@
         $('.exerciseName').click(function(e){
           let eid = e.target.id.split('_');
           console.log(eid[1]);
-        location.replace(baseURL + '/pages/editExercise.html?exercise=' + eid[1]);
+        location.replace('./editExercise.html?exercise=' + eid[1]);
         });
       }, 2000);
-    })
+    });
 
+    $(document).ready(function(){
+        const auth = firebase.auth();
+        // logout
+        $('.logout').click(function(e) {
+            console.log('logout');
+            e.preventDefault();
+            auth.signOut();
+
+            // Clear storage items
+            localStorage.removeItem('email'),
+            localStorage.removeItem('name'),
+            localStorage.removeItem('firebaseUID'),
+            localStorage.removeItem('uid')
+
+            localStorage.setItem('loggedIn','false');
+
+            // Redirect back to login page
+            setTimeout(() => {
+                location.replace('./login.html');
+            }, 1000);
+        });
+    });
   </script>
   <!-- Custom js for this page-->
   <!-- End custom js for this page-->

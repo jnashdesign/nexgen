@@ -22,7 +22,7 @@
   <link rel="shortcut icon" href="../images/favicon.png" />
 </head>
 
-<body class="trainersPage">
+<body class="staffPage">
   <div class="container-scroller">
     <!-- partial:../../partials/_navbar.html -->
     <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
@@ -232,6 +232,29 @@
         window.location.replace('./staffDetail.html?trainer=' +  trainerName);
       });
     }, 1000);
+
+    $(document).ready(function(){
+        const auth = firebase.auth();
+        // logout
+        $('.logout').click(function(e) {
+            console.log('logout');
+            e.preventDefault();
+            auth.signOut();
+
+            // Clear storage items
+            localStorage.removeItem('email'),
+            localStorage.removeItem('name'),
+            localStorage.removeItem('firebaseUID'),
+            localStorage.removeItem('uid')
+
+            localStorage.setItem('loggedIn','false');
+
+            // Redirect back to login page
+            setTimeout(() => {
+                location.replace('./login.html');
+            }, 1000);
+        });
+    });
 
   </script>
   <!-- Custom js for this page-->

@@ -16,6 +16,15 @@ const trainerRef = firebase.database().ref('/people/staff');
 const locationRef = firebase.database().ref('/locations');
 const appointmentsRef = firebase.database().ref('/appointments');
 
+// Check login status
+console.log('loggedIn = ' + localStorage.getItem('loggedIn'))
+
+// If not logged in, send to login page
+if (document.location.href.indexOf('login.html') === -1 && localStorage.getItem('loggedIn') == 'false') {
+    console.log('not logged in')
+    location.replace(baseURL + '/pages/login.html');
+}
+
 // Look through client node
 clientsRef.on('value', function (snapshot) {
     // Get snapshot value
@@ -44,6 +53,7 @@ clientsRef.on('value', function (snapshot) {
             age: clientAge,
             dob: result[clientKey].personal.dob,
             gender: result[clientKey].personal.gender,
+            location: result[clientKey].location,
             notes: result[clientKey].client_notes.general,
             status: result[clientKey].status
         });
@@ -51,7 +61,10 @@ clientsRef.on('value', function (snapshot) {
 
     // Add client names to autocomplete
     $("#clientName").autocomplete({
-        source: clientNames
+        source: clientNames,
+        select: function (e, ui) {
+            console.log(e)
+        }
     });
 
     // Loop through client details
@@ -64,13 +77,26 @@ clientsRef.on('value', function (snapshot) {
             statusColor = 'danger';
         }
 
+        // Check if admin, if not, populate location and disable field
+        if (localStorage.getItem('access') !== 'Admin'){
+            let location = localStorage.getItem('location');
+            if (res.location !== location){
+                return;
+            }
+        }
+
         // Clear all data in table
         $('.clientTable tbody').html('');
         // Fill in table
         setTimeout(() => {
-            $('.clientTable tbody').append('<tr> <td class="clientDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.dob + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
+            $('.clientTable tbody').append('<tr> <td class="clientDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
         }, 100);
     });
+});
+
+$('.planAppointmentsPage .ui-menu').click(function(){
+    console.log('test')
+    console.log($('.planAppointmentsPage .ui-menu .ui-menu-item-wrapper').val())
 });
 
 // Function to get years from today
@@ -97,9 +123,18 @@ exerciseRef.on('value', function (snapshot) {
     // Loop through exercises
     for (const prop in result) {
         exerciseArray.push(result[prop]);
-        exerciseNames.push(result[prop].Exercise);
+        let exerciseName = result[prop].Exercise;
+        let exerciseInfo = { [exerciseName.replace(/[ ,-,/]/g, '_').replace(/[(,)]/g, '')] : {
+            Exercise : result[prop].Exercise,
+            Modality : result[prop].Modality,
+            U_L_C : result[prop].U_L_C,
+            Joint : result[prop].Joint,
+            Muscle_Group : result[prop].Muscle_Group,
+            Notes : result[prop].Notes ?? null
+            }
+        };
+        exerciseNames.push(exerciseName);
     }
-    // console.log(exerciseArray);
 
     if (window.location.href.indexOf("editExercise.html") > -1) {
         const urlSearchParams = new URLSearchParams(window.location.search);
@@ -110,6 +145,22 @@ exerciseRef.on('value', function (snapshot) {
         $('#modality').val(exerciseArray[eid].Modality);
         $('#video').val(exerciseArray[eid].video);
         $('#difficulty').val(exerciseArray[eid].Difficulty);
+        $('.notes').val(exerciseArray[eid].Notes);
+
+        $('.editExercisePage .submit').click(function(){
+            let exerciseName = [exerciseArray[eid].Exercise.replace(/[ ,-,/]/g, '_').replace(/[(,)]/g, '')]
+            let exerciseUpdate = {
+                [exerciseName] : {
+                 "Exercise" : $('#name').val(),
+                 "Notes" : $('.notes').val(),
+                 "Modality" : $('#modality').val(),
+                 "Muscle_Group" : $('#muscleGroup').val(),
+                 "U_L_C" : $('#ulc').val(),
+                 "video" : $('#video').val()
+                 }
+             }
+             exerciseRef.update(exerciseUpdate);
+         });
     }
 
     // Add autocomplete to each exercise input
@@ -120,14 +171,14 @@ exerciseRef.on('value', function (snapshot) {
             select: function (e, ui) {
                 // Get which exercise number
                 let exerciseNum = e.target.classList[2];
-
+                console.log(e.target.classList);
+                // console.log(exerciseArray);
                 // Update exercise array for each round
                 exerciseArray.forEach(function (res) {
                     if (res.Exercise == ui.item.label) {
                         $('.muscleGroups.' + exerciseNum).val(res.Muscle_Group);
                         $('.u_l_c.' + exerciseNum).val(res.U_L_C)
                         $('.modality.' + exerciseNum).val(res.Modality);
-                        $('.level.' + exerciseNum).val(res.Difficulty);
                     }
                 })
             }
@@ -136,15 +187,6 @@ exerciseRef.on('value', function (snapshot) {
 
     exerciseArray.forEach(function (res, index) {
         let video;
-        // Create badge colors
-        let levelColor;
-        if (res.Difficulty == 'Beginner') {
-            levelColor = 'success';
-        } else if (res.Difficulty == 'Intermediate') {
-            levelColor = 'warning';
-        } else {
-            levelColor = 'danger'
-        };
 
         if (res.video) {
             video = '<a target="_blank" href="' + res.video + '"><span style="font-size:1.5em" class="mdi mdi-video"></span></a>'
@@ -153,7 +195,7 @@ exerciseRef.on('value', function (snapshot) {
         }
 
         // Fill in table
-        $('.exerciseTable tbody').append('<tr> <td class="exerciseName" id="exercise_' + index + '">' + res.Exercise + '</td> <td>' + res.Muscle_Group + '</td> <td>' + res.U_L_C + '</td> <td>' + res.Modality + '</td> <td><label class="badge badge-' + levelColor + '">' + res.Difficulty + '</label></td><td>' + video + '</td></tr>')
+        $('.exerciseTable tbody').append('<tr> <td class="exerciseName" id="exercise_' + index + '">' + res.Exercise + '</td> <td>' + res.Muscle_Group + '</td> <td>' + res.U_L_C + '</td> <td>' + res.Modality + '</td> <td>' + video + '</td></tr>')
     });
 });
 
@@ -193,6 +235,9 @@ trainerRef.on('value', function (snapshot) {
             status: result[trainerName].status,
             appointments: appointmentTotal
         });
+
+        // Clear all data in table
+        $('.staffTable tbody').html('');
     }
 
     // Loop through trainer details
@@ -205,8 +250,13 @@ trainerRef.on('value', function (snapshot) {
             statusColor = 'danger';
         }
 
-        // Clear all data in table
-        $('.staffTable tbody').html('');
+        // Check if admin, if not, populate location and disable field
+        if (localStorage.getItem('access') !== 'Admin'){
+            let location = localStorage.getItem('location');
+            if (res.location !== location){
+                return;
+            }
+        }
 
         // Fill in data after 100ms
         setTimeout(() => {
@@ -272,8 +322,8 @@ $('#date').val(today);
 
 // Submit new client info
 $('.addClientPage .submit').click(function () {
-    if ($('.name').val() == '' || $('#email').val() == '' || $('.gender').val() == '' || $('#date').val() == '' || $('.height').val() == '') {
-        alert('Name, email, gender, dob are required.');
+    if ($('.name').val() == '' || $('#email').val() == '' || $('.gender').val() == '' || $('#date').val() == '' || $('.height').val() == '---' || $('.weight').val() == '') {
+        alert('All fields other than Notes and Physical Problems are required.');
         return;
     } else {
         let key = $('.name').val().replace(/ /g, "_");
@@ -282,11 +332,13 @@ $('.addClientPage .submit').click(function () {
         let gender = $('.gender').val();
         let dob = $('#date').val();
         let height = $('.height').val();
+        let location = $('#locationName').val();
         let physical_problems = $('.physicalProblems').val();
         let notes = $('.notes').val();
         let weight = $('.weight').val();
         let clientInfo = {
             [key]: {
+                location: location,
                 personal: {
                     age: getAge(dob),
                     dob: dob,
@@ -306,7 +358,7 @@ $('.addClientPage .submit').click(function () {
             if (error) {
                 alert(error)
             } else {
-                alert('Client successfully updated!')
+                alert('Client successfully added!')
             }
         });
     }
@@ -347,7 +399,6 @@ $('.editClientPage .submit').click(function () {
                 client_notes: null ?? notes
             }
         }
-        // console.log(clientInfo);
         clientsRef.update(clientInfo, (error) => {
             if (error) {
                 alert(error)
@@ -362,15 +413,27 @@ $('.clientDetailPage .submit').click(function () {
     location.replace(baseURL + '/pages/editClient.html?client=' + $('.name').html().replace(/\s/g, '_'))
 });
 
+// Capitalize first letter of each word in Exercise Name
+$(document).ready(function () {  
+    $(".addExercisePage #name").keyup(function () {  
+        $(".addExercisePage #name").css('textTransform', 'capitalize');  
+    });  
+}); 
+
 // Add new exercise
-$('.addExercisePage .submit').click(function () {
-    $('#name').val();
-    $('#ulc').val();
-    $('#muscleGroup').val();
-    $('#modality').val();
-    $('#video').val();
-    $('#difficulty').val();
-});
+$('.addExercisePage .submit').click(function(){
+    let exerciseName = $('#name').val().replace(/[ ,-,/]/g, '_').replace(/[(,)]/g, '');
+    let exerciseUpdate = {
+        [exerciseName] : {
+         "Exercise" : $('#name').val(),
+         "Modality" : $('#modality').val(),
+         "Muscle_Group" : $('#muscleGroup').val(),
+         "U_L_C" : $('#ulc').val(),
+         "video" : $('#video').val()
+         }
+     }
+     exerciseRef.update(exerciseUpdate);
+ });
 
 // Collect appointment log info on submit
 $(".planAppointmentsPage .submit").click(function () {
@@ -427,7 +490,8 @@ $(".planAppointmentsPage .submit").click(function () {
                     last_updated: $('#date').val(),
                     location: $('#locationName').val().split(', ')[0],
                     state: $('#locationName').val().split(', ')[1],
-                    no_show: "false"
+                    no_show: "false",
+                    notes: $('#appointmentNotes').val()
                 },
                 exercises: {
                     round1: {
@@ -436,36 +500,36 @@ $(".planAppointmentsPage .submit").click(function () {
                             ulc: $('.u_l_c.exercise-1').val(),
                             musclGroups: $('.muscleGroups.exercise-1').val(),
                             modality: $('.modality.exercise-1').val(),
-                            level: $('.level.exercise-1').val(),
                             reps: $('.reps.exercise-1').val(),
-                            weight: $('.weight.exercise-1').val()
+                            weight: $('.weight.exercise-1').val(),
+                            notes: $('.notes.exercise-1').val()
                         },
                         exercise2: {
                             exercise: $('.exercises.exercise-2').val(),
                             ulc: $('.u_l_c.exercise-2').val(),
                             musclGroups: $('.muscleGroups.exercise-2').val(),
                             modality: $('.modality.exercise-2').val(),
-                            level: $('.level.exercise-2').val(),
                             reps: $('.reps.exercise-2').val(),
-                            weight: $('.weight.exercise-2').val()
+                            weight: $('.weight.exercise-2').val(),
+                            notes: $('.notes.exercise-2').val()
                         },
                         exercise3: {
                             exercise: $('.exercises.exercise-3').val(),
                             ulc: $('.u_l_c.exercise-3').val(),
                             musclGroups: $('.muscleGroups.exercise-3').val(),
                             modality: $('.modality.exercise-3').val(),
-                            level: $('.level.exercise-3').val(),
                             reps: $('.reps.exercise-3').val(),
-                            weight: $('.weight.exercise-3').val()
+                            weight: $('.weight.exercise-3').val(),
+                            notes: $('.notes.exercise-3').val()
                         },
                         exercise4: {
                             exercise: $('.exercises.exercise-4').val(),
                             ulc: $('.u_l_c.exercise-4').val(),
                             musclGroups: $('.muscleGroups.exercise-4').val(),
                             modality: $('.modality.exercise-4').val(),
-                            level: $('.level.exercise-4').val(),
                             reps: $('.reps.exercise-4').val(),
-                            weight: $('.weight.exercise-4').val()
+                            weight: $('.weight.exercise-4').val(),
+                            notes: $('.notes.exercise-4').val()
                         },
                     },
                     round2: {
@@ -474,36 +538,36 @@ $(".planAppointmentsPage .submit").click(function () {
                             ulc: $('.u_l_c.exercise-5').val(),
                             musclGroups: $('.muscleGroups.exercise-5').val(),
                             modality: $('.modality.exercise-5').val(),
-                            level: $('.level.exercise-5').val(),
                             reps: $('.reps.exercise-5').val(),
-                            weight: $('.weight.exercise-5').val()
+                            weight: $('.weight.exercise-5').val(),
+                            notes: $('.notes.exercise-5').val()
                         },
                         exercise2: {
                             exercise: $('.exercises.exercise-6').val(),
                             ulc: $('.u_l_c.exercise-6').val(),
                             musclGroups: $('.muscleGroups.exercise-6').val(),
                             modality: $('.modality.exercise-6').val(),
-                            level: $('.level.exercise-6').val(),
                             reps: $('.reps.exercise-6').val(),
-                            weight: $('.weight.exercise-6').val()
+                            weight: $('.weight.exercise-6').val(),
+                            notes: $('.notes.exercise-6').val()
                         },
                         exercise3: {
                             exercise: $('.exercises.exercise-7').val(),
                             ulc: $('.u_l_c.exercise-7').val(),
                             musclGroups: $('.muscleGroups.exercise-7').val(),
                             modality: $('.modality.exercise-7').val(),
-                            level: $('.level.exercise-7').val(),
                             reps: $('.reps.exercise-7').val(),
-                            weight: $('.weight.exercise-7').val()
+                            weight: $('.weight.exercise-7').val(),
+                            notes: $('.notes.exercise-7').val()
                         },
                         exercise4: {
                             exercise: $('.exercises.exercise-8').val(),
                             ulc: $('.u_l_c.exercise-8').val(),
                             musclGroups: $('.muscleGroups.exercise-8').val(),
                             modality: $('.modality.exercise-8').val(),
-                            level: $('.level.exercise-8').val(),
                             reps: $('.reps.exercise-8').val(),
-                            weight: $('.weight.exercise-8').val()
+                            weight: $('.weight.exercise-8').val(),
+                            notes: $('.notes.exercise-8').val()
                         },
                     },
                     round3: {
@@ -512,36 +576,36 @@ $(".planAppointmentsPage .submit").click(function () {
                             ulc: $('.u_l_c.exercise-9').val(),
                             musclGroups: $('.muscleGroups.exercise-9').val(),
                             modality: $('.modality.exercise-9').val(),
-                            level: $('.level.exercise-9').val(),
                             reps: $('.reps.exercise-9').val(),
-                            weight: $('.weight.exercise-9').val()
+                            weight: $('.weight.exercise-9').val(),
+                            notes: $('.notes.exercise-9').val()
                         },
                         exercise2: {
                             exercise: $('.exercises.exercise-10').val(),
                             ulc: $('.u_l_c.exercise-10').val(),
                             musclGroups: $('.muscleGroups.exercise-10').val(),
                             modality: $('.modality.exercise-10').val(),
-                            level: $('.level.exercise-10').val(),
                             reps: $('.reps.exercise-10').val(),
-                            weight: $('.weight.exercise-10').val()
+                            weight: $('.weight.exercise-10').val(),
+                            notes: $('.notes.exercise-10').val()
                         },
                         exercise3: {
                             exercise: $('.exercises.exercise-11').val(),
                             ulc: $('.u_l_c.exercise-11').val(),
                             musclGroups: $('.muscleGroups.exercise-11').val(),
                             modality: $('.modality.exercise-11').val(),
-                            level: $('.level.exercise-11').val(),
                             reps: $('.reps.exercise-11').val(),
-                            weight: $('.weight.exercise-11').val()
+                            weight: $('.weight.exercise-11').val(),
+                            notes: $('.notes.exercise-11').val()
                         },
                         exercise4: {
                             exercise: $('.exercises.exercise-12').val(),
                             ulc: $('.u_l_c.exercise-12').val(),
                             musclGroups: $('.muscleGroups.exercise-12').val(),
                             modality: $('.modality.exercise-12').val(),
-                            level: $('.level.exercise-12').val(),
                             reps: $('.reps.exercise-12').val(),
-                            weight: $('.weight.exercise-12').val()
+                            weight: $('.weight.exercise-12').val(),
+                            notes: $('.notes.exercise-12').val()
                         },
                     },
                     round4: {
@@ -550,36 +614,36 @@ $(".planAppointmentsPage .submit").click(function () {
                             ulc: $('.u_l_c.exercise-13').val(),
                             musclGroups: $('.muscleGroups.exercise-13').val(),
                             modality: $('.modality.exercise-13').val(),
-                            level: $('.level.exercise-13').val(),
                             reps: $('.reps.exercise-13').val(),
-                            weight: $('.weight.exercise-13').val()
+                            weight: $('.weight.exercise-13').val(),
+                            notes: $('.notes.exercise-13').val()
                         },
                         exercise2: {
                             exercise: $('.exercises.exercise-14').val(),
                             ulc: $('.u_l_c.exercise-14').val(),
                             musclGroups: $('.muscleGroups.exercise-14').val(),
                             modality: $('.modality.exercise-14').val(),
-                            level: $('.level.exercise-14').val(),
                             reps: $('.reps.exercise-14').val(),
-                            weight: $('.weight.exercise-14').val()
+                            weight: $('.weight.exercise-14').val(),
+                            notes: $('.notes.exercise-14').val()
                         },
                         exercise3: {
                             exercise: $('.exercises.exercise-15').val(),
                             ulc: $('.u_l_c.exercise-15').val(),
                             musclGroups: $('.muscleGroups.exercise-15').val(),
                             modality: $('.modality.exercise-15').val(),
-                            level: $('.level.exercise-15').val(),
                             reps: $('.reps.exercise-15').val(),
-                            weight: $('.weight.exercise-15').val()
+                            weight: $('.weight.exercise-15').val(),
+                            notes: $('.notes.exercise-15').val()
                         },
                         exercise4: {
                             exercise: $('.exercises.exercise-16').val(),
                             ulc: $('.u_l_c.exercise-16').val(),
                             musclGroups: $('.muscleGroups.exercise-16').val(),
                             modality: $('.modality.exercise-16').val(),
-                            level: $('.level.exercise-16').val(),
                             reps: $('.reps.exercise-16').val(),
-                            weight: $('.weight.exercise-16').val()
+                            weight: $('.weight.exercise-16').val(),
+                            notes: $('.notes.exercise-16').val()
                         },
                     },
                 }
@@ -620,19 +684,16 @@ $('.tab-pane').focusout(function () {
 });
 
 function checkRoundCompletion() {
-    // console.log('checkRoundCompletion');
     let exercisesEntries = [];
     let exercisesInfo = [];
     let exercisesNum;
 
     exercises.forEach(function (res) {
-        // console.log(res);
         exercisesEntries = [
             $('.exercises.exercise-' + res + ' ').val(),
             $('.reps.exercise-' + res).val(),
             $('.weight.exercise-' + res).val()
         ];
-        // console.log(exercisesEntries);
         if (exercisesEntries.includes('') == false) {
             $('#ui-id-' + res).css('background-color', '#00b137 !important').css('border-color','#00b137 !important');
         } else {
@@ -655,7 +716,6 @@ exercises.forEach(function (res) {
             $('.u_l_c.exercise-' + res).val('');
             $('.muscleGroups.exercise-' + res).val('');
             $('.modality.exercise-' + res).val('');
-            $('.level.exercise-' + res).val('');
         }
     })
 });
@@ -673,12 +733,23 @@ if (localStorage.getItem('name') && localStorage.getItem('email')) {
     $('.acronym').html(acronym)
 };
 
+// Check if admin, if not, populate location and disable field
+if (localStorage.getItem('access') !== 'Admin'){
+    $('#locationName').val(localStorage.getItem('location'));
+    $('#locationName').prop('disabled','true');
+}
+
+if (localStorage.getItem('access') !== 'Admin'){
+    let staffTitle = $('.staffPage h4.card-title').html() + ' &mdash; ' + localStorage.getItem('location')
+    $('.staffPage h4.card-title').html(staffTitle)
+}
+
 // ********* Hide Pages ********* //
 // Hide some pages while they're being worked.
-let hiddenPages = ['addExercise.html', 'locations.html'];
+let hiddenPages = ['locations.html'];
 
 hiddenPages.forEach(function (res) {
     $('a[href*="' + res + '"]').each(function () {
         $(this).parent().css('display', 'none');
     });
-})
+});

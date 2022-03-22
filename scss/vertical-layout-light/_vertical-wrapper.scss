@@ -149,10 +149,19 @@ a {
 
 .ui-accordion .ui-accordion-header {
   background: #242cea !important;
+  color: #fff !important;
   padding: 20px !important;
   border-radius: 7px;
 }
 
 .ui-accordion .ui-accordion-header .ui-icon-triangle-1-e, .ui-accordion .ui-accordion-header.ui-state-active .ui-icon {
   display: none;
+}
+
+.hide {
+  display: none !important;
+}
+
+.ui-accordion .ui-accordion-content {
+  display: block !important;
 }

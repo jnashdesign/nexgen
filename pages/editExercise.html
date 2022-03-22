@@ -165,30 +165,21 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6 form-group">
-                                            <label for="exampleInputEmail1">Difficulty</label>
-                                            <select class="form-control status" id="difficulty" placeholder="Beginner">
-                                                <option></option>
-                                                <option>Beginner</option>
-                                                <option>Intermediate</option>
-                                                <option>Advanced</option>
-                                            </select>
-                                        </div>
-                                        <div class="col-6 form-group">
                                             <label for="name">Video Link</label>
                                             <input type="text" id="video" class="form-control" placeholder="https://www.youtube.com/watch?v=JbyjNymZOt0">
                                         </div>
+                                        <div class="col-6 form-group">
+                                            <label for="notes">Notes</label>
+                                            <textarea class="form-control notes"
+                                                placeholder="Add notes that may be useful for other trainers."></textarea>
+                                        </div>
+
                                     </div>
 
                                     <div class="row">
-                                    <button type="button" style="width:100%" disabled class="btn btn-primary submit"
+                                    <button type="button" style="width:100%" class="btn btn-primary submit"
                                         data-dismiss="modal">Update</button>
                                     </div>
-                                        <div class="row">
-                                            <div style="margin-top: 10px;" class="alert alert-danger" role="alert">
-                                                This feature is still in progress.
-                                              </div>
-                                        </div>
-           
                             </div>
                         </div>
                     </div>
@@ -224,7 +215,6 @@
     <script src="../js/settings.js"></script>
     <script src="../js/todolist.js"></script>
     <script src="../js/dashboard.js"></script>
-    <script src="../js/Chart.roundedBarCharts.js"></script>
     <script src="../js/firebase-app.js"></script>
     <script src="../js/firebase-database.js"></script>
     <script src="../js/firebase-auth.js"></script>
@@ -244,25 +234,30 @@
     <script src="../js/custom.js"></script>
     <script src="../js/login.js"></script>
     <!-- End custom js for this page-->
+
     <script>
-        const urlSearchParams = new URLSearchParams(window.location.search);
-        const params = urlSearchParams.get('exercise');
+    $(document).ready(function(){
+        const auth = firebase.auth();
+        // logout
+        $('.logout').click(function(e) {
+            console.log('logout');
+            e.preventDefault();
+            auth.signOut();
 
-        $('.editExercisePage .submit').click(function(){
+            // Clear storage items
+            localStorage.removeItem('email'),
+            localStorage.removeItem('name'),
+            localStorage.removeItem('firebaseUID'),
+            localStorage.removeItem('uid')
 
-           let eid = 'ID_' + params + '';
-           let exerciseUpdate = {
-               [eid] : {
-                "Exercise" : $('#name').val(),
-                "Difficulty" : $('#difficulty').val(),
-                "Modality" : $('#modality').val(),
-                "Muscle_Group" : $('#muscleGroup').val(),
-                "U_L_C" : $('#ulc').val(),
-                "video" : $('#video').val()
-                }
-            }
-            exerciseRef.update(exerciseUpdate)
+            localStorage.setItem('loggedIn','false');
+
+            // Redirect back to login page
+            setTimeout(() => {
+                location.replace('./login.html');
+            }, 1000);
         });
+    });
     </script>
 </body>
 

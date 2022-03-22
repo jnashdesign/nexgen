@@ -265,7 +265,6 @@
     <script src="../js/settings.js"></script>
     <script src="../js/todolist.js"></script>
     <script src="../js/dashboard.js"></script>
-    <script src="../js/Chart.roundedBarCharts.js"></script>
     <script src="../js/firebase-app.js"></script>
     <script src="../js/firebase-database.js"></script>
     <script src="../js/firebase-auth.js"></script>
@@ -312,6 +311,30 @@
             $('.notes').val(notes);
             $('.status').val(status);
         });
+
+        $(document).ready(function(){
+        const auth = firebase.auth();
+        // logout
+        $('.logout').click(function(e) {
+            console.log('logout');
+            e.preventDefault();
+            auth.signOut();
+
+            // Clear storage items
+            localStorage.removeItem('email'),
+            localStorage.removeItem('name'),
+            localStorage.removeItem('firebaseUID'),
+            localStorage.removeItem('uid')
+
+            localStorage.setItem('loggedIn','false');
+
+            // Redirect back to login page
+            setTimeout(() => {
+                location.replace('./login.html');
+            }, 1000);
+        });
+    });
+
     </script>
 </body>
 
