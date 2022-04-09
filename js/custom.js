@@ -1,5 +1,5 @@
-// const baseURL = 'https://jnashconsulting.com/nexgenfitness';
-const baseURL = '';
+const baseURL = 'https://jnashconsulting.com/nexgenfitness';
+// const baseURL = '';
 
 // Initialize Firebase
 var config = {
@@ -54,7 +54,8 @@ clientsRef.on('value', function (snapshot) {
             dob: result[clientKey].personal.dob,
             gender: result[clientKey].personal.gender,
             location: result[clientKey].location,
-            notes: result[clientKey].client_notes.general,
+            client_notes: result[clientKey].client_notes,
+            physical_problems: result[clientKey].physical_problems,
             status: result[clientKey].status
         });
     }
@@ -63,7 +64,13 @@ clientsRef.on('value', function (snapshot) {
     $("#clientName").autocomplete({
         source: clientNames,
         select: function (e, ui) {
-            console.log(e)
+            console.log(ui.item.value)
+            $(clientDetails).each(function(index, client){
+                if (client.name == ui.item.value){
+                    $('.planAppointmentsPage #physicalproblems').val(client.physical_problems)
+                    $('.planAppointmentsPage #clientNotes').val(client.client_notes)
+                }
+            })
         }
     });
 
@@ -92,11 +99,6 @@ clientsRef.on('value', function (snapshot) {
             $('.clientTable tbody').append('<tr> <td class="clientDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
         }, 100);
     });
-});
-
-$('.planAppointmentsPage .ui-menu').click(function(){
-    console.log('test')
-    console.log($('.planAppointmentsPage .ui-menu .ui-menu-item-wrapper').val())
 });
 
 // Function to get years from today

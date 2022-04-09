@@ -2,6 +2,31 @@ const urlSearchParams = new URLSearchParams(window.location.search);
 const params = urlSearchParams.get('appointment');
 let info;
 
+// Get client notes
+function getClientNotes(name){
+// Look through client node
+clientsRef.on('value', function (snapshot) {
+    // Get snapshot value
+    let result = snapshot.val();
+
+    // Loop through clients
+    for (const [key, value] of Object.entries(result)) {
+        // Get keys
+        let clientKey = `${key}`;
+
+        if (clientKey == name){
+                console.log('match');
+                console.log(result[clientKey].client_notes);
+                $( document ).ready(function() {
+                // Push notes into page
+                $('.editAppointmentsPage #clientNotes').val(result[clientKey].client_notes);
+                $('.editAppointmentsPage #physicalProblems').val(result[clientKey].physical_problems);
+            })
+        }
+    }
+});
+}
+
 // // Look through appointments node
 appointmentsRef.on('value', function (snapshot) {
     // Get snapshot value
@@ -21,11 +46,15 @@ appointmentsRef.on('value', function (snapshot) {
             matchingEntryInfo = (result[clientKey]).info;
             console.log(matchingEntryExercises)
 
-            $('#clientName').val(matchingEntryInfo.client);
-            $('#date').val(matchingEntryInfo.date);
-            $('#locationName').val(matchingEntryInfo.location + ', ' + matchingEntryInfo.state);
-            $('#trainerName').val(matchingEntryInfo.trainer);
-            $('#appointmentNotes').val(matchingEntryInfo.notes);
+            getClientNotes(matchingEntryInfo.client.replace(/[ ,-,/]/g, '_'));
+
+            $('.editAppointmentsPage #clientName').val(matchingEntryInfo.client);
+            $('.editAppointmentsPage #physicalProblems').val(matchingEntryInfo.physical_problems)
+            $('.editAppointmentsPage #clientNotes').val(matchingEntryInfo.client_notes)
+            $('.editAppointmentsPage #date').val(matchingEntryInfo.date);
+            $('.editAppointmentsPage #locationName').val(matchingEntryInfo.location + ', ' + matchingEntryInfo.state);
+            $('.editAppointmentsPage #trainerName').val(matchingEntryInfo.trainer);
+            $('.editAppointmentsPage #appointmentNotes').val(matchingEntryInfo.notes);
             if (matchingEntryInfo.no_show == 'true') {
                 $('#noShow').prop('checked', 'true');
             }
