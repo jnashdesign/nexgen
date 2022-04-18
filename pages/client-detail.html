@@ -165,9 +165,15 @@
                                             <div class="col-12">
                                                 <h4 class="detailHeaders">Basic Info</h4>
                                             </div>
-                                            <div class="col-6 form-group">
-                                                <label for="email">Email</label>
-                                                <p class="email" name="email"></p>
+                                            <div class="row">
+                                                <div class="col-6 form-group">
+                                                    <label for="email">Email</label>
+                                                    <p class="email" name="email"></p>
+                                                </div>
+                                                <div class="col-6 form-group">
+                                                    <label for="location">Location</label>
+                                                    <p class="location" name="location"></p>
+                                                </div>
                                             </div>
                                             <div class="col-6 form-group">
                                                 <label for="gender">Gender</label>
@@ -426,18 +432,24 @@
                 } else {
                     statusColor = 'danger';
                 }
+                let fullDate = result[clientInfo].personal.dob.split('-');
+                let yr = fullDate[0];
+                let mo = fullDate[1];
+                let dy = fullDate[2];
                 //   console.log(result[clientInfo])
                 $('.clientDetailPage .name').html(result[clientInfo].personal.name);
                 $('.clientDetailPage .age').html(result[clientInfo].personal.age);
-                $('.clientDetailPage .dob').html(result[clientInfo].personal.dob);
+                $('.clientDetailPage .dob').html(mo + '/' + dy + '/' + yr);
                 $('.clientDetailPage .email').html(result[clientInfo].personal.email);
                 $('.clientDetailPage .gender').html(result[clientInfo].personal.gender);
                 $('.clientDetailPage .problems').html(result[clientInfo].physical_problems);
                 $('.clientDetailPage .height').html(result[clientInfo].personal.height);
                 $('.clientDetailPage .weight').html(result[clientInfo].personal.weight + ' lbs');
-                $('.clientDetailPage .notes').html(result[clientInfo].client_notes.general);
+                $('.clientDetailPage .notes').html(result[clientInfo].client_notes);
                 $('.clientDetailPage .status').addClass('badge badge-' + statusColor);
                 $('.clientDetailPage .status').html(result[clientInfo].status);
+                $('.clientDetailPage .location').html(result[clientInfo].location);
+                console.log(result[clientInfo]);
             });
 
             const urlSearchParams = new URLSearchParams(window.location.search);

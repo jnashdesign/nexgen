@@ -217,12 +217,16 @@
                                     </div>
                                     <div class="row">
                                         <div class="col-6 form-group">
-                                            <label for="exampleSelectGender">Status</label>
-                                            <select class="form-control status" id="exampleSelectGender">
+                                            <label for="status">Status</label>
+                                            <select class="form-control status" id="status">
                                                 <option>---</option>
                                                 <option>Active</option>
                                                 <option>Inactive</option>
                                             </select>
+                                        </div>
+                                        <div class="col-6 form-group">
+                                            <label for="status">Location</label>
+                                            <input type="text" class="form-control location" placeholder="location"/>
                                         </div>
                                         </div>
                                     <!-- Modal footer -->
@@ -295,21 +299,22 @@
             let result = snapshot.val();
             let status = result[params].status;
             let physicalProblems = result[params].physical_problems;
-            let notes = result[params].client_notes.general;
+            let notes = result[params].client_notes;
             let personalInfo = result[params].personal;
             let fullDate = personalInfo.dob.split('-');
-            let yr = fullDate[2];
+            let yr = fullDate[0];
             let mo = fullDate[1];
-            let dy = fullDate[0];
-            $('.name').val(personalInfo.name);
-            $('.weight').val(personalInfo.weight);
-            $('.height').val(personalInfo.height);
-            $('#email').val(personalInfo.email);
-            $('#date').val(yr + '-' + dy + '-' + mo);
-            $('.gender').val(personalInfo.gender.charAt(0).toUpperCase() + personalInfo.gender.slice(1));
-            $('.physicalProblems').val(physicalProblems);
-            $('.notes').val(notes);
-            $('.status').val(status);
+            let dy = fullDate[2];
+            $('.editClientPage #date').val(yr + '-' + mo + '-' + dy);
+            $('.editClientPage .name').val(personalInfo.name);
+            $('.editClientPage .weight').val(personalInfo.weight);
+            $('.editClientPage .height').val(personalInfo.height);
+            $('.editClientPage #email').val(personalInfo.email);
+            $('.editClientPage .gender').val(personalInfo.gender.charAt(0).toUpperCase() + personalInfo.gender.slice(1));
+            $('.editClientPage .physicalProblems').val(physicalProblems);
+            $('.editClientPage .notes').val(notes);
+            $('.editClientPage .status').val(status);
+            $('.editClientPage .location').val(result[params].location)
         });
 
         $(document).ready(function(){

@@ -309,7 +309,12 @@ locationRef.on('value', function (snapshot) {
 
 
     // Add names to the autocomplete
-    $('#locationName').autocomplete({
+    $('input#locationName').autocomplete({
+        source: individualLocations
+    });
+
+    // Add names to the autocomplete
+    $('input.location').autocomplete({
         source: individualLocations
     });
 });
@@ -377,10 +382,11 @@ $('.editClientPage .submit').click(function () {
         let email = $('#email').val();
         let gender = $('.gender').val();
         let fullDate = $('#date').val().split('-');
+        let location = $('.location').val();
         let yr = fullDate[0];
         let mo = fullDate[1];
         let dy = fullDate[2];
-        let dob = mo + '-' + dy + '-' + yr;
+        let dob = yr + '-' + mo + '-' + dy;
         let height = $('.height').val();
         let physical_problems = $('.physicalProblems').val();
         let notes = $('.notes').val();
@@ -397,6 +403,7 @@ $('.editClientPage .submit').click(function () {
                     name: name
                 },
                 status: 'Active',
+                location: location,
                 physical_problems: null ?? physical_problems,
                 client_notes: null ?? notes
             }
