@@ -1,5 +1,5 @@
-const baseURL = 'https://jnashconsulting.com/nexgenfitness';
-// const baseURL = '';
+// const baseURL = 'https://jnashconsulting.com/nexgenfitness';
+const baseURL = '';
 
 // Initialize Firebase
 var config = {
@@ -67,7 +67,8 @@ clientsRef.on('value', function (snapshot) {
             console.log(ui.item.value)
             $(clientDetails).each(function(index, client){
                 if (client.name == ui.item.value){
-                    $('.planAppointmentsPage #physicalproblems').val(client.physical_problems)
+                    console.log(client.physical_problems)
+                    $('.planAppointmentsPage #physicalProblems').val(client.physical_problems)
                     $('.planAppointmentsPage #clientNotes').val(client.client_notes)
                 }
             })
