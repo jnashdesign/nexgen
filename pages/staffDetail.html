@@ -138,8 +138,12 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="col-8">
                                         <h2 class="name"></h2>
                                     </div>
+    
+                                    </div>
+
                                     <div class="row">
                                         <div class="col-6 form-group">
                                             <div class="col-3">
@@ -147,15 +151,8 @@
                                             </div>
                                         </div>
                                     </div>
+
                                     <div class="row" style="margin-top: 20px;">
-                                        <nav style="padding:0">
-                                            <div class="nav nav-tabs" id="nav-tabs" role="tablist">
-                                              <button class="nav-link active" id="nav-personal" data-bs-toggle="tab" data-bs-target="#personal" type="button" role="tab" aria-controls="personal" aria-selected="true">Personal</button>
-                                              <button class="nav-link" id="nav-appointments" data-bs-toggle="tab" data-bs-target="#appointments" type="button" role="tab" aria-controls="appointments" aria-selected="false">Appointments</button>
-                                            </div>
-                                          </nav>
-                                          <div class="tab-content" id="nav-tabContent">
-                                            <div class="tab-pane fade show active" id="personal" role="tabpanel" aria-labelledby="nav-personal">
                                             <div class="col-12">
                                                 <h4 class="detailHeaders">Personal</h4>
                                             </div>
@@ -209,32 +206,30 @@
                                                 <label for="exampleInputEmail1">Notes</label>
                                                 <p class="notes"></p>
                                             </div>
-                                        </div>
-                                    <button type="button" style="width:100%" class="btn btn-primary submit"
-                                        data-dismiss="modal">Edit</button>
-                                </div>
-                                <div class="tab-pane fade show" id="appointments" role="tabpanel" aria-labelledby="nav-appointments">
                                     <div class="row appointments">
                                         <div class="col-12">
-                                            <h4 class="detailHeaders">Appointment Info</h4>
+                                            <h4 class="detailHeaders">Appointments</h4>
                                         </div>
                                         <div class="col-md-12">
                                             <table class="table appointmentTable">
                                                 <thead>
-                                                  <tr class="headers">
-                                                    <td>Date</td>
-                                                    <td>Location</td>
-                                                    <td>Client</td>
-                                                    <td>Last Updated</td>
-                                                  </tr>
+                                                    <tr class="headers">
+                                                        <td>View</td>
+                                                        <td class="editBtn">Edit</td>
+                                                        <td>Date</td>
+                                                        <td>Location</td>
+                                                        <td>Trainer</td>
+                                                        <td>Last Updated</td>
+                                                    </tr>
                                                 </thead>
                                                 <tbody>
                                                 </tbody>
                                             </table>
                                         </div>
                                     </div>
+                                    <button type="button" style="width:100%" class="btn btn-primary submit"
+                                    data-dismiss="modal">Edit</button>
                                 </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -333,13 +328,19 @@
         for (const [key, value] of Object.entries(result)) {
             let clientKey = `${key}`;
             let info = clientKey.split('|');
+            let displayEdit = 'none';
             // console.log(params)
             // console.log(info[4])
             if (info[4] == params){
                 let matchingEntry = (result[clientKey]);
                 console.log('matchingEntry')
                 console.log(matchingEntry.info);
-                $('.appointmentTable tbody').append('<tr><td><a href="./editAppointment.html?appointment=' + info[0] + '">' +  matchingEntry.info.date + '</a></td><td><a href="./editAppointment.html?appointment=' + info[0] + '">' +  matchingEntry.info.location.replace('-',' ') + '</a></td><td><a href="./editAppointment.html?appointment=' + info[0] + '">' +  matchingEntry.info.client.replace('-',' ') + '</a></td><td><a href="./editAppointment.html?appointment=' + info[0] + '">' + matchingEntry.info.last_updated + '</a><td></tr>');
+                if (matchingEntry.info.trainer.replace('-', ' ') == localStorage.getItem('name')){
+                    $('body').append('<style>.editBtn {display: block;}</style>')
+                }else {
+                    $('body').append('<style>.editBtn {display: none;}</style>')
+                }
+                $('.appointmentTable tbody').append('<tr><td><a target="_blank" class="mdi mdi-eye menu-icon" href="./viewAppointment.html?appointment=' + info[0] + '"></a></td><td class="editBtn"><a class="mdi mdi-pencil menu-icon" href="./editAppointment.html?appointment=' + info[0] + '"></a></td><td>' + matchingEntry.info.date + '</td><td>' + matchingEntry.info.location.replace('-', ' ') + '</td><td>' + matchingEntry.info.trainer.replace('-', ' ') + '</td><td>' + matchingEntry.info.last_updated + '<td></tr>');
             }
         }
     });
@@ -367,6 +368,9 @@
 
     $(document).ready(function(){
         const auth = firebase.auth();
+
+
+
         // logout
         $('.logout').click(function(e) {
             console.log('logout');

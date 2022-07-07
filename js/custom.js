@@ -1,5 +1,5 @@
-// const baseURL = 'https://jnashconsulting.com/nexgenfitness';
-const baseURL = '';
+const baseURL = 'https://jnashconsulting.com/nexgenfitness';
+// const baseURL = '';
 
 // Initialize Firebase
 var config = {
@@ -14,7 +14,8 @@ const clientsRef = firebase.database().ref('/people/clients');
 const exerciseRef = firebase.database().ref('/exercises');
 const trainerRef = firebase.database().ref('/people/staff');
 const locationRef = firebase.database().ref('/locations');
-const appointmentsRef = firebase.database().ref('/appointments');
+const appointmentsRef_old = firebase.database().ref('/appointments');
+const appointmentsRef = firebase.database().ref('/ngf_appointments');
 
 // Check login status
 console.log('loggedIn = ' + localStorage.getItem('loggedIn'))
@@ -65,11 +66,11 @@ clientsRef.on('value', function (snapshot) {
         source: clientNames,
         select: function (e, ui) {
             console.log(ui.item.value)
-            $(clientDetails).each(function(index, client){
-                if (client.name == ui.item.value){
+            $(clientDetails).each(function (index, client) {
+                if (client.name == ui.item.value) {
                     console.log(client.physical_problems)
-                    $('.planAppointmentsPage #physicalProblems').val(client.physical_problems)
-                    $('.planAppointmentsPage #clientNotes').val(client.client_notes)
+                    $('.planAppointmentsPage #physicalProblems').val(client.physical_problems ? undefined : 'Not provided');
+                    $('.planAppointmentsPage #clientNotes').val(client.client_notes ? undefined : 'Not provided');
                 }
             })
         }
@@ -86,18 +87,23 @@ clientsRef.on('value', function (snapshot) {
         }
 
         // Check if admin, if not, populate location and disable field
-        if (localStorage.getItem('access') !== 'Admin'){
-            let location = localStorage.getItem('location');
-            if (res.location !== location){
-                return;
-            }
-        }
+        // if (localStorage.getItem('access') !== 'Admin'){
+        //     if (res.location !== location){
+        //         return;
+        //     }
+        // }
 
         // Clear all data in table
         $('.clientTable tbody').html('');
         // Fill in table
         setTimeout(() => {
-            $('.clientTable tbody').append('<tr> <td class="clientDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
+            let location = localStorage.getItem('location');
+            if (localStorage.getItem('access') !== 'Admin' && res.location !== location) {
+                $('.clientTable tbody').append('<tr> <td class="clientDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
+            } else {
+                $('.clientTable tbody').append('<tr> <td class="clientDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
+            }
+
         }, 100);
     });
 });
@@ -127,13 +133,14 @@ exerciseRef.on('value', function (snapshot) {
     for (const prop in result) {
         exerciseArray.push(result[prop]);
         let exerciseName = result[prop].Exercise;
-        let exerciseInfo = { [exerciseName.replace(/[ ,-,/]/g, '_').replace(/[(,)]/g, '')] : {
-            Exercise : result[prop].Exercise,
-            Modality : result[prop].Modality,
-            U_L_C : result[prop].U_L_C,
-            Joint : result[prop].Joint,
-            Muscle_Group : result[prop].Muscle_Group,
-            Notes : result[prop].Notes ?? null
+        let exerciseInfo = {
+            [exerciseName.replace(/[ ,-,/]/g, '_').replace(/[(,)]/g, '')]: {
+                Exercise: result[prop].Exercise,
+                // Modality: result[prop].Modality,
+                // U_L_C: result[prop].U_L_C,
+                // Joint: result[prop].Joint,
+                // Muscle_Group: result[prop].Muscle_Group,
+                Notes: result[prop].Notes ?? null
             }
         };
         exerciseNames.push(exerciseName);
@@ -143,53 +150,59 @@ exerciseRef.on('value', function (snapshot) {
         const urlSearchParams = new URLSearchParams(window.location.search);
         const eid = urlSearchParams.get('exercise');
         $('#name').val(exerciseArray[eid].Exercise);
-        $('#ulc').val(exerciseArray[eid].U_L_C);
-        $('#muscleGroup').val(exerciseArray[eid].Muscle_Group);
-        $('#modality').val(exerciseArray[eid].Modality);
-        $('#video').val(exerciseArray[eid].video);
-        $('#difficulty').val(exerciseArray[eid].Difficulty);
+        // $('#ulc').val(exerciseArray[eid].U_L_C);
+        // $('#muscleGroup').val(exerciseArray[eid].Muscle_Group);
+        // $('#modality').val(exerciseArray[eid].Modality);
+        // $('#video').val(exerciseArray[eid].video);
+        // $('#difficulty').val(exerciseArray[eid].Difficulty);
         $('.notes').val(exerciseArray[eid].Notes);
 
-        $('.editExercisePage .submit').click(function(){
+        $('.editExercisePage .submit').click(function () {
             let exerciseName = [exerciseArray[eid].Exercise.replace(/[ ,-,/]/g, '_').replace(/[(,)]/g, '')]
             let exerciseUpdate = {
-                [exerciseName] : {
-                 "Exercise" : $('#name').val(),
-                 "Notes" : $('.notes').val(),
-                 "Modality" : $('#modality').val(),
-                 "Muscle_Group" : $('#muscleGroup').val(),
-                 "U_L_C" : $('#ulc').val(),
-                 "video" : $('#video').val()
-                 }
-             }
-             exerciseRef.update(exerciseUpdate);
-         });
+                [exerciseName]: {
+                    "Exercise": $('#name').val(),
+                    "Notes": $('.notes').val(),
+                    // "Modality": $('#modality').val(),
+                    // "Muscle_Group": $('#muscleGroup').val(),
+                    // "U_L_C": $('#ulc').val(),
+                    "video": $('#video').val()
+                }
+            }
+            exerciseRef.update(exerciseUpdate);
+        });
     }
 
     // Add autocomplete to each exercise input
-    $('.exercises').each(function (i, obj) {
-        // Add exercise names to autocomplete
-        $(obj).autocomplete({
-            source: exerciseNames,
-            select: function (e, ui) {
-                // Get which exercise number
-                let exerciseNum = e.target.classList[2];
-                console.log(e.target.classList);
-                // console.log(exerciseArray);
-                // Update exercise array for each round
-                exerciseArray.forEach(function (res) {
-                    if (res.Exercise == ui.item.label) {
-                        $('.muscleGroups.' + exerciseNum).val(res.Muscle_Group);
-                        $('.u_l_c.' + exerciseNum).val(res.U_L_C)
-                        $('.modality.' + exerciseNum).val(res.Modality);
-                    }
-                })
-            }
-        });
-    });
+    // $('.exercises').each(function (i, obj) {
+    //     // Add exercise names to autocomplete
+    //     $(obj).autocomplete({
+    //         source: exerciseNames,
+    //         select: function (e, ui) {
+    //             // Get which exercise number
+    //             let exerciseNum = e.target.classList[2];
+    //             console.log(e.target.classList);
+    //             // console.log(exerciseArray);
+    //             // Update exercise array for each round
+    //             exerciseArray.forEach(function (res) {
+    //                 if (res.Exercise == ui.item.label) {
+    //                     $('.muscleGroups.' + exerciseNum).val(res.Muscle_Group);
+    //                     $('.u_l_c.' + exerciseNum).val(res.U_L_C)
+    //                     $('.modality.' + exerciseNum).val(res.Modality);
+    //                 }
+    //             })
+    //         }
+    //     });
+    // });
 
     exerciseArray.forEach(function (res, index) {
         let video;
+        let notes;
+        if (!res.Notes){
+            notes = 'Not provided'
+        }else{
+            notes = res.Notes;
+        }
 
         if (res.video) {
             video = '<a target="_blank" href="' + res.video + '"><span style="font-size:1.5em" class="mdi mdi-video"></span></a>'
@@ -198,7 +211,7 @@ exerciseRef.on('value', function (snapshot) {
         }
 
         // Fill in table
-        $('.exerciseTable tbody').append('<tr> <td class="exerciseName" id="exercise_' + index + '">' + res.Exercise + '</td> <td>' + res.Muscle_Group + '</td> <td>' + res.U_L_C + '</td> <td>' + res.Modality + '</td> <td>' + video + '</td></tr>')
+        $('.exerciseTable tbody').append('<tr> <td class="exerciseName" id="exercise_' + index + '">' + res.Exercise + '</td> <td>' + video + '</td><td>' + notes + '</td></tr>')
     });
 });
 
@@ -254,16 +267,21 @@ trainerRef.on('value', function (snapshot) {
         }
 
         // Check if admin, if not, populate location and disable field
-        if (localStorage.getItem('access') !== 'Admin'){
+        if (localStorage.getItem('access') !== 'Admin') {
             let location = localStorage.getItem('location');
-            if (res.location !== location){
+            if (res.location !== location) {
                 return;
             }
         }
 
         // Fill in data after 100ms
         setTimeout(() => {
-            $('.staffTable tbody').append('<tr> <td class="trainerDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td> <td>' + res.tenure + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>')
+            let location = localStorage.getItem('location');
+            if (localStorage.getItem('access') !== 'Admin' && res.location !== location) {
+                $('.staffTable tbody').append('<tr> <td class="trainerDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
+            } else {
+                $('.staffTable tbody').append('<tr> <td class="trainerDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
+            }
         }, 100);
     });
 });
@@ -424,260 +442,29 @@ $('.clientDetailPage .submit').click(function () {
 });
 
 // Capitalize first letter of each word in Exercise Name
-$(document).ready(function () {  
-    $(".addExercisePage #name").keyup(function () {  
-        $(".addExercisePage #name").css('textTransform', 'capitalize');  
-    });  
-}); 
+$(document).ready(function () {
+    $(".addExercisePage #name").keyup(function () {
+        $(".addExercisePage #name").css('textTransform', 'capitalize');
+    });
+});
 
 // Add new exercise
-$('.addExercisePage .submit').click(function(){
+$('.addExercisePage .submit').click(function () {
     let exerciseName = $('#name').val().replace(/[ ,-,/]/g, '_').replace(/[(,)]/g, '');
     let exerciseUpdate = {
-        [exerciseName] : {
-         "Exercise" : $('#name').val(),
-         "Modality" : $('#modality').val(),
-         "Muscle_Group" : $('#muscleGroup').val(),
-         "U_L_C" : $('#ulc').val(),
-         "video" : $('#video').val()
-         }
-     }
-     exerciseRef.update(exerciseUpdate);
- });
-
-// Collect appointment log info on submit
-$(".planAppointmentsPage .submit").click(function () {
-    // Check if name, location or date are empty
-    if ($('#clientName').val() == '' || $('#date').val() == '' || $('#locationName').val() == '') {
-        alert('Name location and date are required.')
-        return;
+        [exerciseName]: {
+            "Exercise": $('#name').val(),
+            // "Modality": $('#modality').val(),
+            // "Muscle_Group": $('#muscleGroup').val(),
+            // "U_L_C": $('#ulc').val(),
+            "video": $('#video').val()
+        }
     }
-    // Check if "No Show" has been selected
-    if ($('.noShow').hasClass('checked')) {
-        // Create object with "No Show" data
-        let exerciseLog = {
-            [Date.now() + '|' + $('#locationName').val().split(', ')[0].replace(/ /g, "_") + '|' + $('#locationName').val().split(', ')[1] + '|' + $('#clientName').val().replace(/ /g, "_") + '|' + $('.trainerName').val().replace(/ /g, "_")]: {
-                info: {
-                    client: $('#clientName').val(),
-                    trainer: $('.trainerName').val(),
-                    date: $('#date').val(),
-                    last_updated: $('#date').val(),
-                    location: $('#locationName').val(),
-                    no_show: "true"
-                },
-                exercises: {
-                    round1: 'NA',
-                    round2: 'NA',
-                    round3: 'NA',
-                    round4: 'NA'
-                }
-            }
-        }
-        return;
-    } else {
-
-        // Check if any important fields are empty
-        if ($('.roundContainer .round-1.exercises').val() == '' || $('.roundContainer .round-1.exercises').val() == '') {
-            alert('Log is incomplete.');
-            return;
-        }
-
-        // Instantiate log results array
-        let logResults = [];
-
-        // Push input values into log results array
-        $('.exerciseLog .form-control').each(function (i, obj) {
-            logResults.push($(obj).val());
-        });
-
-        // Create exercise log object
-        let exerciseLog = {
-            [Date.now() + '|' + $('#locationName').val().split(', ')[0].replace(/ /g, "_") + '|' + $('#locationName').val().split(', ')[1] + '|' + $('#clientName').val().replace(/ /g, "_") + '|' + $('.trainerName').val().replace(/ /g, "_")]: {
-                info: {
-                    client: $('#clientName').val(),
-                    trainer: $('.trainerName').val(),
-                    date: $('#date').val(),
-                    last_updated: $('#date').val(),
-                    location: $('#locationName').val().split(', ')[0],
-                    state: $('#locationName').val().split(', ')[1],
-                    no_show: "false",
-                    notes: $('#appointmentNotes').val()
-                },
-                exercises: {
-                    round1: {
-                        exercise1: {
-                            exercise: $('.exercises.exercise-1').val(),
-                            ulc: $('.u_l_c.exercise-1').val(),
-                            musclGroups: $('.muscleGroups.exercise-1').val(),
-                            modality: $('.modality.exercise-1').val(),
-                            reps: $('.reps.exercise-1').val(),
-                            weight: $('.weight.exercise-1').val(),
-                            notes: $('.notes.exercise-1').val()
-                        },
-                        exercise2: {
-                            exercise: $('.exercises.exercise-2').val(),
-                            ulc: $('.u_l_c.exercise-2').val(),
-                            musclGroups: $('.muscleGroups.exercise-2').val(),
-                            modality: $('.modality.exercise-2').val(),
-                            reps: $('.reps.exercise-2').val(),
-                            weight: $('.weight.exercise-2').val(),
-                            notes: $('.notes.exercise-2').val()
-                        },
-                        exercise3: {
-                            exercise: $('.exercises.exercise-3').val(),
-                            ulc: $('.u_l_c.exercise-3').val(),
-                            musclGroups: $('.muscleGroups.exercise-3').val(),
-                            modality: $('.modality.exercise-3').val(),
-                            reps: $('.reps.exercise-3').val(),
-                            weight: $('.weight.exercise-3').val(),
-                            notes: $('.notes.exercise-3').val()
-                        },
-                        exercise4: {
-                            exercise: $('.exercises.exercise-4').val(),
-                            ulc: $('.u_l_c.exercise-4').val(),
-                            musclGroups: $('.muscleGroups.exercise-4').val(),
-                            modality: $('.modality.exercise-4').val(),
-                            reps: $('.reps.exercise-4').val(),
-                            weight: $('.weight.exercise-4').val(),
-                            notes: $('.notes.exercise-4').val()
-                        },
-                    },
-                    round2: {
-                        exercise1: {
-                            exercise: $('.exercises.exercise-5').val(),
-                            ulc: $('.u_l_c.exercise-5').val(),
-                            musclGroups: $('.muscleGroups.exercise-5').val(),
-                            modality: $('.modality.exercise-5').val(),
-                            reps: $('.reps.exercise-5').val(),
-                            weight: $('.weight.exercise-5').val(),
-                            notes: $('.notes.exercise-5').val()
-                        },
-                        exercise2: {
-                            exercise: $('.exercises.exercise-6').val(),
-                            ulc: $('.u_l_c.exercise-6').val(),
-                            musclGroups: $('.muscleGroups.exercise-6').val(),
-                            modality: $('.modality.exercise-6').val(),
-                            reps: $('.reps.exercise-6').val(),
-                            weight: $('.weight.exercise-6').val(),
-                            notes: $('.notes.exercise-6').val()
-                        },
-                        exercise3: {
-                            exercise: $('.exercises.exercise-7').val(),
-                            ulc: $('.u_l_c.exercise-7').val(),
-                            musclGroups: $('.muscleGroups.exercise-7').val(),
-                            modality: $('.modality.exercise-7').val(),
-                            reps: $('.reps.exercise-7').val(),
-                            weight: $('.weight.exercise-7').val(),
-                            notes: $('.notes.exercise-7').val()
-                        },
-                        exercise4: {
-                            exercise: $('.exercises.exercise-8').val(),
-                            ulc: $('.u_l_c.exercise-8').val(),
-                            musclGroups: $('.muscleGroups.exercise-8').val(),
-                            modality: $('.modality.exercise-8').val(),
-                            reps: $('.reps.exercise-8').val(),
-                            weight: $('.weight.exercise-8').val(),
-                            notes: $('.notes.exercise-8').val()
-                        },
-                    },
-                    round3: {
-                        exercise1: {
-                            exercise: $('.exercises.exercise-9').val(),
-                            ulc: $('.u_l_c.exercise-9').val(),
-                            musclGroups: $('.muscleGroups.exercise-9').val(),
-                            modality: $('.modality.exercise-9').val(),
-                            reps: $('.reps.exercise-9').val(),
-                            weight: $('.weight.exercise-9').val(),
-                            notes: $('.notes.exercise-9').val()
-                        },
-                        exercise2: {
-                            exercise: $('.exercises.exercise-10').val(),
-                            ulc: $('.u_l_c.exercise-10').val(),
-                            musclGroups: $('.muscleGroups.exercise-10').val(),
-                            modality: $('.modality.exercise-10').val(),
-                            reps: $('.reps.exercise-10').val(),
-                            weight: $('.weight.exercise-10').val(),
-                            notes: $('.notes.exercise-10').val()
-                        },
-                        exercise3: {
-                            exercise: $('.exercises.exercise-11').val(),
-                            ulc: $('.u_l_c.exercise-11').val(),
-                            musclGroups: $('.muscleGroups.exercise-11').val(),
-                            modality: $('.modality.exercise-11').val(),
-                            reps: $('.reps.exercise-11').val(),
-                            weight: $('.weight.exercise-11').val(),
-                            notes: $('.notes.exercise-11').val()
-                        },
-                        exercise4: {
-                            exercise: $('.exercises.exercise-12').val(),
-                            ulc: $('.u_l_c.exercise-12').val(),
-                            musclGroups: $('.muscleGroups.exercise-12').val(),
-                            modality: $('.modality.exercise-12').val(),
-                            reps: $('.reps.exercise-12').val(),
-                            weight: $('.weight.exercise-12').val(),
-                            notes: $('.notes.exercise-12').val()
-                        },
-                    },
-                    round4: {
-                        exercise1: {
-                            exercise: $('.exercises.exercise-13').val(),
-                            ulc: $('.u_l_c.exercise-13').val(),
-                            musclGroups: $('.muscleGroups.exercise-13').val(),
-                            modality: $('.modality.exercise-13').val(),
-                            reps: $('.reps.exercise-13').val(),
-                            weight: $('.weight.exercise-13').val(),
-                            notes: $('.notes.exercise-13').val()
-                        },
-                        exercise2: {
-                            exercise: $('.exercises.exercise-14').val(),
-                            ulc: $('.u_l_c.exercise-14').val(),
-                            musclGroups: $('.muscleGroups.exercise-14').val(),
-                            modality: $('.modality.exercise-14').val(),
-                            reps: $('.reps.exercise-14').val(),
-                            weight: $('.weight.exercise-14').val(),
-                            notes: $('.notes.exercise-14').val()
-                        },
-                        exercise3: {
-                            exercise: $('.exercises.exercise-15').val(),
-                            ulc: $('.u_l_c.exercise-15').val(),
-                            musclGroups: $('.muscleGroups.exercise-15').val(),
-                            modality: $('.modality.exercise-15').val(),
-                            reps: $('.reps.exercise-15').val(),
-                            weight: $('.weight.exercise-15').val(),
-                            notes: $('.notes.exercise-15').val()
-                        },
-                        exercise4: {
-                            exercise: $('.exercises.exercise-16').val(),
-                            ulc: $('.u_l_c.exercise-16').val(),
-                            musclGroups: $('.muscleGroups.exercise-16').val(),
-                            modality: $('.modality.exercise-16').val(),
-                            reps: $('.reps.exercise-16').val(),
-                            weight: $('.weight.exercise-16').val(),
-                            notes: $('.notes.exercise-16').val()
-                        },
-                    },
-                }
-            }
-        }
-
-        appointmentsRef.update(exerciseLog, (error) => {
-            if (error) {
-                alert(error)
-            } else {
-                alert('Data saved successfully!')
-            }
-        });
-    }
+    exerciseRef.update(exerciseUpdate);
 });
 
 // Keep copyright year up-to-date
 $('.copyrightYear').html(new Date().getFullYear());
-
-// No show checkmark
-$('.noShow').click(function () {
-    $('.noShow').toggleClass('checked');
-    $('.exerciseLog').toggleClass('noShow')
-});
 
 // Basic validation for exercise log
 let exercises = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16];
@@ -705,9 +492,9 @@ function checkRoundCompletion() {
             $('.weight.exercise-' + res).val()
         ];
         if (exercisesEntries.includes('') == false) {
-            $('#ui-id-' + res).css('background-color', '#00b137 !important').css('border-color','#00b137 !important');
+            $('#ui-id-' + res).css('background-color', '#00b137 !important').css('border-color', '#00b137 !important');
         } else {
-            $('#ui-id-' + res).css('background-color', '#242cea !important').css('border-color','#242cea !important');
+            $('#ui-id-' + res).css('background-color', '#242cea !important').css('border-color', '#242cea !important');
         };
     });
 
@@ -723,9 +510,9 @@ exercises.forEach(function (res) {
 
     $('.exercises.exercise-' + res).focusout(function () {
         if ($('.exercises.exercise-' + res) == '') {
-            $('.u_l_c.exercise-' + res).val('');
-            $('.muscleGroups.exercise-' + res).val('');
-            $('.modality.exercise-' + res).val('');
+            // $('.u_l_c.exercise-' + res).val('');
+            // $('.muscleGroups.exercise-' + res).val('');
+            // $('.modality.exercise-' + res).val('');
         }
     })
 });
@@ -744,12 +531,12 @@ if (localStorage.getItem('name') && localStorage.getItem('email')) {
 };
 
 // Check if admin, if not, populate location and disable field
-if (localStorage.getItem('access') !== 'Admin'){
+if (localStorage.getItem('access') !== 'Admin') {
     $('#locationName').val(localStorage.getItem('location'));
-    $('#locationName').prop('disabled','true');
+    $('#locationName').prop('disabled', 'true');
 }
 
-if (localStorage.getItem('access') !== 'Admin'){
+if (localStorage.getItem('access') !== 'Admin') {
     let staffTitle = $('.staffPage h4.card-title').html() + ' &mdash; ' + localStorage.getItem('location')
     $('.staffPage h4.card-title').html(staffTitle)
 }
@@ -763,3 +550,15 @@ hiddenPages.forEach(function (res) {
         $(this).parent().css('display', 'none');
     });
 });
+
+$('a[href^="#"]').click(function(e){        
+    e.preventDefault();
+    $('html,body').scrollTop($(this.hash).offset().top - 150);
+});
+
+function successMessage() {
+    notif({
+        msg: "<b>Success:</b> In 5 seconds i'll be gone",
+        type: "success"
+    });
+}

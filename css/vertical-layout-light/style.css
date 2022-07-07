@@ -28648,6 +28648,21 @@ button.nav-link i {
   pointer-events: none;
 }
 
+.exerciseLog h3 span, .exerciseLog .h3 span {
+  display: block;
+  font-size: 0.8em;
+  color: #777;
+  font-weight: bold;
+}
+
+.roundContainer {
+  border-radius: 10px;
+}
+
+.roundContainer {
+  background: rgba(0, 0, 0, 0.025);
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -28674,6 +28689,110 @@ a {
 
 .ui-accordion .ui-accordion-content {
   display: block !important;
+}
+
+.passwordReset {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+.ui-widget.ui-widget-content {
+  background: #fff !important;
+}
+
+.sets {
+  margin-bottom: 20px;
+  border: 1px solid #ddd;
+  padding: 20px;
+  border-radius: 15px;
+  background: #eee;
+}
+
+.sets h4, .sets .h4 {
+  font-size: 1em;
+}
+
+.roundContainer h3, .roundContainer .h3 {
+  font-weight: normal !important;
+  font-size: 1.5em;
+}
+
+.floatingNav {
+  position: fixed;
+  top: calc(50% - 50px);
+  right: -10px;
+  background: #fff;
+  width: 150px;
+  min-height: 3em;
+  z-index: 99;
+  padding: 10px;
+  box-shadow: -3px 0px 8px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+}
+
+.floatingNav ul {
+  margin: 0px;
+}
+
+.floatingNav li {
+  list-style: none;
+}
+
+.viewAppointmentsPage .roundContainer,
+.viewAppointmentsPage .sets {
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+}
+
+.viewAppointmentsPage .roundContainer {
+  padding-top: 20px;
+  border-top: 2px solid #ddd;
+  border-radius: 0px;
+}
+
+.viewAppointmentsPage .roundContainer:nth-child(odd) {
+  background: #f7f7f7;
+  padding: 16px 16px 0;
+}
+
+.viewAppointmentsPage .sets .row:nth-child(odd) {
+  background: #eee;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+.viewAppointmentsPage .form-group input[type=text],
+.viewAppointmentsPage .form-group label {
+  height: 1em;
+  margin: 0;
+  padding: 0;
+}
+
+.viewAppointmentsPage .form-group {
+  margin: 0.5em 0;
+}
+
+.viewAppointmentsPage input[type=text].form-control.exercises, .viewAppointmentsPage input.asColorPicker-input[type=text].exercises, .viewAppointmentsPage .select2-container--default input.select2-selection--single[type=text].exercises, .select2-container--default .viewAppointmentsPage input.select2-selection--single[type=text].exercises, .viewAppointmentsPage .select2-container--default .select2-selection--single input.select2-search__field[type=text].exercises, .select2-container--default .select2-selection--single .viewAppointmentsPage input.select2-search__field[type=text].exercises, .viewAppointmentsPage input.typeahead[type=text].exercises,
+.viewAppointmentsPage input.tt-query[type=text].exercises,
+.viewAppointmentsPage input.tt-hint[type=text].exercises {
+  font-size: 1.25em;
+  padding: 10px 0 10px 0;
+}
+
+.viewAppointmentsPage textarea {
+  min-height: 1em !important;
+  padding-left: 0;
+}
+
+.viewAppointmentsPage .input-helper:before {
+  left: -25px !important;
+}
+
+.viewAppointmentsPage .main-panel {
+  width: 100%;
 }
 
 /* Sidebar */

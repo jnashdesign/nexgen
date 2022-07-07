@@ -146,22 +146,22 @@
                                     </div>
                                 </div>
                                 <div class="row" style="margin-top: 20px;">
-                                    <nav style="padding:0">
+                                    <!-- <nav style="padding:0">
                                         <div class="nav nav-tabs" id="nav-tabs" role="tablist">
                                             <button class="nav-link active" id="nav-personal" data-bs-toggle="tab"
                                                 data-bs-target="#personal" type="button" role="tab"
                                                 aria-controls="personal" aria-selected="true">Info</button>
                                             <button class="nav-link" id="nav-appointments" data-bs-toggle="tab"
                                                 data-bs-target="#appointments" type="button" role="tab"
-                                                aria-controls="appointments" aria-selected="false">Appointments</button>
-                                            <button class="nav-link" id="nav-assessments" data-bs-toggle="tab"
+                                                aria-controls="appointments" aria-selected="false">Appointments</button> -->
+                                            <!-- <button class="nav-link" id="nav-assessments" data-bs-toggle="tab"
                                                 data-bs-target="#assessments" type="button" role="tab"
-                                                aria-controls="assessments" aria-selected="false">Assessments</button>
-                                        </div>
-                                    </nav>
-                                    <div class="tab-content" id="nav-tabContent">
-                                        <div class="tab-pane fade show active" id="personal" role="tabpanel"
-                                            aria-labelledby="nav-personal">
+                                                aria-controls="assessments" aria-selected="false">Assessments</button> -->
+                                        <!-- </div>
+                                    </nav> -->
+                                    <!-- <div class="tab-content" id="nav-tabContent"> -->
+                                        <!-- <div class="tab-pane fade show active" id="personal" role="tabpanel"
+                                            aria-labelledby="nav-personal"> -->
                                             <div class="col-12">
                                                 <h4 class="detailHeaders">Basic Info</h4>
                                             </div>
@@ -213,20 +213,17 @@
 
                                                 </div>
                                             </div>
-                                            <button type="button" style="width:100%" class="btn btn-primary submit"
-                                                data-dismiss="modal">Edit</button>
 
-                                        </div>
-                                        <div class="tab-pane fade" id="appointments" role="tabpanel"
-                                            aria-labelledby="nav-appointments">
                                             <div class="row appointments">
                                                 <div class="col-12">
-                                                    <h4 class="detailHeaders">Appointment Info</h4>
+                                                    <h4 class="detailHeaders">Appointments</h4>
                                                 </div>
                                                 <div class="col-md-12">
                                                     <table class="table appointmentTable">
                                                         <thead>
                                                             <tr class="headers">
+                                                                <td>View</td>
+                                                                <td>Edit</td>
                                                                 <td>Date</td>
                                                                 <td>Location</td>
                                                                 <td>Trainer</td>
@@ -238,130 +235,8 @@
                                                     </table>
                                                 </div>
                                             </div>
-                                        </div>
-
-                                        <div class="tab-pane fade" id="assessments" role="tabpanel"
-                                            aria-labelledby="nav-assessments">
-
-                                            <div class="col-12">
-                                                <h4 class="detailHeaders">Assessment Info</h4>
-                                            </div>
-                                            <h4>Feature Coming Soon</h4>
-                                        <div class="panel-group" id="accordion">
-                                                <div class="panel panel-default">
-                                                  <div class="panel-heading">
-                                                    <h4 class="panel-title">
-                                                      <a data-toggle="collapse" data-parent="#accordion" href="#collapse1">
-                                                          Sample Info
-                                                      </a>
-                                                    </h4>
-                                                  </div>
-                                                  <div id="collapse1" class="panel-collapse collapse in">
-                                                    <div class="panel-body">
-                                                        <div class="assementRow">
-                                                            <div class="col-12">
-                                                                <h5>Body Fat</h5>
-                                                                <div class="row">
-                                                                    <div class="col-3">
-                                                                        <label for="body-fat-percentage">Body Fat %</label>
-                                                                        <p class="body-fat-percentage"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="lean-mass-percentage">Lean Mass %</label>
-                                                                        <p class="lean-mass-fat-percentage"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="subcutaneous-fat-percentage">Subcutaneous
-                                                                            Fat %</label>
-                                                                        <p class="subcutaneous-fat-percentage"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="visceral-fat-percentage">Visceral Fat
-                                                                            %</label>
-                                                                        <p class="visceral-fat-percentage"></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-12">
-                                                                <h5>Girth</h5>
-                                                                <div class="row">
-                                                                    <div class="col-3">
-                                                                        <label for="arm-measurement">Arm</label>
-                                                                        <p class="arm-measurement"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="calf-measurement">Calf</label>
-                                                                        <p class="calf-measurement"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="chest-measurement">Chest</label>
-                                                                        <p class="chest-measurement"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="forearm-measurement">Forearm</label>
-                                                                        <p class="forearm-measurement"></p>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="row">
-                                                                    <div class="col-3">
-                                                                        <label for="hips-measurement">Hips</label>
-                                                                        <p class="hips-measurement"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="neck-measurement">Neck</label>
-                                                                        <p class="neck-measurement"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="thigh-measurement">Thigh</label>
-                                                                        <p class="thigh-measurement"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="waist-measurement">Waist</label>
-                                                                        <p class="waist-measurement"></p>
-                                                                    </div>
-                                                                </div>
-                                                                <h5>Strength and Endurance</h5>
-                                                                <div class="row">
-                                                                    <div class="col-3">
-                                                                        <label for="bench-press">Bench Press</label>
-                                                                        <p class="bench-press"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="modified">Modified</label>
-                                                                        <p class="modified"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="pushups">Push Ups</label>
-                                                                        <p class="pushups"></p>
-                                                                    </div>
-                                                                </div>
-                                                                <h5>Testing Protocol</h5>
-                                                                <div class="row">
-                                                                    <div class="col-3">
-                                                                        <label for="resting-heart-rate">Resting Heart
-                                                                            Rate</label>
-                                                                        <p class="resting-heart-rate"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="resting-metabolic-rate">Resting Metabolic
-                                                                            Rate</label>
-                                                                        <p class="resting-metabolic-rate"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="sit-and-reach">Sit and Reach</label>
-                                                                        <p class="sit-and-reach"></p>
-                                                                    </div>
-                                                                    <div class="col-3">
-                                                                        <label for="weight">Weight</label>
-                                                                        <p class="weight"></p>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>        
-                                                    </div>
-                                                  </div>
-                                                </div>
-                                              </div>
+                                            <button type="button" style="width:100%" class="btn btn-primary submit"
+                                                data-dismiss="modal">Edit Client</button>
                                         </div>
                                     </div>
                                 </div>
@@ -468,7 +343,12 @@
                     if (info[3] == params) {
                         let matchingEntry = (result[clientKey]);
                         console.log(matchingEntry);
-                        $('.appointmentTable tbody').append('<tr><td><a href="./editAppointment.html?appointment=' + info[0] + '">' + matchingEntry.info.date + '</a></td><td><a href="./editAppointment.html?appointment=' + info[0] + '">' + matchingEntry.info.location.replace('-', ' ') + '</a></td><td><a href="./editAppointment.html?appointment=' + info[0] + '">' + matchingEntry.info.trainer.replace('-', ' ') + '</a></td><td><a href="./editAppointment.html?appointment=' + info[0] + '">' + matchingEntry.info.last_updated + '</a><td></tr>');
+                        if (matchingEntry.info.trainer.replace('-', ' ') == localStorage.getItem('name')){
+                            $('body').append('<style>.editBtn {display: block;}</style>')
+                        }else {
+                            $('body').append('<style>.editBtn {display: none;}</style>')
+                        }
+                        $('.appointmentTable tbody').append('<tr><td><a target="_blank" class="mdi mdi-eye menu-icon" href="./viewAppointment.html?appointment=' + info[0] + '"></a></td><td><a class="mdi mdi-pencil menu-icon" href="./editAppointment.html?appointment=' + info[0] + '"></a></td><td>' + matchingEntry.info.date + '</td><td>' + matchingEntry.info.location.replace('-', ' ') + '</td><td>' + matchingEntry.info.trainer.replace('-', ' ') + '</td><td>' + matchingEntry.info.last_updated + '<td></tr>');
                     }
                 }
             });

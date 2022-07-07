@@ -177,6 +177,8 @@ $('.addStaffPage .submit').click(function (e) {
                     start_date: start_date,
                     status: 'Active'
                 }
+            }).then(function (res){
+                window.location.replace(baseURL + '/pages/staff.html');
             });
         }).catch(function (error) {
             alert(error);
