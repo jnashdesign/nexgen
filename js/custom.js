@@ -65,12 +65,39 @@ clientsRef.on('value', function (snapshot) {
     $("#clientName").autocomplete({
         source: clientNames,
         select: function (e, ui) {
-            console.log(ui.item.value)
+            let appointments = [];
+            $('.planAppointmentsPage .appointmentTable tbody').html('');
             $(clientDetails).each(function (index, client) {
                 if (client.name == ui.item.value) {
-                    console.log(client.physical_problems)
-                    $('.planAppointmentsPage #physicalProblems').val(client.physical_problems ? undefined : 'Not provided');
-                    $('.planAppointmentsPage #clientNotes').val(client.client_notes ? undefined : 'Not provided');
+                    // console.log(client.name)
+                    $('.planAppointmentsPage #physicalProblems').val(client.physical_problems);
+                    $('.planAppointmentsPage #clientNotes').val(client.client_notes);
+
+                    // Look through appointments node
+                    appointmentsRef.on('value', function (snapshot) {
+                        // Get snapshot value
+                        let result = snapshot.val();
+                
+                        // Loop through the keys
+                        for (const [key, value] of Object.entries(result)) {
+                            let clientKey = `${key}`;
+                            let info = clientKey.split('|');
+
+                            if (info[3] == client.name.replace(' ', '_')){
+                                let matchingEntry = (result[clientKey]);
+                                // console.log(matchingEntry);
+                                appointments.push(matchingEntry);
+                                let dateArray = matchingEntry.info.date.split('-');
+                                let lastUpdatedArray = matchingEntry.info.last_updated.split('-');
+                                let date = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
+                                let lastUpdated = lastUpdatedArray[1] + '/' + lastUpdatedArray[2] + '/' + lastUpdatedArray[0];
+        
+                                localStorage.setItem('appointments', JSON.stringify(appointments));
+                                $('.planAppointmentsPage .appointments').css('display','block');
+                                $('.planAppointmentsPage .appointmentTable tbody').append('<tr><td><a target="_blank" class="mdi mdi-eye menu-icon" href="./viewAppointment.html?appointment=' + info[0] + '"></a></td><td>' + date + '</td><td>' + matchingEntry.info.location.replace('-', ' ') + '</td><td>' + matchingEntry.info.trainer.replace('-', ' ') + '</td><td>' + lastUpdated + '<td></tr>');
+                            }
+                        }
+                    });
                 }
             })
         }
@@ -136,10 +163,6 @@ exerciseRef.on('value', function (snapshot) {
         let exerciseInfo = {
             [exerciseName.replace(/[ ,-,/]/g, '_').replace(/[(,)]/g, '')]: {
                 Exercise: result[prop].Exercise,
-                // Modality: result[prop].Modality,
-                // U_L_C: result[prop].U_L_C,
-                // Joint: result[prop].Joint,
-                // Muscle_Group: result[prop].Muscle_Group,
                 Notes: result[prop].Notes ?? null
             }
         };
@@ -150,11 +173,6 @@ exerciseRef.on('value', function (snapshot) {
         const urlSearchParams = new URLSearchParams(window.location.search);
         const eid = urlSearchParams.get('exercise');
         $('#name').val(exerciseArray[eid].Exercise);
-        // $('#ulc').val(exerciseArray[eid].U_L_C);
-        // $('#muscleGroup').val(exerciseArray[eid].Muscle_Group);
-        // $('#modality').val(exerciseArray[eid].Modality);
-        // $('#video').val(exerciseArray[eid].video);
-        // $('#difficulty').val(exerciseArray[eid].Difficulty);
         $('.notes').val(exerciseArray[eid].Notes);
 
         $('.editExercisePage .submit').click(function () {
@@ -163,9 +181,6 @@ exerciseRef.on('value', function (snapshot) {
                 [exerciseName]: {
                     "Exercise": $('#name').val(),
                     "Notes": $('.notes').val(),
-                    // "Modality": $('#modality').val(),
-                    // "Muscle_Group": $('#muscleGroup').val(),
-                    // "U_L_C": $('#ulc').val(),
                     "video": $('#video').val()
                 }
             }
@@ -174,26 +189,44 @@ exerciseRef.on('value', function (snapshot) {
     }
 
     // Add autocomplete to each exercise input
-    // $('.exercises').each(function (i, obj) {
-    //     // Add exercise names to autocomplete
-    //     $(obj).autocomplete({
-    //         source: exerciseNames,
-    //         select: function (e, ui) {
-    //             // Get which exercise number
-    //             let exerciseNum = e.target.classList[2];
-    //             console.log(e.target.classList);
-    //             // console.log(exerciseArray);
-    //             // Update exercise array for each round
-    //             exerciseArray.forEach(function (res) {
-    //                 if (res.Exercise == ui.item.label) {
-    //                     $('.muscleGroups.' + exerciseNum).val(res.Muscle_Group);
-    //                     $('.u_l_c.' + exerciseNum).val(res.U_L_C)
-    //                     $('.modality.' + exerciseNum).val(res.Modality);
-    //                 }
-    //             })
-    //         }
-    //     });
-    // });
+    $('.exercises').each(function (i, obj) {
+        // Add exercise names to autocomplete
+        $(obj).autocomplete({
+            source: exerciseNames,
+            select: function (e, ui) {
+                let storedAppointments = JSON.parse(localStorage.getItem('appointments'));
+                let date;
+                let matchingDates = [];
+
+                // Update exercise array for each round
+                storedAppointments.forEach(function (res) {
+                    let test = JSON.stringify(res.exercises);
+
+                    // Check if the substring exists inside the string
+                    var index = test.indexOf('"exerciseName":"' + ui.item.value + '"');
+                    if(index !== -1){
+                        matchingDates.push(res.info.date);
+                    } else{
+                        return;
+                    }
+                });
+
+                if (matchingDates.length > 0){
+                // Sort through dates
+                matchingDates.sort(function(a,b){
+                    return new Date(a) - new Date(b);
+                  });
+                // Find last used date and format
+                const lastUsed = matchingDates.reverse()[0];
+                let dateArray = lastUsed.split('-');
+                date = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
+
+                // Add to value shown in input field
+                ui.item.value = ui.item.value + ' (Last used: ' + date + ')';
+                }
+            }
+        });
+    });
 
     exerciseArray.forEach(function (res, index) {
         let video;
@@ -348,8 +381,13 @@ $('#date').val(today);
 
 // Submit new client info
 $('.addClientPage .submit').click(function () {
-    if ($('.name').val() == '' || $('#email').val() == '' || $('.gender').val() == '' || $('#date').val() == '' || $('.height').val() == '---' || $('.weight').val() == '') {
-        alert('All fields other than Notes and Physical Problems are required.');
+    if ($('.name').val() == '' || 
+    $('#email').val() == '' || 
+    $('.gender').val() == '' || 
+    $('#date').val() == '' || 
+    $('.height').val() == '---' || 
+    $('.weight').val() == '') {
+        callAlert('All fields other than Notes and Physical Problems are required.', 'danger');
         return;
     } else {
         let key = $('.name').val().replace(/ /g, "_");
@@ -382,9 +420,9 @@ $('.addClientPage .submit').click(function () {
 
         clientsRef.update(clientInfo, (error) => {
             if (error) {
-                alert(error)
+                callAlert(error, 'danger');
             } else {
-                alert('Client successfully added!')
+                callAlert('Client successfully added!', 'success');
             }
         });
     }
@@ -392,9 +430,13 @@ $('.addClientPage .submit').click(function () {
 
 // Edit client info
 $('.editClientPage .submit').click(function () {
-    if ($('.name').val() == '' || $('#email').val() == '' || $('.gender').val() == '' || $('#date').val() == '' || $('.height').val() == '') {
-        alert('Name, email, gender, dob are required.');
-        return;
+    if ($('.name').val() == '' || 
+        $('#email').val() == '' || 
+        $('.gender').val() == '' || 
+        $('#date').val() == '' || 
+        $('.height').val() == '') {
+            callAlert('Name, email, gender, dob are required.', 'danger');
+            return;
     } else {
         let key = $('.name').val().replace(/ /g, "_");
         let name = $('.name').val();
@@ -429,9 +471,9 @@ $('.editClientPage .submit').click(function () {
         }
         clientsRef.update(clientInfo, (error) => {
             if (error) {
-                alert(error)
+                callAlert(error, 'danger');
             } else {
-                alert('Client successfully updated!')
+                callAlert('Client successfully updated!', 'success')
             }
         });
     }
@@ -561,4 +603,21 @@ function successMessage() {
         msg: "<b>Success:</b> In 5 seconds i'll be gone",
         type: "success"
     });
+}
+
+function callAlert(message, status){
+    $('html').append('<span class="alert ' + status + '">'+ message + '</span>');
+    $('.alert').animate({
+        top: "-10px"
+    });
+    setTimeout(() => {
+        $('.alert').animate({
+            top: "-200px"
+        });    
+    }, 3000);
+    if ($('.alert').hasClass('danger')){
+        $('.alert').prepend('<i class="menu-icon mdi mdi-alert-circle"></i>');
+    }else if ($('.alert').hasClass('success')){
+        $('.alert').prepend('<i class="menu-icon mdi mdi-check-bold"></i>');
+    }
 }

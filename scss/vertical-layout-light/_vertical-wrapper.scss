@@ -278,3 +278,35 @@ a {
 .viewAppointmentsPage .main-panel {
   width: 100%;
 }
+
+.alert {
+  font-family: Roboto, sans-serif;
+  width: 50%;
+  position: fixed;
+  top: -200px;
+  right: 100px;
+  padding: 20px 10px 10px 20px;
+  z-index: 9999;
+  &.success {
+    color: #155724;
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+  }
+  &.danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+    .menu-icon {
+      margin-right: 5px;
+    }
+}
+.form-group .submit {
+  margin-top: 1rem;
+  width: calc(100% - 30px) !important;
+  margin-left: 15px;
+}
+.btn-primary {
+  font-weight: bolder;
+  text-transform: uppercase;
+}

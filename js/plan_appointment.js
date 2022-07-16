@@ -61,7 +61,7 @@ function submitAppointment(){
 
     // Check if name, location or date are empty
     if ($('#clientName').val() == '' || $('#date').val() == '' || $('#locationName').val() == '') {
-        alert('Name location and date are required.')
+        callAlert('Name location and date are required.', 'danger')
         return;
     }
 
@@ -495,7 +495,7 @@ function submitAppointment(){
                     exercises: {
                         round1: {
                             exercise1: {
-                                exerciseName: logResults[0],
+                                exerciseName: logResults[0].split(' (')[0],
                                 set1: {
                                     weight: logResults[1],
                                     reps: logResults[2],
@@ -519,7 +519,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[13]
                             },
                             exercise2: {
-                                exerciseName: logResults[14],
+                                exerciseName: logResults[14].split(' (')[0],
                                 set1: {
                                     weight: logResults[15],
                                     reps: logResults[16],
@@ -543,7 +543,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[27]
                             },
                             exercise3: {
-                                exerciseName: logResults[28],
+                                exerciseName: logResults[28].split(' (')[0],
                                 set1: {
                                     weight: logResults[29],
                                     reps: logResults[30],
@@ -567,7 +567,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[41]
                             },
                             exercise4: {
-                                exerciseName: logResults[42],
+                                exerciseName: logResults[42].split(' (')[0],
                                 set1: {
                                     weight: logResults[43],
                                     reps: logResults[44],
@@ -593,7 +593,7 @@ function submitAppointment(){
                         },
                         round2: {
                             exercise1: {
-                                exerciseName: logResults[56],
+                                exerciseName: logResults[56].split(' (')[0],
                                 set1: {
                                     weight: logResults[57],
                                     reps: logResults[58],
@@ -617,7 +617,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[69]
                             },
                             exercise2: {
-                                exerciseName: logResults[70],
+                                exerciseName: logResults[70].split(' (')[0],
                                 set1: {
                                     weight: logResults[71],
                                     reps: logResults[72],
@@ -641,7 +641,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[83]
                             },
                             exercise3: {
-                                exerciseName: logResults[84],
+                                exerciseName: logResults[84].split(' (')[0],
                                 set1: {
                                     weight: logResults[85],
                                     reps: logResults[86],
@@ -665,7 +665,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[97]
                             },
                             exercise4: {
-                                exerciseName: logResults[98],
+                                exerciseName: logResults[98].split(' (')[0],
                                 set1: {
                                     weight: logResults[99],
                                     reps: logResults[100],
@@ -691,7 +691,7 @@ function submitAppointment(){
                         },
                         round3: {
                             exercise1: {
-                                exerciseName: logResults[112],
+                                exerciseName: logResults[112].split(' (')[0],
                                 set1: {
                                     weight: logResults[113],
                                     reps: logResults[114],
@@ -715,7 +715,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[125]
                             },
                             exercise2: {
-                                exerciseName: logResults[126],
+                                exerciseName: logResults[126].split(' (')[0],
                                 set1: {
                                     weight: logResults[127],
                                     reps: logResults[128],
@@ -739,7 +739,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[139]
                             },
                             exercise3: {
-                                exerciseName: logResults[140],
+                                exerciseName: logResults[140].split(' (')[0],
                                 set1: {
                                     weight: logResults[141],
                                     reps: logResults[142],
@@ -763,7 +763,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[153]
                             },
                             exercise4: {
-                                exerciseName: logResults[154],
+                                exerciseName: logResults[154].split(' (')[0],
                                 set1: {
                                     weight: logResults[155],
                                     reps: logResults[156],
@@ -789,7 +789,7 @@ function submitAppointment(){
                         },
                         round4: {
                             exercise1: {
-                                exerciseName: logResults[168],
+                                exerciseName: logResults[168].split(' (')[0],
                                 set1: {
                                     weight: logResults[169],
                                     reps: logResults[170],
@@ -813,7 +813,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[181]
                             },
                             exercise2: {
-                                exerciseName: logResults[182],
+                                exerciseName: logResults[182].split(' (')[0],
                                 set1: {
                                     weight: logResults[183],
                                     reps: logResults[184],
@@ -837,7 +837,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[195]
                             },
                             exercise3: {
-                                exerciseName: logResults[196],
+                                exerciseName: logResults[196].split(' (')[0],
                                 set1: {
                                     weight: logResults[197],
                                     reps: logResults[198],
@@ -861,7 +861,7 @@ function submitAppointment(){
                                 exerciseNotes: logResults[209]
                             },
                             exercise4: {
-                                exerciseName: logResults[210],
+                                exerciseName: logResults[210].split(' (')[0],
                                 set1: {
                                     weight: logResults[211],
                                     reps: logResults[212],
@@ -892,16 +892,21 @@ function submitAppointment(){
     }            
     console.log(exerciseLog);
     updateDB(exerciseLog);
-
 };
 
 function updateDB(exerciseLog){
     setTimeout(() => {
         appointmentsRef.update(exerciseLog, (error) => {
         if (error) {
-            alert(error)
+            callAlert(error, 'danger')
         } else {
-            console.log('Data saved successfully!')
+            let message = 'Data saved successfully!';
+            callAlert(message, 'success');
+            $('input').val('');
+            $('textarea').val('');
+            $("html,body").animate({
+                scrollTop: 0
+              }, "slow");
         }
     });
 
@@ -912,7 +917,7 @@ function publishToDB(exerciseLog){
     setTimeout(() => {
         appointmentsRef.update(exerciseLog, (error) => {
         if (error) {
-            alert(error)
+            callAlert(error, 'danger')
         } else {
             console.log('Data saved successfully!')
         }

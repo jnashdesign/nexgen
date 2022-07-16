@@ -181,7 +181,7 @@ $('.addStaffPage .submit').click(function (e) {
                 window.location.replace(baseURL + '/pages/staff.html');
             });
         }).catch(function (error) {
-            alert(error);
+            callAlert(error, 'danger');
             console.log(error);
         });
-})
+});
