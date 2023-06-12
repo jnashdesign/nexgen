@@ -1,21 +1,17 @@
 # NexGen Fitness
 ## Project Description
-------------
 NexGen fitness is in need of a web application to manage client appointments.
 <br /><br />
 
 ## Build/Compilation Technology Used
-------------
 This project is built using Gulp to compile and package all the HTML, CSS and Javascript files.
 <br /><br />
 
 ## Database and Authentication
-------------
 All data storage and authentication is managed through Google Firebase
 <br /><br />
 
 ## How to set up and edit the project
-------------
 1. Clone the project from this repository using:
 ```
 https://github.com/jnashdesign/nexgen.git
@@ -29,7 +25,6 @@ https://github.com/jnashdesign/nexgen.git
 <br /><br />
 
 ## Current Google Firebase Info
-------------
 ### Firebase Config
 ```
 var config = {
@@ -63,21 +58,18 @@ The security rules for this project is configured so access the database (red an
 ``` 
 <br />
 
-## Adding a new user
-------------
+## Adding a new user to Firebase authentation
 Firebase makes authenitication and user management really easy. When you first create your project, use the step-by-step guidance Firebase provides and choose "Email/Password" as your sign-in method. There are other methods available but this is the easiest for users and the one I have set up for the project currently.
 
 Just navigate to the Authentication page and there's a button that says "Add User"
 <br /><br />
 
 ## Styling and Updates
-------------
 Any changes you need to make in the future will likely be in the ```pages``` directory. Each page is named in a way that makes it's use obvious, for example (Addlocation.html, is the page you use to add a new location.)
 
 Most styling changes will be made in the ```scss/vertical-layout-light``` directory.
 <br /><br />
 ## Migration of the latest data to database
-------------
 Let me know when you are ready and I will export the database and send it over. 
 
 1. Save the exported JSON somewhere you can find it. 
@@ -90,7 +82,6 @@ Let me know when you are ready and I will export the database and send it over.
 <br /><br />
 
 ## Migrating users and authentication info
-------------
 There are two options here:
 1. I can use the Firebase CLI to export the user data and walk you through using it in your project to import it.
 2. Use a function I've created for your convenience.
@@ -107,7 +98,6 @@ The way the function is written, each of these accounts will be given the same (
 <br /><br />
 
 ## Managing Access
-----------
 Each user's data is managed inside the Realtime Database under ```people```. Staff user data is found in "you guessed it" ```people/staff```. Each staff member has an attribute called "access". By default, when a staff member is added, they are greated "Trainer" access. If you would like to upgrade their access to administrator, just change this value in the database to "Admin".
 
 ***Example Staff Member***
@@ -130,7 +120,6 @@ Each user's data is managed inside the Realtime Database under ```people```. Sta
 ```
 <br /><br />
 ***IMPORTANT NOTE***
-------------
 
 The data for the user and their login email address are tied together. When a user logs in, the app looks for a user data matching the authentication email. So if you were to change their email address, in the "edit staff" page for example, their login would no longer work. 
 
