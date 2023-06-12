@@ -35,11 +35,10 @@ var config = {
 };
 firebase.initializeApp(config);
 ```
-You will need to create your own Firebase account (the free account should be fine) and replace these values (apiKey,authDomain, and databaseURL) with your own.
+You will need to create your own Firebase account (the free account should be fine) and replace these values (apiKey,authDomain, and databaseURL) with your own [Firebase account](https://firebase.google.com/).
 
-*Don't worry, the firebase apiKey is safe to expose. It's only used to identify your project.
 
-[Click For More Info](https://medium.com/@paulbreslin/is-it-safe-to-expose-your-firebase-api-key-to-the-public-7e5bd01e637b#:~:text=So%20to%20recapitulate%2C%20yes%20it's,to%20mitigate%20the%20damage%20done.)
+*Don't worry, the firebase apiKey is safe to expose. It's only used to identify your project.[Click For More Info](https://medium.com/@paulbreslin/is-it-safe-to-expose-your-firebase-api-key-to-the-public-7e5bd01e637b#:~:text=So%20to%20recapitulate%2C%20yes%20it's,to%20mitigate%20the%20damage%20done.)
  
 
 These config values can be found in the "Project Settings" page of your Firebase account.
