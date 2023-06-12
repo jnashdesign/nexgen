@@ -31,7 +31,7 @@ https://github.com/jnashdesign/nexgen.git
 ## Current Google Firebase Info
 ------------
 ### Firebase Config
-```JSON
+```
 var config = {
     apiKey: "AIzaSyA9GzcyqiMtv4iinJRJ4EdvlNN7ry4IRR8",
     authDomain: "nexgenfitness-2021.firebaseapp.com",
