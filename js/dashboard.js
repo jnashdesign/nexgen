@@ -17,7 +17,7 @@
       var salesTopData = {
           labels: ["SUN","sun", "MON", "mon", "TUE","tue", "WED", "wed", "THU", "thu", "FRI", "fri", "SAT"],
           datasets: [{
-              label: 'Upper Body',
+              label: 'Texas',
               data: [50, 110, 60, 290, 200, 115, 130, 170, 90, 210, 240, 280, 200],
               backgroundColor: saleGradientBg,
               borderColor: [
@@ -31,7 +31,7 @@
               pointBackgroundColor: ['#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3','#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3','#1F3BB3)', '#1F3BB3', '#1F3BB3', '#1F3BB3','#1F3BB3)'],
               pointBorderColor: ['#1F3BB3','#1F3BB3','#1F3BB3','#1F3BB3','#1F3BB3','#1F3BB3','#1F3BB3','#1F3BB3','#1F3BB3','#1F3BB3','#1F3BB3','#1F3BB3','#1F3BB3',],
           },{
-            label: 'Lower Body',
+            label: 'New York',
             data: [30, 150, 190, 250, 120, 150, 130, 20, 30, 15, 40, 95, 180],
             backgroundColor: saleGradientBg2,
             borderColor: [
@@ -46,7 +46,7 @@
               pointBorderColor: ['#52CDFF','#52CDFF','#52CDFF','#52CDFF','#52CDFF','#52CDFF','#52CDFF','#52CDFF','#52CDFF','#52CDFF','#52CDFF','#52CDFF','#52CDFF',],
         },
         {
-          label: 'Core',
+          label: 'Oklahoma',
           data: [80, 75, 90, 50, 32, 49, 68, 40, 140, 85, 60, 135, 140],
           backgroundColor: saleGradientBg3,
           borderColor: [

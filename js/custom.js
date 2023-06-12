@@ -1,5 +1,5 @@
-const baseURL = 'https://jnashconsulting.com/nexgenfitness';
-// const baseURL = '';
+// const baseURL = 'https://bleedblue.fitness';
+const baseURL = '';
 
 // Initialize Firebase
 var config = {
@@ -14,11 +14,24 @@ const clientsRef = firebase.database().ref('/people/clients');
 const exerciseRef = firebase.database().ref('/exercises');
 const trainerRef = firebase.database().ref('/people/staff');
 const locationRef = firebase.database().ref('/locations');
-const appointmentsRef_old = firebase.database().ref('/appointments');
-const appointmentsRef = firebase.database().ref('/ngf_appointments');
+const appointmentsRef= firebase.database().ref('/appointments');
 
 // Check login status
-console.log('loggedIn = ' + localStorage.getItem('loggedIn'))
+console.log('loggedIn = ' + localStorage.getItem('loggedIn'));
+
+$(document).ready(function(){
+    // Check if admin, if not, populate location and disable field
+    if (localStorage.getItem('access') !== 'Admin'){
+        $('.adminOnly').parent().css('display','none');
+        if (res.location !== location){
+            return;
+        }
+    }
+    appointmentsRef.on('value', function (snapshot) {
+        // Get snapshot value
+        localStorage.setItem('allAppointments', JSON.stringify(snapshot.val()));
+    })
+})
 
 // If not logged in, send to login page
 if (document.location.href.indexOf('login.html') === -1 && localStorage.getItem('loggedIn') == 'false') {
@@ -43,23 +56,40 @@ clientsRef.on('value', function (snapshot) {
         let clientKey = `${key}`;
 
         // Get age
-        let clientAge = getAge(result[clientKey].personal.dob)
+        let clientAge = getAge(result[clientKey].personal.dob);
+        console.log(result[clientKey].location);
 
-        // Push names into array in preparation for autocomplete
-        clientNames.push(result[clientKey].personal.name);
-
-        // Create new object with details for table
-        clientDetails.push({
-            name: result[clientKey].personal.name,
-            age: clientAge,
-            dob: result[clientKey].personal.dob,
-            gender: result[clientKey].personal.gender,
-            location: result[clientKey].location,
-            client_notes: result[clientKey].client_notes,
-            physical_problems: result[clientKey].physical_problems,
-            status: result[clientKey].status
-        });
+        if (localStorage.getItem('access') !== 'Admin'){
+            // Push names into array in preparation for autocomplete
+            if (result[clientKey].location == localStorage.getItem('location')){
+                clientNames.push(result[clientKey].personal.name);
+            }
+        }else{
+            clientNames.push(result[clientKey].personal.name);
+        }
+            console.log(clientNames);
+        
+            // Create new object with details for table
+            clientDetails.push({
+                name: result[clientKey].personal.name,
+                age: clientAge,
+                dob: result[clientKey].personal.dob,
+                gender: result[clientKey].personal.gender,
+                location: result[clientKey].location,
+                client_notes: result[clientKey].client_notes,
+                physical_problems: result[clientKey].physical_problems,
+                status: result[clientKey].status
+            });
     }
+
+    $('#clientName').keyup(function(e){
+        if(e.keyCode == 8 && $('#clientName').val() == ''){
+            $(document).ready(function(){
+                $('.row.appointments').css('display','none');
+            });
+        }
+    })  
+
 
     // Add client names to autocomplete
     $("#clientName").autocomplete({
@@ -74,18 +104,29 @@ clientsRef.on('value', function (snapshot) {
                     $('.planAppointmentsPage #clientNotes').val(client.client_notes);
 
                     // Look through appointments node
-                    appointmentsRef.on('value', function (snapshot) {
-                        // Get snapshot value
-                        let result = snapshot.val();
+                    // appointmentsRef.on('value', function (snapshot) {
+                    //     // Get snapshot value
+                    //     let result = snapshot.val();
+                    let result = JSON.parse(localStorage.getItem('allAppointments'));
+                    console.log('result');
+                    console.log(result);
+
+                    if (result == null){
+                        $('.planAppointmentsPage .appointments').css('display','block');
+                        return;
+                    }else{
+                    $(document).ready(function(){
+                        $('.planAppointmentsPage .blocked').css('display','none');
+                    });
                 
                         // Loop through the keys
                         for (const [key, value] of Object.entries(result)) {
+                            
                             let clientKey = `${key}`;
                             let info = clientKey.split('|');
 
                             if (info[3] == client.name.replace(' ', '_')){
                                 let matchingEntry = (result[clientKey]);
-                                // console.log(matchingEntry);
                                 appointments.push(matchingEntry);
                                 let dateArray = matchingEntry.info.date.split('-');
                                 let lastUpdatedArray = matchingEntry.info.last_updated.split('-');
@@ -93,11 +134,18 @@ clientsRef.on('value', function (snapshot) {
                                 let lastUpdated = lastUpdatedArray[1] + '/' + lastUpdatedArray[2] + '/' + lastUpdatedArray[0];
         
                                 localStorage.setItem('appointments', JSON.stringify(appointments));
-                                $('.planAppointmentsPage .appointments').css('display','block');
-                                $('.planAppointmentsPage .appointmentTable tbody').append('<tr><td><a target="_blank" class="mdi mdi-eye menu-icon" href="./viewAppointment.html?appointment=' + info[0] + '"></a></td><td>' + date + '</td><td>' + matchingEntry.info.location.replace('-', ' ') + '</td><td>' + matchingEntry.info.trainer.replace('-', ' ') + '</td><td>' + lastUpdated + '<td></tr>');
+                                $('.planAppointmentsPage .appointmentTable tbody').append('<tr><td><a target="_blank" class="mdi mdi-eye menu-icon" href="./viewAppointment.html?appointment=' + info[0] + '"></a></td><td><a class="mdi mdi-pencil menu-icon" href="./editAppointment.html?appointment=' + info[0] + '"></a></td><td>' + date + '</td><td>' + matchingEntry.info.location.replace('-', ' ') + '</td><td>' + matchingEntry.info.trainer.replace('-', ' ') + '</td><td>' + lastUpdated + '<td></tr>');
                             }
+                            $('.planAppointmentsPage .appointments').css('display','block');
                         }
-                    });
+                        $('.planAppointmentsPage .appointmentTable tbody').each(function(elem,index){
+                            var arr = $.makeArray($("tr",this).detach());
+                            arr.reverse();
+                              $(this).append(arr);
+                          });
+                        console.log('appointments');
+                        console.log(appointments);
+                    };
                 }
             })
         }
@@ -113,22 +161,19 @@ clientsRef.on('value', function (snapshot) {
             statusColor = 'danger';
         }
 
-        // Check if admin, if not, populate location and disable field
-        // if (localStorage.getItem('access') !== 'Admin'){
-        //     if (res.location !== location){
-        //         return;
-        //     }
-        // }
+        let location = localStorage.getItem('location');
+        
+
 
         // Clear all data in table
         $('.clientTable tbody').html('');
         // Fill in table
         setTimeout(() => {
-            let location = localStorage.getItem('location');
+            
             if (localStorage.getItem('access') !== 'Admin' && res.location !== location) {
-                $('.clientTable tbody').append('<tr> <td class="clientDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
+                // $('.clientTable tbody').append('<tr> <td class="clientDetailLink">' + res.name + '</td> <td>' + res.gender + '</td><td>' + res.age + '</td><td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
             } else {
-                $('.clientTable tbody').append('<tr> <td class="clientDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
+                $('.clientTable tbody').append('<tr> <td class="clientDetailLink">' + res.name + '</td> <td>' + res.gender + '</td><td>' + res.age + '</td><td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
             }
 
         }, 100);
@@ -176,6 +221,10 @@ exerciseRef.on('value', function (snapshot) {
         $('.notes').val(exerciseArray[eid].Notes);
 
         $('.editExercisePage .submit').click(function () {
+            if ($('#name').val() == '') {
+                callAlert('Name field is required.', 'danger');
+                return;
+            } else {
             let exerciseName = [exerciseArray[eid].Exercise.replace(/[ ,-,/]/g, '_').replace(/[(,)]/g, '')]
             let exerciseUpdate = {
                 [exerciseName]: {
@@ -185,6 +234,7 @@ exerciseRef.on('value', function (snapshot) {
                 }
             }
             exerciseRef.update(exerciseUpdate);
+            }
         });
     }
 
@@ -198,6 +248,7 @@ exerciseRef.on('value', function (snapshot) {
                 let date;
                 let matchingDates = [];
 
+                if (storedAppointments){
                 // Update exercise array for each round
                 storedAppointments.forEach(function (res) {
                     let test = JSON.stringify(res.exercises);
@@ -210,19 +261,25 @@ exerciseRef.on('value', function (snapshot) {
                         return;
                     }
                 });
+                }
 
                 if (matchingDates.length > 0){
-                // Sort through dates
-                matchingDates.sort(function(a,b){
-                    return new Date(a) - new Date(b);
-                  });
-                // Find last used date and format
-                const lastUsed = matchingDates.reverse()[0];
-                let dateArray = lastUsed.split('-');
-                date = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
+                    // Sort through dates
+                    matchingDates.sort(function(a,b){
+                        return new Date(a) - new Date(b);
+                    });
+                    // Find last used date and format
+                    const lastUsed = matchingDates.reverse()[0];
+                    let dateArray = lastUsed.split('-');
+                    date = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
 
-                // Add to value shown in input field
-                ui.item.value = ui.item.value + ' (Last used: ' + date + ')';
+                    // Add to value shown in input field
+                    console.log(ui.item.value.substring().length)
+                    // if (ui.item.value.substring().length > 10){
+                    //     ui.item.value = ui.item.value.substring(0, 10) + '... ' + ' (' + date + ')';
+                    // }else{
+                        ui.item.value = ui.item.value + ' Last used:' + date;
+                    // }
                 }
             }
         });
@@ -311,9 +368,9 @@ trainerRef.on('value', function (snapshot) {
         setTimeout(() => {
             let location = localStorage.getItem('location');
             if (localStorage.getItem('access') !== 'Admin' && res.location !== location) {
-                $('.staffTable tbody').append('<tr> <td class="trainerDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
+                $('.staffTable tbody').append('<tr> <td class="trainerDetailLink">' + res.name + '</td> <td>' + res.gender + '</td><td>' + res.age + '</td> <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
             } else {
-                $('.staffTable tbody').append('<tr> <td class="trainerDetailLink">' + res.name + '</td> <td>' + res.gender + '</td> <td>' + res.age + '</td>  <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
+                $('.staffTable tbody').append('<tr> <td class="trainerDetailLink">' + res.name + '</td> <td>' + res.gender + '</td><td>' + res.age + '</td> <td>' + res.location + '</td> <td><label class="badge badge-' + statusColor + '">' + res.status + '</label></td> </tr>');
             }
         }, 100);
     });
@@ -371,6 +428,7 @@ locationRef.on('value', function (snapshot) {
     });
 });
 
+
 // Get today's date
 var today = new Date();
 var dd = String(today.getDate()).padStart(2, '0');
@@ -378,6 +436,34 @@ var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
 var yyyy = today.getFullYear();
 today = yyyy + '-' + mm + '-' + dd;
 $('#date').val(today);
+
+$('.addLocationPage .submit').click(function(){
+    let city = $('#city').val();
+    let state = $('#state').val();
+
+    let entry = state + '_' + city
+
+    let locationList = [];
+    locationRef.on('value', function(snapshot){
+        let result = snapshot.val();
+        for (const [key, value] of Object.entries(result)) {
+            locationList.push(`${key}`);
+        }
+        if (!locationList.includes(entry)){
+            console.log('doesn\'t exist');
+            locationRef.update({
+                [entry]: {
+                    appointments: 0,
+                    trainers: 1,
+                    clients: 1
+                }
+            })
+        } else {
+            callAlert('This location already exists.', 'danger');
+            return;
+        }
+    })
+});
 
 // Submit new client info
 $('.addClientPage .submit').click(function () {
@@ -390,8 +476,8 @@ $('.addClientPage .submit').click(function () {
         callAlert('All fields other than Notes and Physical Problems are required.', 'danger');
         return;
     } else {
-        let key = $('.name').val().replace(/ /g, "_");
-        let name = $('.name').val();
+        let name = $('.name').val().replace(/\//g, ' and ');
+        let key = name.replace(/ /g, "_");
         let email = $('#email').val();
         let gender = $('.gender').val();
         let dob = $('#date').val();
@@ -492,17 +578,22 @@ $(document).ready(function () {
 
 // Add new exercise
 $('.addExercisePage .submit').click(function () {
-    let exerciseName = $('#name').val().replace(/[ ,-,/]/g, '_').replace(/[(,)]/g, '');
-    let exerciseUpdate = {
-        [exerciseName]: {
-            "Exercise": $('#name').val(),
-            // "Modality": $('#modality').val(),
-            // "Muscle_Group": $('#muscleGroup').val(),
-            // "U_L_C": $('#ulc').val(),
-            "video": $('#video').val()
+    if ($('#name').val() == '') {
+        callAlert('Name field is required.', 'danger');
+        return;
+    } else {
+        let exerciseName = $('#name').val().replace(/[ ,-,/]/g, '_').replace(/[(,)]/g, '');
+        let exerciseUpdate = {
+            [exerciseName]: {
+                "Exercise": $('#name').val(),
+                // "Modality": $('#modality').val(),
+                // "Muscle_Group": $('#muscleGroup').val(),
+                // "U_L_C": $('#ulc').val(),
+                "video": $('#video').val()
+            }
         }
+        exerciseRef.update(exerciseUpdate);
     }
-    exerciseRef.update(exerciseUpdate);
 });
 
 // Keep copyright year up-to-date
@@ -575,7 +666,7 @@ if (localStorage.getItem('name') && localStorage.getItem('email')) {
 // Check if admin, if not, populate location and disable field
 if (localStorage.getItem('access') !== 'Admin') {
     $('#locationName').val(localStorage.getItem('location'));
-    $('#locationName').prop('disabled', 'true');
+    // $('#locationName').prop('disabled', 'true');
 }
 
 if (localStorage.getItem('access') !== 'Admin') {

@@ -5,7 +5,7 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>NexGen Fitness | Add Trainer</title>
+    <title>NexGen Fitness | Edit Staff</title>
     <!-- plugins:css -->
     <link rel="stylesheet" href="../vendors/feather/feather.css">
     <link rel="stylesheet" href="../vendors/mdi/css/materialdesignicons.min.css">
@@ -24,7 +24,7 @@
     <link rel="shortcut icon" href="../images/favicon.png" />
 </head>
 
-<body class="addStaffPage">
+<body class="editStaffPage">
     <div class="container-scroller">
         <!-- partial:../../partials/_navbar.html -->
         <nav class="navbar default-layout col-lg-12 col-12 p-0 fixed-top d-flex align-items-top flex-row">
@@ -146,7 +146,7 @@
                     <div class="col-md-12 grid-margin stretch-card">
                         <div class="card">
                             <div class="card-body form-group">
-                                <h4 class="card-title">Add Staff</h4>
+                                <h4 class="card-title">Edit Staff</h4>
                                 <div class="row">
                                     <div class="col-6 form-group">
                                         <label for="exampleInputEmail1">First and Last Name</label>
@@ -166,13 +166,17 @@
                                     <div class="col-6 form-group">
                                         <label for="email">Email</label>
                                         <input id="email" type="email" class="form-control" name="email"
-                                            placeholder="john.doe@nexgenfitness.com">
+                                            placeholder="john.doe@nexgenfitness.com" disabled>
                                     </div>
                                     <div class="col-6 form-group">
-                                        <label for="password">Password</label>
-                                        <input type="password" class="form-control" id="password" name="password">
+                                        <label for="status">Status</label>
+                                        <select class="form-control status" id="status">
+                                            <option>---</option>
+                                            <option>Active</option>
+                                            <option>Inactive</option>
+                                        </select>
                                     </div>
-                                </div>
+                            </div>
                                 <div class="row">
                                     <div class="col-6 form-group">
                                         <label for="exampleInputUsername1">Phone</label>
@@ -226,7 +230,7 @@
                                     </div>
                                     <div class="row">
                                     <button type="button" style="width:100%" class="btn btn-primary submit"
-                                        data-dismiss="modal">Add</button>
+                                        data-dismiss="modal">Update</button>
                                     </div>
                                     <div class="signInFeedback"></div>
                                 </div>
@@ -285,7 +289,98 @@
         <script src="../js/login.js"></script>
 
         <script>
-                    $(document).ready(function(){
+             // Look through trainer node
+        trainerRef.on('value', function (snapshot) {
+          // Get snapshot value
+          let result = snapshot.val();
+          const queryString = window.location.search;
+          const urlParams = new URLSearchParams(queryString);
+          let trainerInfo = urlParams.get('trainer');
+
+
+          let statusColor;
+            if (result[trainerInfo].status == 'Active') {
+                statusColor = 'success';
+            } else {
+                statusColor = 'danger';
+            }
+        //   console.log(result[trainerInfo]);
+
+          let age = getAge(result[trainerInfo].personal.dob)
+
+          $('.editStaffPage #name').val(result[trainerInfo].personal.name);
+          $('.editStaffPage #access').val(result[trainerInfo].access);
+          $('.editStaffPage #age').val(age);
+          $('.editStaffPage #dob').val(result[trainerInfo].personal.dob);
+          $('.editStaffPage #start_date').val(result[trainerInfo].start_date);
+          $('.editStaffPage #locationName').val(result[trainerInfo].location);
+          $('.editStaffPage #specialties').val(result[trainerInfo].specialties);
+          $('.editStaffPage #email').val(result[trainerInfo].personal.email);
+          $('.editStaffPage #phone').val(result[trainerInfo].personal.phone);
+          $('.editStaffPage #gender').val(result[trainerInfo].personal.gender);
+          $('.editStaffPage #notes').val(result[trainerInfo].notes);
+          $('.editStaffPage #status').val(result[trainerInfo].status);
+          console.log('status')
+          console.log(result[trainerInfo].status)
+        });
+
+        
+        $(document).ready(function(){
+
+            // Edit User
+$('.editStaffPage .submit').click(function (e) {
+    console.log('click');
+    if ($('.editStaffPage #access').val() == '' ||
+    $('.editStaffPage #email').val() == '' ||
+    $('.editStaffPage #name').val() == '' ||
+    $('.editStaffPage #locationName').val() == '') {
+        callAlert('Access, email, name, and location are required.', 'danger');
+        return;
+    } else {
+    console.log(e)
+    e.preventDefault();
+
+    let access = $('.editStaffPage #access').val();
+    let dob = $('.editStaffPage #dob').val();
+    let phone = $('.editStaffPage #phone').val();
+    let email = $('.editStaffPage #email').val();
+    let name = $('.editStaffPage #name').val();
+    let key = $('.editStaffPage #name').val().replace(/ /g, "_");
+    let location = $('.editStaffPage #locationName').val();
+    let gender = $('.editStaffPage #gender').val();
+    let start_date = $('.editStaffPage #start_date').val();
+    let specialties = $('.editStaffPage #specialties').val();
+    let notes = $('.editStaffPage #notes').val();
+    let status = $('.editStaffPage #status').val();
+    console.log('click')
+            let success = 'Success! ' + name + ' has been updated.';
+            $('.editStaffPage .signInFeedback').css('display', 'block');
+            $('.editStaffPage .signInFeedback').addClass('success').text(success);
+
+            // Add trainer to DB
+            trainerRef.update({
+                [key]: {
+                    access: access,
+                    location: location,
+                    notes: notes,
+                    personal: {
+                        dob: dob,
+                        email: email,
+                        gender: gender,
+                        name: name,
+                        phone: phone
+                    },
+                    specialties: specialties,
+                    start_date: start_date,
+                    status: status
+                }
+            }).then(function (res){
+                window.location.replace(baseURL + '/pages/staff.html');
+            });
+    }
+});
+
+
         const auth = firebase.auth();
         // logout
         $('.logout').click(function(e) {
@@ -307,7 +402,6 @@
             }, 1000);
         });
     });
-
         </script>
         <!-- End custom js for this page-->
 

@@ -29,14 +29,16 @@
       <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-start">
         <div>
           <a class="navbar-brand brand-logo" href="../index.html">
-            <img src="../images/logo-mobile.png" alt="logo" />
-          </a>
-          <a class="navbar-brand brand-logo-mini" href="../index.html">
-            <img src="../images/logo-mobile.png" alt="logo" />
-          </a>
+            <img src="../images/ngf_circle.png" alt="logo" />
+        </a>
+        <a class="navbar-brand brand-logo-mini" href="../index.html">
+            <img src="../images/ngf_circle.png" alt="logo" />
+        </a>
         </div>
       </div>
-      <div class="navbar-menu-wrapper d-flex align-items-top">
+                  <div class="navbar-menu-wrapper d-flex align-items-top">
+                <img class="alignCenter" src="../images/ngf_horiz.png"/>
+
         <ul class="navbar-nav">
         </ul>
         <ul class="navbar-nav ms-auto">
@@ -67,6 +69,12 @@
       <!-- partial:../../partials/_sidebar.html -->
       <nav class="sidebar sidebar-offcanvas" id="sidebar">
         <ul class="nav">
+          <li class="nav-item">
+              <a class="nav-link dashboardLink adminOnly" href="../index.html">
+                  <i class="mdi mdi-chart-bar menu-icon"></i>
+                  <span class="menu-title">Dashboard</span>
+              </a>
+          </li>
           <li class="nav-item nav-category">Actions</li>
           <li class="nav-item">
             <a class="nav-link" href="planAppointment.html">
@@ -91,6 +99,12 @@
               <i class="mdi mdi-human-handsup menu-icon"></i>
               <span class="menu-title">Add Exercise</span>
             </a>
+          </li> 
+          <li class="nav-item">
+            <a class="nav-link" href="addLocation.html">
+              <i class="mdi mdi-store menu-icon"></i>
+              <span class="menu-title">Add Location</span>
+            </a>
           </li>            
           <li class="nav-item nav-category">Lists</li>
           <li class="nav-item">
@@ -106,7 +120,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="staff.html" aria-expanded="false" aria-controls="ui-basic">
+            <a class="nav-link adminOnly" href="staff.html" aria-expanded="false" aria-controls="ui-basic">
               <i class="menu-icon mdi mdi-account-circle"></i>
               <span class="menu-title">Staff</span>
             </a>

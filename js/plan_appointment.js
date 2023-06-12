@@ -17,15 +17,26 @@ for (i = 1; i <= numExercises; i++) {
         roundNum = 4;
         exerciseNum = i - 12;
     }
-
-    $('.exerciseLog').append('<div id="round' + roundNum + '" class="r'+roundNum+'_e'+exerciseNum+' roundContainer round' + roundNum + '"><h3><span>Round ' + roundNum + '</span> Exercise ' + exerciseNum + '</h3><div class="exercise' + exerciseNum + '"><div class="row"><div class="form-group col-md-12 grid-margin"><label>Excerise Name</label><div class="autocomplete"><input placeholder="Not provided." type="text" class="form-control exercises exercise' + exerciseNum + ' name" placeholder="Not provided" autocomplete="off"></div></div></div><div class="sets"></div><div class="row"><div class="form-group col-md-12 grid-margin"><label for="appointmentNotes">Exercise Notes</label><textarea class="form-control notes exercise-' + exerciseNum + '" name="exercise' + exerciseNum + 'Notes" placeholder="Not provided."></textarea></div></div></div></div>')
 };
+
+if (localStorage.getItem('location')){
+    $('#locationName').val(localStorage.getItem('location'));
+    $('#locationName').attr('disabled');
+}
 
 // Build sets
 const setTotal = 4;
+const roundTotal = 3;
 let roundNumSet = 1;
+for (let i = 1; i <= roundTotal; i++) {
+    $('.exerciseLog').append('<div id="round-' + i + '" class="roundContainer"><h3>Round ' + i + '</h3></div>');
+};
+
 for (let i = 1; i <= setTotal; i++) {
-    $('.sets').append('<div class="row set' + i + '"><h4>Set ' + i + '</h4><div class="form-group col-md-4 grid-margin"><label for="set' + i + 'Reps">Reps</label><div><input placeholder="Not provided." type="text" class="form-control reps set' + i + 'Reps"></div></div><div class="form-group col-md-4 grid-margin"><label for="set' + i + 'Weight">Weight</label><div><input placeholder="Not provided." type="text" class="form-control weight exercise set' + i + 'Weight" ></div></div><div class="form-group col-md-4 grid-margin"><label for="set' + i + 'Weight">Tempo</label><div><input placeholder="Not provided." type="text" class="form-control weight set' + i + 'Tempo"></div></div></div>')
+    $('.roundContainer').append('<div class="exerciseContainer exercise-'+ i +'"><input placeholder="Exercise ' + i + ' Name" type="text" class="form-control exercises exercise' + i + ' name" placeholder="Not provided" autocomplete="off"></div></div>');
+};
+for (let i = 1; i <= setTotal; i++) {
+    $('.exerciseContainer').append('<div class="row set' + i + '"><div class="form-group col-md-4 grid-margin"><input placeholder="Set ' + i + ' Weight" type="text" class="form-control weight set' + i + 'Weight" ></div><div class="form-group col-md-4 grid-margin"><input placeholder="Set ' + i + ' Reps" type="text" class="form-control reps set' + i + 'Reps"></div><div class="form-group col-md-4 grid-margin"><div><input placeholder="Set ' + i + ' Notes" type="text" class="form-control notes set' + i + 'Notes"></div></div>');
 }
 
 // No show checkmark
@@ -83,384 +94,7 @@ function submitAppointment(){
                         no_show: "true",
                         notes: $('#appointmentNotes').val()
                     },
-                    exercises: {
-                        round1: {
-                            exercise1: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise2: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise3: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise4: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            }
-                        },
-                        round2: {
-                            exercise1: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise2: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise3: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise4: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            }
-                        },
-                        round3: {
-                            exercise1: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise2: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise3: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise4: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            }
-                        },
-                        round4: {
-                            exercise1: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise2: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise3: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            },
-                            exercise4: {
-                                name: 'NA',
-                                set1: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set2: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set3: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                                set4: {
-                                    weight: 'NA',
-                                    reps: 'NA',
-                                    tempo: 'NA'
-                                },
-                            }
-                        }
-                    }
+                    exercises: 'NA'
                 }
             }
         } else {
@@ -471,7 +105,9 @@ function submitAppointment(){
             // Push input values into log results array
             $('.exerciseLog .form-control').each(function (i, obj) {
                     logResults.push($(obj).val());
+                    console.log(logResults);
             });
+
             let aid;
             if (window.location.href.indexOf("editAppointment.html") > -1) {
                 const urlSearchParams = new URLSearchParams(window.location.search);
@@ -482,7 +118,7 @@ function submitAppointment(){
 
             // Create exercise log object
             exerciseLog = {
-                [aid + '|' + $('#locationName').val().split(', ')[0].replace(/ /g, "_") + '|' + $('#locationName').val().split(', ')[1] + '|' + $('#clientName').val().replace(/ /g, "_") + '|' + $('.trainerName').val().replace(/ /g, "_")]: {
+                [aid + '|' + $('#locationName').val().split(', ')[0].replace(/ /g, "_") + '|' + $('#locationName').val().split(', ')[1] + '|' + $('#clientName').val().replace(/ /g, "_") + '|' + $('.trainerName').val().replace(/ /g, "_") + '|' + $('#date').val()]: {
                     info: {
                         client: $('#clientName').val(),
                         trainer: $('.trainerName').val(),
@@ -495,402 +131,385 @@ function submitAppointment(){
                     exercises: {
                         round1: {
                             exercise1: {
-                                exerciseName: logResults[0].split(' (')[0],
+                                exerciseName: logResults[0].split(' (')[0] || 'Not Provided',
                                 set1: {
-                                    weight: logResults[1],
-                                    reps: logResults[2],
-                                    tempo: logResults[3]
+                                    weight: logResults[1] || 'Not Provided',
+                                    reps: logResults[2] || 'Not Provided',
+                                    notes: logResults[3] || 'Not Provided',
                                 },
                                 set2: {
-                                    weight: logResults[4],
-                                    reps: logResults[5],
-                                    tempo: logResults[6]
+                                    weight: logResults[4] || 'Not Provided',
+                                    reps: logResults[5] || 'Not Provided',
+                                    notes: logResults[6] || 'Not Provided',
                                 },
                                 set3: {
-                                    weight: logResults[7],
-                                    reps: logResults[8],
-                                    tempo: logResults[9]
+                                    weight: logResults[7] || 'Not Provided',
+                                    reps: logResults[8] || 'Not Provided',
+                                    notes: logResults[9] || 'Not Provided',
                                 },
                                 set4: {
-                                    weight: logResults[10],
-                                    reps: logResults[11],
-                                    tempo: logResults[12]
+                                    weight: logResults[10] || 'Not Provided',
+                                    reps: logResults[11] || 'Not Provided',
+                                    notes: logResults[12] || 'Not Provided',
                                 },
-                                exerciseNotes: logResults[13]
                             },
                             exercise2: {
-                                exerciseName: logResults[14].split(' (')[0],
+                                exerciseName: logResults[13].split(' (')[0] || 'Not Provided',
                                 set1: {
-                                    weight: logResults[15],
-                                    reps: logResults[16],
-                                    tempo: logResults[17]
+                                    weight: logResults[14] || 'Not Provided',
+                                    reps: logResults[15] || 'Not Provided',
+                                    notes: logResults[16] || 'Not Provided',
                                 },
                                 set2: {
-                                    weight: logResults[18],
-                                    reps: logResults[19],
-                                    tempo: logResults[20]
+                                    weight: logResults[17] || 'Not Provided',
+                                    reps: logResults[18] || 'Not Provided',
+                                    notes: logResults[19] || 'Not Provided',
                                 },
                                 set3: {
-                                    weight: logResults[21],
-                                    reps: logResults[22],
-                                    tempo: logResults[23]
+                                    weight: logResults[20] || 'Not Provided',
+                                    reps: logResults[21] || 'Not Provided',
+                                    notes: logResults[22] || 'Not Provided',
                                 },
                                 set4: {
-                                    weight: logResults[24],
-                                    reps: logResults[25],
-                                    tempo: logResults[26]
+                                    weight: logResults[23] || 'Not Provided',
+                                    reps: logResults[24] || 'Not Provided',
+                                    notes: logResults[25] || 'Not Provided',
                                 },
-                                exerciseNotes: logResults[27]
-                            },
+                            },                        
                             exercise3: {
-                                exerciseName: logResults[28].split(' (')[0],
-                                set1: {
-                                    weight: logResults[29],
-                                    reps: logResults[30],
-                                    tempo: logResults[31]
-                                },
-                                set2: {
-                                    weight: logResults[32],
-                                    reps: logResults[33],
-                                    tempo: logResults[34]
-                                },
-                                set3: {
-                                    weight: logResults[35],
-                                    reps: logResults[36],
-                                    tempo: logResults[37]
-                                },
-                                set4: {
-                                    weight: logResults[38],
-                                    reps: logResults[39],
-                                    tempo: logResults[40]
-                                },
-                                exerciseNotes: logResults[41]
-                            },
+                                exerciseName: logResults[26].split(' (')[0] || 'Not Provided',
+                                    set1: {
+                                        weight: logResults[27] || 'Not Provided',
+                                        reps: logResults[28] || 'Not Provided',
+                                        notes: logResults[29] || 'Not Provided',
+                                    },
+                                    set2: {
+                                        weight: logResults[30] || 'Not Provided',
+                                        reps: logResults[31] || 'Not Provided',
+                                        notes: logResults[32] || 'Not Provided',
+                                    },
+                                    set3: {
+                                        weight: logResults[33] || 'Not Provided',
+                                        reps: logResults[34] || 'Not Provided',
+                                        notes: logResults[35] || 'Not Provided',
+                                    },
+                                    set4: {
+                                        weight: logResults[36] || 'Not Provided',
+                                        reps: logResults[37] || 'Not Provided',
+                                        notes: logResults[38] || 'Not Provided',
+                                    },
+                            },                        
                             exercise4: {
-                                exerciseName: logResults[42].split(' (')[0],
+                            exerciseName: logResults[39].split(' (')[0] || 'Not Provided',
                                 set1: {
-                                    weight: logResults[43],
-                                    reps: logResults[44],
-                                    tempo: logResults[45]
+                                    weight: logResults[40] || 'Not Provided',
+                                    reps: logResults[41] || 'Not Provided',
+                                    notes: logResults[42] || 'Not Provided',
                                 },
                                 set2: {
-                                    weight: logResults[46],
-                                    reps: logResults[47],
-                                    tempo: logResults[48]
+                                    weight: logResults[43] || 'Not Provided',
+                                    reps: logResults[44] || 'Not Provided',
+                                    notes: logResults[45] || 'Not Provided',
                                 },
                                 set3: {
-                                    weight: logResults[49],
-                                    reps: logResults[50],
-                                    tempo: logResults[51]
+                                    weight: logResults[46] || 'Not Provided',
+                                    reps: logResults[47] || 'Not Provided',
+                                    notes: logResults[48] || 'Not Provided',
                                 },
                                 set4: {
-                                    weight: logResults[52],
-                                    reps: logResults[53],
-                                    tempo: logResults[54]
+                                    weight: logResults[49] || 'Not Provided',
+                                    reps: logResults[50] || 'Not Provided',
+                                    notes: logResults[51] || 'Not Provided',
                                 },
-                                exerciseNotes: logResults[55]
-                            }
+                            },
                         },
                         round2: {
                             exercise1: {
-                                exerciseName: logResults[56].split(' (')[0],
+                                exerciseName: logResults[52].split(' (')[0] || 'Not Provided',
                                 set1: {
-                                    weight: logResults[57],
-                                    reps: logResults[58],
-                                    tempo: logResults[59]
+                                    weight: logResults[53] || 'Not Provided',
+                                    reps: logResults[54] || 'Not Provided',
+                                    notes: logResults[55] || 'Not Provided',
                                 },
                                 set2: {
-                                    weight: logResults[60],
-                                    reps: logResults[61],
-                                    tempo: logResults[62]
+                                    weight: logResults[56] || 'Not Provided',
+                                    reps: logResults[57] || 'Not Provided',
+                                    notes: logResults[58] || 'Not Provided',
                                 },
                                 set3: {
-                                    weight: logResults[63],
-                                    reps: logResults[64],
-                                    tempo: logResults[65]
+                                    weight: logResults[59] || 'Not Provided',
+                                    reps: logResults[60] || 'Not Provided',
+                                    notes: logResults[61] || 'Not Provided',
                                 },
                                 set4: {
-                                    weight: logResults[66],
-                                    reps: logResults[67],
-                                    tempo: logResults[68]
+                                    weight: logResults[62] || 'Not Provided',
+                                    reps: logResults[63] || 'Not Provided',
+                                    notes: logResults[64] || 'Not Provided',
                                 },
-                                exerciseNotes: logResults[69]
-                            },
+                                },
                             exercise2: {
-                                exerciseName: logResults[70].split(' (')[0],
+                                exerciseName: logResults[65].split(' (')[0] || 'Not Provided',
                                 set1: {
-                                    weight: logResults[71],
-                                    reps: logResults[72],
-                                    tempo: logResults[73]
+                                    weight: logResults[66] || 'Not Provided',
+                                    reps: logResults[67] || 'Not Provided',
+                                    notes: logResults[68] || 'Not Provided',
                                 },
                                 set2: {
-                                    weight: logResults[74],
-                                    reps: logResults[75],
-                                    tempo: logResults[76]
+                                    weight: logResults[69] || 'Not Provided',
+                                    reps: logResults[70] || 'Not Provided',
+                                    notes: logResults[71] || 'Not Provided',
                                 },
                                 set3: {
-                                    weight: logResults[77],
-                                    reps: logResults[78],
-                                    tempo: logResults[79]
+                                    weight: logResults[72] || 'Not Provided',
+                                    reps: logResults[73] || 'Not Provided',
+                                    notes: logResults[74] || 'Not Provided',
                                 },
                                 set4: {
-                                    weight: logResults[80],
-                                    reps: logResults[81],
-                                    tempo: logResults[82]
+                                    weight: logResults[75] || 'Not Provided',
+                                    reps: logResults[76] || 'Not Provided',
+                                    notes: logResults[77] || 'Not Provided',
                                 },
-                                exerciseNotes: logResults[83]
-                            },
+                            },                        
                             exercise3: {
-                                exerciseName: logResults[84].split(' (')[0],
-                                set1: {
-                                    weight: logResults[85],
-                                    reps: logResults[86],
-                                    tempo: logResults[87]
-                                },
-                                set2: {
-                                    weight: logResults[88],
-                                    reps: logResults[89],
-                                    tempo: logResults[90]
-                                },
-                                set3: {
-                                    weight: logResults[91],
-                                    reps: logResults[92],
-                                    tempo: logResults[93]
-                                },
-                                set4: {
-                                    weight: logResults[94],
-                                    reps: logResults[95],
-                                    tempo: logResults[96]
-                                },
-                                exerciseNotes: logResults[97]
-                            },
+                                exerciseName: logResults[78].split(' (')[0] || 'Not Provided',
+                                    set1: {
+                                        weight: logResults[79] || 'Not Provided',
+                                        reps: logResults[80] || 'Not Provided',
+                                        notes: logResults[81] || 'Not Provided',
+                                    },
+                                    set2: {
+                                        weight: logResults[82] || 'Not Provided',
+                                        reps: logResults[83] || 'Not Provided',
+                                        notes: logResults[84] || 'Not Provided',
+                                    },
+                                    set3: {
+                                        weight: logResults[85] || 'Not Provided',
+                                        reps: logResults[86] || 'Not Provided',
+                                        notes: logResults[87] || 'Not Provided',
+                                    },
+                                    set4: {
+                                        weight: logResults[88] || 'Not Provided',
+                                        reps: logResults[89] || 'Not Provided',
+                                        notes: logResults[90] || 'Not Provided',
+                                    },
+                            },                        
                             exercise4: {
-                                exerciseName: logResults[98].split(' (')[0],
+                            exerciseName: logResults[91].split(' (')[0] || 'Not Provided',
                                 set1: {
-                                    weight: logResults[99],
-                                    reps: logResults[100],
-                                    tempo: logResults[101]
+                                    weight: logResults[92] || 'Not Provided',
+                                    reps: logResults[93] || 'Not Provided',
+                                    notes: logResults[94] || 'Not Provided',
                                 },
                                 set2: {
-                                    weight: logResults[102],
-                                    reps: logResults[103],
-                                    tempo: logResults[104]
+                                    weight: logResults[95] || 'Not Provided',
+                                    reps: logResults[96] || 'Not Provided',
+                                    notes: logResults[97] || 'Not Provided',
                                 },
                                 set3: {
-                                    weight: logResults[105],
-                                    reps: logResults[106],
-                                    tempo: logResults[107]
+                                    weight: logResults[98] || 'Not Provided',
+                                    reps: logResults[99] || 'Not Provided',
+                                    notes: logResults[100] || 'Not Provided',
                                 },
                                 set4: {
-                                    weight: logResults[108],
-                                    reps: logResults[109],
-                                    tempo: logResults[110]
+                                    weight: logResults[101] || 'Not Provided',
+                                    reps: logResults[102] || 'Not Provided',
+                                    notes: logResults[103] || 'Not Provided',
                                 },
-                                exerciseNotes: logResults[111]
-                            }
+                            },
                         },
                         round3: {
                             exercise1: {
-                                exerciseName: logResults[112].split(' (')[0],
+                                exerciseName: logResults[104].split(' (')[0] || 'Not Provided',
                                 set1: {
-                                    weight: logResults[113],
-                                    reps: logResults[114],
-                                    tempo: logResults[115]
+                                    weight: logResults[105] || 'Not Provided',
+                                    reps: logResults[106] || 'Not Provided',
+                                    notes: logResults[107] || 'Not Provided',
                                 },
                                 set2: {
-                                    weight: logResults[116],
-                                    reps: logResults[117],
-                                    tempo: logResults[118]
+                                    weight: logResults[108] || 'Not Provided',
+                                    reps: logResults[109] || 'Not Provided',
+                                    notes: logResults[110] || 'Not Provided',
                                 },
                                 set3: {
-                                    weight: logResults[119],
-                                    reps: logResults[120],
-                                    tempo: logResults[121]
+                                    weight: logResults[111] || 'Not Provided',
+                                    reps: logResults[112] || 'Not Provided',
+                                    notes: logResults[113] || 'Not Provided',
                                 },
                                 set4: {
-                                    weight: logResults[122],
-                                    reps: logResults[123],
-                                    tempo: logResults[124]
+                                    weight: logResults[114] || 'Not Provided',
+                                    reps: logResults[115] || 'Not Provided',
+                                    notes: logResults[116] || 'Not Provided',
                                 },
-                                exerciseNotes: logResults[125]
-                            },
+                                },
                             exercise2: {
-                                exerciseName: logResults[126].split(' (')[0],
+                                exerciseName: logResults[117].split(' (')[0] || 'Not Provided',
                                 set1: {
-                                    weight: logResults[127],
-                                    reps: logResults[128],
-                                    tempo: logResults[129]
+                                    weight: logResults[118] || 'Not Provided',
+                                    reps: logResults[119] || 'Not Provided',
+                                    notes: logResults[120] || 'Not Provided',
                                 },
                                 set2: {
-                                    weight: logResults[130],
-                                    reps: logResults[131],
-                                    tempo: logResults[132]
+                                    weight: logResults[121] || 'Not Provided',
+                                    reps: logResults[122] || 'Not Provided',
+                                    notes: logResults[123] || 'Not Provided',
                                 },
                                 set3: {
-                                    weight: logResults[133],
-                                    reps: logResults[134],
-                                    tempo: logResults[135]
+                                    weight: logResults[124] || 'Not Provided',
+                                    reps: logResults[125] || 'Not Provided',
+                                    notes: logResults[126] || 'Not Provided',
                                 },
                                 set4: {
-                                    weight: logResults[136],
-                                    reps: logResults[137],
-                                    tempo: logResults[138]
+                                    weight: logResults[127] || 'Not Provided',
+                                    reps: logResults[128] || 'Not Provided',
+                                    notes: logResults[129] || 'Not Provided',
                                 },
-                                exerciseNotes: logResults[139]
-                            },
+                            },                        
                             exercise3: {
-                                exerciseName: logResults[140].split(' (')[0],
-                                set1: {
-                                    weight: logResults[141],
-                                    reps: logResults[142],
-                                    tempo: logResults[143]
-                                },
-                                set2: {
-                                    weight: logResults[144],
-                                    reps: logResults[145],
-                                    tempo: logResults[146]
-                                },
-                                set3: {
-                                    weight: logResults[147],
-                                    reps: logResults[148],
-                                    tempo: logResults[149]
-                                },
-                                set4: {
-                                    weight: logResults[150],
-                                    reps: logResults[151],
-                                    tempo: logResults[152]
-                                },
-                                exerciseNotes: logResults[153]
-                            },
+                                exerciseName: logResults[130].split(' (')[0] || 'Not Provided',
+                                    set1: {
+                                        weight: logResults[131] || 'Not Provided',
+                                        reps: logResults[132] || 'Not Provided',
+                                        notes: logResults[133] || 'Not Provided',
+                                    },
+                                    set2: {
+                                        weight: logResults[134] || 'Not Provided',
+                                        reps: logResults[135] || 'Not Provided',
+                                        notes: logResults[136] || 'Not Provided',
+                                    },
+                                    set3: {
+                                        weight: logResults[137] || 'Not Provided',
+                                        reps: logResults[138] || 'Not Provided',
+                                        notes: logResults[139] || 'Not Provided',
+                                    },
+                                    set4: {
+                                        weight: logResults[140] || 'Not Provided',
+                                        reps: logResults[141] || 'Not Provided',
+                                        notes: logResults[142] || 'Not Provided',
+                                    },
+                            },                        
                             exercise4: {
-                                exerciseName: logResults[154].split(' (')[0],
+                            exerciseName: logResults[143].split(' (')[0] || 'Not Provided',
                                 set1: {
-                                    weight: logResults[155],
-                                    reps: logResults[156],
-                                    tempo: logResults[157]
+                                    weight: logResults[144] || 'Not Provided',
+                                    reps: logResults[145] || 'Not Provided',
+                                    notes: logResults[146] || 'Not Provided',
                                 },
                                 set2: {
-                                    weight: logResults[158],
-                                    reps: logResults[159],
-                                    tempo: logResults[160]
+                                    weight: logResults[147] || 'Not Provided',
+                                    reps: logResults[148] || 'Not Provided',
+                                    notes: logResults[149] || 'Not Provided',
                                 },
                                 set3: {
-                                    weight: logResults[161],
-                                    reps: logResults[162],
-                                    tempo: logResults[163]
+                                    weight: logResults[150] || 'Not Provided',
+                                    reps: logResults[151] || 'Not Provided',
+                                    notes: logResults[152] || 'Not Provided',
                                 },
                                 set4: {
-                                    weight: logResults[164],
-                                    reps: logResults[165],
-                                    tempo: logResults[166]
+                                    weight: logResults[153] || 'Not Provided',
+                                    reps: logResults[154] || 'Not Provided',
+                                    notes: logResults[155] || 'Not Provided',
                                 },
-                                exerciseNotes: logResults[167]
-                            }
+                            },
                         },
-                        round4: {
-                            exercise1: {
-                                exerciseName: logResults[168].split(' (')[0],
-                                set1: {
-                                    weight: logResults[169],
-                                    reps: logResults[170],
-                                    tempo: logResults[171]
-                                },
-                                set2: {
-                                    weight: logResults[172],
-                                    reps: logResults[173],
-                                    tempo: logResults[174]
-                                },
-                                set3: {
-                                    weight: logResults[175],
-                                    reps: logResults[176],
-                                    tempo: logResults[177]
-                                },
-                                set4: {
-                                    weight: logResults[178],
-                                    reps: logResults[179],
-                                    tempo: logResults[180]
-                                },
-                                exerciseNotes: logResults[181]
-                            },
-                            exercise2: {
-                                exerciseName: logResults[182].split(' (')[0],
-                                set1: {
-                                    weight: logResults[183],
-                                    reps: logResults[184],
-                                    tempo: logResults[185]
-                                },
-                                set2: {
-                                    weight: logResults[186],
-                                    reps: logResults[187],
-                                    tempo: logResults[188]
-                                },
-                                set3: {
-                                    weight: logResults[189],
-                                    reps: logResults[190],
-                                    tempo: logResults[191]
-                                },
-                                set4: {
-                                    weight: logResults[192],
-                                    reps: logResults[193],
-                                    tempo: logResults[194]
-                                },
-                                exerciseNotes: logResults[195]
-                            },
-                            exercise3: {
-                                exerciseName: logResults[196].split(' (')[0],
-                                set1: {
-                                    weight: logResults[197],
-                                    reps: logResults[198],
-                                    tempo: logResults[199]
-                                },
-                                set2: {
-                                    weight: logResults[200],
-                                    reps: logResults[201],
-                                    tempo: logResults[202]
-                                },
-                                set3: {
-                                    weight: logResults[203],
-                                    reps: logResults[204],
-                                    tempo: logResults[205]
-                                },
-                                set4: {
-                                    weight: logResults[206],
-                                    reps: logResults[207],
-                                    tempo: logResults[208]
-                                },
-                                exerciseNotes: logResults[209]
-                            },
-                            exercise4: {
-                                exerciseName: logResults[210].split(' (')[0],
-                                set1: {
-                                    weight: logResults[211],
-                                    reps: logResults[212],
-                                    tempo: logResults[213]
-                                },
-                                set2: {
-                                    weight: logResults[214],
-                                    reps: logResults[215],
-                                    tempo: logResults[216]
-                                },
-                                set3: {
-                                    weight: logResults[217],
-                                    reps: logResults[218],
-                                    tempo: logResults[219]
-                                },
-                                set4: {
-                                    weight: logResults[220],
-                                    reps: logResults[221],
-                                    tempo: logResults[222]
-                                },
-                                exerciseNotes: logResults[223]
-                            }
-                        }
+                        // round4: {
+                        //     exercise1: {
+                        //         exerciseName: logResults[156].split(' (')[0]|| 'Not Provided',
+                        //         set1: {
+                        //             weight: logResults[157]|| 'Not Provided',
+                        //             reps: logResults[158]|| 'Not Provided',
+                        //             notes: logResults[159]|| 'Not Provided',
+                        //         },
+                        //         set2: {
+                        //             weight: logResults[160] || 'Not Provided',
+                        //             reps: logResults[161] || 'Not Provided',
+                        //             notes: logResults[162] || 'Not Provided',
+                        //         },
+                        //         set3: {
+                        //             weight: logResults[163] || 'Not Provided',
+                        //             reps: logResults[164] || 'Not Provided',
+                        //             notes: logResults[165] || 'Not Provided'
+                        //         },
+                        //         set4: {
+                        //             weight: logResults[166] || 'Not Provided',
+                        //             reps: logResults[167] || 'Not Provided',
+                        //             notes: logResults[168] || 'Not Provided'
+                        //         },
+                        //         },
+                        //     exercise2: {
+                        //         exerciseName: logResults[169].split(' (')[0] || 'Not Provided',
+                        //         set1: {
+                        //             weight: logResults[170] || 'Not Provided',
+                        //             reps: logResults[171] || 'Not Provided',
+                        //             notes: logResults[172] || 'Not Provided',
+                        //         },
+                        //         set2: {
+                        //             weight: logResults[173] || 'Not Provided',
+                        //             reps: logResults[174] || 'Not Provided',
+                        //             notes: logResults[175] || 'Not Provided',
+                        //         },
+                        //         set3: {
+                        //             weight: logResults[176] || 'Not Provided',
+                        //             reps: logResults[177] || 'Not Provided',
+                        //             notes: logResults[178] || 'Not Provided',
+                        //         },
+                        //         set4: {
+                        //             weight: logResults[179] || 'Not Provided',
+                        //             reps: logResults[180] || 'Not Provided',
+                        //             notes: logResults[181] || 'Not Provided',
+                        //         },
+                        //     },                        
+                        //     exercise3: {
+                        //         exerciseName: logResults[182].split(' (')[0] || 'Not Provided',
+                        //             set1: {
+                        //                 weight: logResults[183] || 'Not Provided',
+                        //                 reps: logResults[184] || 'Not Provided',
+                        //                 notes: logResults[185] || 'Not Provided',
+                        //             },
+                        //             set2: {
+                        //                 weight: logResults[186] || 'Not Provided',
+                        //                 reps: logResults[187] || 'Not Provided',
+                        //                 notes: logResults[188] || 'Not Provided',
+                        //             },
+                        //             set3: {
+                        //                 weight: logResults[189] || 'Not Provided',
+                        //                 reps: logResults[190] || 'Not Provided',
+                        //                 notes: logResults[191] || 'Not Provided',
+                        //             },
+                        //             set4: {
+                        //                 weight: logResults[192] || 'Not Provided',
+                        //                 reps: logResults[193] || 'Not Provided',
+                        //                 notes: logResults[194] || 'Not Provided',
+                        //             },
+                        //     },                        
+                        //     exercise4: {
+                        //     exerciseName: logResults[195].split(' (')[0] || 'Not Provided',
+                        //         set1: {
+                        //             weight: logResults[196] || 'Not Provided',
+                        //             reps: logResults[197] || 'Not Provided',
+                        //             notes: logResults[198] || 'Not Provided',
+                        //         },
+                        //         set2: {
+                        //             weight: logResults[199] || 'Not Provided',
+                        //             reps: logResults[200] || 'Not Provided',
+                        //             notes: logResults[201] || 'Not Provided',
+                        //         },
+                        //         set3: {
+                        //             weight: logResults[202] || 'Not Provided',
+                        //             reps: logResults[203] || 'Not Provided',
+                        //             notes: logResults[204] || 'Not Provided',
+                        //         },
+                        //         set4: {
+                        //             weight: logResults[205] || 'Not Provided',
+                        //             reps: logResults[206] || 'Not Provided',
+                        //             notes: logResults[207] || 'Not Provided',
+                        //         },
+                        //     }
+                        // }    
                     }
                 }
             }
         }
     }            
-    console.log(exerciseLog);
     updateDB(exerciseLog);
 };
 
@@ -925,4 +544,3 @@ function publishToDB(exerciseLog){
 
 }, 200)
 };
-

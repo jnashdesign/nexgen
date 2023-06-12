@@ -19625,7 +19625,7 @@ code {
 
 /* Footer */
 .footer {
-  background: #242cea;
+  background: #000;
   color: #ffffff;
   padding: 30px 2.45rem;
   transition: all 0.25s ease;
@@ -28510,6 +28510,14 @@ div.tagsinput span.tag a {
   padding-top: 0;
 }
 
+#locationName, #clientName {
+  font-size: 16px;
+}
+
+.navbar-menu-wrapper img.alignCenter {
+  max-width: 325px;
+}
+
 .main-panel {
   transition: width 0.25s ease, margin 0.25s ease;
   width: calc(100% - 275px);
@@ -28541,9 +28549,17 @@ div.tagsinput span.tag a {
   }
 }
 
+::placeholder, input::placeholder {
+  color: #fff !important;
+}
+
 .locationPage h5, .locationPage .h5, .locationPage .h5 {
   border-bottom: 2px solid #ddd;
   padding-bottom: 5px;
+}
+
+.alignCenter {
+  margin: 0 auto;
 }
 
 .clientDetailPage strong, .trainerDetailPage strong {
@@ -28608,6 +28624,11 @@ table.table.locationsTable td {
   color: green;
 }
 
+.appointmentContainer {
+  max-height: 8.5em;
+  overflow: scroll;
+}
+
 .appointmentTable {
   margin-bottom: 60px;
 }
@@ -28657,10 +28678,22 @@ button.nav-link i {
 
 .roundContainer {
   border-radius: 10px;
+  background: #eee;
+  color: #333;
 }
 
-.roundContainer {
-  background: rgba(0, 0, 0, 0.025);
+.roundContainer input, .roundContainer input:focus {
+  background: #000 !important;
+  color: #fff !important;
+  font-size: 16px;
+}
+
+.roundContainer .full-width.form-group {
+  width: calc(100% - 11px) !important;
+}
+
+.roundContainer .form-group:first-child {
+  margin-top: 10px;
 }
 
 a {
@@ -28699,6 +28732,8 @@ a {
 
 .ui-widget.ui-widget-content {
   background: #fff !important;
+  overflow: scroll;
+  max-height: 300px;
 }
 
 .sets {
@@ -28713,9 +28748,9 @@ a {
   font-size: 1em;
 }
 
-.roundContainer h3, .roundContainer .h3 {
-  font-weight: normal !important;
-  font-size: 1.5em;
+.roundContainer h3, .roundContainer .h3, .roundContainer .h3 {
+  font-weight: bold !important;
+  font-size: 1em;
 }
 
 .floatingNav {
@@ -28740,59 +28775,88 @@ a {
 }
 
 .viewAppointmentsPage .roundContainer,
-.viewAppointmentsPage .sets {
+.viewAppointmentsPage .sets,
+.editAppointmentsPage .roundContainer,
+.editAppointmentsPage .sets {
   padding: 0;
   margin: 0;
   border: none;
   background: transparent;
 }
 
-.viewAppointmentsPage .roundContainer {
-  padding-top: 20px;
+.viewAppointmentsPage .roundContainer,
+.editAppointmentsPage .roundContainer {
+  padding: 10px;
   border-top: 2px solid #ddd;
   border-radius: 0px;
 }
 
-.viewAppointmentsPage .roundContainer:nth-child(odd) {
+.viewAppointmentsPage .roundContainer:nth-child(odd),
+.editAppointmentsPage .roundContainer:nth-child(odd) {
   background: #f7f7f7;
-  padding: 16px 16px 0;
 }
 
-.viewAppointmentsPage .sets .row:nth-child(odd) {
+.viewAppointmentsPage .sets .row:nth-child(odd),
+.editAppointmentsPage .sets .row:nth-child(odd) {
   background: #eee;
   padding-top: 10px;
   margin-bottom: 10px;
 }
 
 .viewAppointmentsPage .form-group input[type=text],
-.viewAppointmentsPage .form-group label {
-  height: 1em;
-  margin: 0;
-  padding: 0;
+.viewAppointmentsPage .form-group label,
+.editAppointmentsPage .form-group input[type=text],
+.editAppointmentsPagen.form-group label {
+  height: 1.5em;
+  margin: 1px;
+  padding: 10px 5px;
 }
 
-.viewAppointmentsPage .form-group {
-  margin: 0.5em 0;
+.viewAppointmentsPage .row,
+.editAppointmentsPage .row {
+  --bs-gutter-x: 4px;
+}
+
+.viewAppointmentsPage .roundContainer .form-group,
+.editAppointmentsPage .roundContainer .form-group {
+  margin: 0 1px !important;
 }
 
 .viewAppointmentsPage input[type=text].form-control.exercises, .viewAppointmentsPage input.asColorPicker-input[type=text].exercises, .viewAppointmentsPage .select2-container--default input.select2-selection--single[type=text].exercises, .select2-container--default .viewAppointmentsPage input.select2-selection--single[type=text].exercises, .viewAppointmentsPage .select2-container--default .select2-selection--single input.select2-search__field[type=text].exercises, .select2-container--default .select2-selection--single .viewAppointmentsPage input.select2-search__field[type=text].exercises, .viewAppointmentsPage input.typeahead[type=text].exercises,
 .viewAppointmentsPage input.tt-query[type=text].exercises,
-.viewAppointmentsPage input.tt-hint[type=text].exercises {
-  font-size: 1.25em;
-  padding: 10px 0 10px 0;
+.viewAppointmentsPage input.tt-hint[type=text].exercises,
+.editAppointmentsPage input[type=text].form-control.exercises,
+.editAppointmentsPage input.asColorPicker-input[type=text].exercises,
+.editAppointmentsPage .select2-container--default input.select2-selection--single[type=text].exercises,
+.select2-container--default .editAppointmentsPage input.select2-selection--single[type=text].exercises,
+.editAppointmentsPage .select2-container--default .select2-selection--single input.select2-search__field[type=text].exercises,
+.select2-container--default .select2-selection--single .editAppointmentsPage input.select2-search__field[type=text].exercises,
+.editAppointmentsPage input.typeahead[type=text].exercises,
+.editAppointmentsPage input.tt-query[type=text].exercises,
+.editAppointmentsPage input.tt-hint[type=text].exercises {
+  font-size: 1em;
+  padding: 10px 0 10px 5px;
 }
 
-.viewAppointmentsPage textarea {
+.viewAppointmentsPage textarea,
+.editAppointmentsPage textarea {
   min-height: 1em !important;
   padding-left: 0;
 }
 
-.viewAppointmentsPage .input-helper:before {
+.viewAppointmentsPage .input-helper:before,
+.editAppointmentsPage .input-helper:before {
   left: -25px !important;
 }
 
-.viewAppointmentsPage .main-panel {
+.viewAppointmentsPage .main-panel,
+.editAppointmentsPage .main-panel {
   width: 100%;
+}
+
+.viewAppointmentsPage .exerciseContainer,
+.editAppointmentsPage .exerciseContainer {
+  margin-top: 10px;
 }
 
 .alert {
@@ -28830,6 +28894,67 @@ a {
 .btn-primary {
   font-weight: bolder;
   text-transform: uppercase;
+  background: #000 !important;
+}
+
+.form-group.col-md-4.grid-margin {
+  margin: 0;
+  padding: 0;
+}
+
+.roundContainer .form-group {
+  margin-bottom: 2px;
+  padding: 2px;
+  width: calc(100%/3 - 2px);
+}
+
+.planAppointmentsPage .roundContainer .form-group {
+  width: calc(100%/3 - 5px);
+}
+
+.planAppointmentsPage .appointments {
+  display: none;
+}
+
+.planAppointmentsPage .blocked {
+  content: '';
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: #fff;
+  margin-left: -24px;
+}
+
+.exerciseContainer {
+  margin-top: 10px;
+}
+
+.roundContainer .row {
+  margin-left: 0px;
+}
+
+.dashboardLink {
+  display: none !important;
+}
+
+@media only screen and (max-width: 1000px) {
+  .roundContainer {
+    background: rgba(0, 0, 0, 0.025);
+    padding-right: 20px;
+    padding-left: 0px;
+  }
+  .roundContainer h3, .roundContainer .h3, .roundContainer .h3, .roundContainer .h3 {
+    padding-left: 13px;
+  }
+  .row {
+    --bs-gutter-x: 0px !important;
+  }
+}
+
+@media only screen and (max-width: 480px) {
+  .navbar .navbar-brand-wrapper {
+    width: 175px;
+  }
 }
 
 /* Sidebar */
@@ -29210,7 +29335,7 @@ a {
   -moz-transition: background 0.25s ease;
   -ms-transition: background 0.25s ease;
   box-shadow: none;
-  background: #242cea;
+  background: #000;
   /* Navbar color variations */
 }
 
@@ -29223,7 +29348,7 @@ a {
 }
 
 .navbar .navbar-brand-wrapper {
-  background: #242cea;
+  background: #000;
   transition: width 0.25s ease, background 0.25s ease;
   -webkit-transition: width 0.25s ease, background 0.25s ease;
   -moz-transition: width 0.25s ease, background 0.25s ease;
@@ -29266,7 +29391,7 @@ a {
 }
 
 .navbar .navbar-brand-wrapper .navbar-brand img {
-  max-width: 100%;
+  max-width: 80px;
   margin: auto;
   vertical-align: middle;
 }
@@ -29278,7 +29403,6 @@ a {
 
 .navbar .navbar-brand-wrapper .brand-logo-mini img {
   width: calc(200px - 30px);
-  max-width: 100%;
   margin: auto;
 }
 
@@ -29326,7 +29450,7 @@ a {
 }
 
 .navbar .navbar-menu-wrapper {
-  background: #242cea;
+  background: #000;
   transition: width 0.25s ease;
   -webkit-transition: width 0.25s ease;
   -moz-transition: width 0.25s ease;
@@ -29347,6 +29471,11 @@ a {
     padding-left: 15px;
     padding-right: 11px;
     height: auto;
+  }
+  .navbar .navbar-menu-wrapper img {
+    width: 150px;
+    height: 40px;
+    margin-top: 10px;
   }
 }
 
@@ -29782,7 +29911,7 @@ a {
 }
 
 .navbar.navbar-primary .navbar-menu-wrapper {
-  background: #242cea;
+  background: #000;
 }
 
 .navbar.navbar-primary:not(.navbar-light) .navbar-menu-wrapper .navbar-toggler {
@@ -29863,7 +29992,7 @@ a {
 }
 
 .navbar.navbar-secondary .navbar-menu-wrapper {
-  background: #F1F1F1;
+  background: #000;
 }
 
 .navbar.navbar-secondary:not(.navbar-light) .navbar-menu-wrapper .navbar-toggler {
@@ -29944,7 +30073,7 @@ a {
 }
 
 .navbar.navbar-success .navbar-menu-wrapper {
-  background: #34B1AA;
+  background: #000;
 }
 
 .navbar.navbar-success:not(.navbar-light) .navbar-menu-wrapper .navbar-toggler {
@@ -30025,7 +30154,7 @@ a {
 }
 
 .navbar.navbar-info .navbar-menu-wrapper {
-  background: #52CDFF;
+  background: #000;
 }
 
 .navbar.navbar-info:not(.navbar-light) .navbar-menu-wrapper .navbar-toggler {
@@ -30106,7 +30235,7 @@ a {
 }
 
 .navbar.navbar-warning .navbar-menu-wrapper {
-  background: #ffaf00;
+  background: #000;
 }
 
 .navbar.navbar-warning:not(.navbar-light) .navbar-menu-wrapper .navbar-toggler {
@@ -30187,7 +30316,7 @@ a {
 }
 
 .navbar.navbar-danger .navbar-menu-wrapper {
-  background: #F95F53;
+  background: #000;
 }
 
 .navbar.navbar-danger:not(.navbar-light) .navbar-menu-wrapper .navbar-toggler {
@@ -30268,7 +30397,7 @@ a {
 }
 
 .navbar.navbar-light .navbar-menu-wrapper {
-  background: #fbfbfb;
+  background: #000;
 }
 
 .navbar.navbar-light:not(.navbar-light) .navbar-menu-wrapper .navbar-toggler {
@@ -30349,7 +30478,7 @@ a {
 }
 
 .navbar.navbar-dark .navbar-menu-wrapper {
-  background: #1E283D;
+  background: #000;
 }
 
 .navbar.navbar-dark:not(.navbar-light) .navbar-menu-wrapper .navbar-toggler {
@@ -30453,9 +30582,12 @@ a {
   }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 550px) {
+  .navbar .navbar-menu-wrapper {
+    width: calc(100% - 100px);
+  }
   .navbar .navbar-brand-wrapper {
-    width: 55px;
+    width: 100px;
   }
   .navbar .navbar-brand-wrapper .brand-logo-mini {
     padding-top: 0px;
