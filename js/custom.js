@@ -57,7 +57,6 @@ clientsRef.on('value', function (snapshot) {
 
         // Get age
         let clientAge = getAge(result[clientKey].personal.dob);
-        console.log(result[clientKey].location);
 
         if (localStorage.getItem('access') !== 'Admin'){
             // Push names into array in preparation for autocomplete
@@ -67,7 +66,6 @@ clientsRef.on('value', function (snapshot) {
         }else{
             clientNames.push(result[clientKey].personal.name);
         }
-            console.log(clientNames);
         
             // Create new object with details for table
             clientDetails.push({
@@ -99,17 +97,10 @@ clientsRef.on('value', function (snapshot) {
             $('.planAppointmentsPage .appointmentTable tbody').html('');
             $(clientDetails).each(function (index, client) {
                 if (client.name == ui.item.value) {
-                    // console.log(client.name)
                     $('.planAppointmentsPage #physicalProblems').val(client.physical_problems);
                     $('.planAppointmentsPage #clientNotes').val(client.client_notes);
 
-                    // Look through appointments node
-                    // appointmentsRef.on('value', function (snapshot) {
-                    //     // Get snapshot value
-                    //     let result = snapshot.val();
                     let result = JSON.parse(localStorage.getItem('allAppointments'));
-                    console.log('result');
-                    console.log(result);
 
                     if (result == null){
                         $('.planAppointmentsPage .appointments').css('display','block');
@@ -143,8 +134,6 @@ clientsRef.on('value', function (snapshot) {
                             arr.reverse();
                               $(this).append(arr);
                           });
-                        console.log('appointments');
-                        console.log(appointments);
                     };
                 }
             })

@@ -240,7 +240,6 @@
 
     setTimeout(() => {
       $('.trainerDetailLink').click(function (e) {
-        console.log(e.target.innerHTML);
         let trainerName = e.target.innerHTML;
         trainerName = trainerName.replace(/\s/g, '_')
         window.location.replace('./staffDetail.html?trainer=' +  trainerName);

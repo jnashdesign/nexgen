@@ -93,17 +93,37 @@ Let me know when you are ready to migrate the data recorded so far and I will ex
 <br /><br />
 
 ## Migrating Users and Authentication Info
-There are two options here:
-1. I can use the Firebase CLI to export the user data and walk you through using it in your project to import it.
-2. Use a function I've created for your convenience.
+I've created a function to create user accounts for your convenience.
 
 There is a function at the bottom of the login.js file (currently commented out) that has an array of the locations and names. If that function is uncommented and you load the login page, it will automatically create all the authentication accounts listed. If you would like to add more accounts, just add another array where the first element is the email address and the second is the display name.
-
+<br /><br />
 ***Example Location***
 ```JavaScript
 ['buffalo@nexgenfitness.com', 'Buffalo']
 ```
+<br />
 
+***User Creation Snippet Example***
+```Javascript
+let userList = [
+  ['buffalo@nexgenfitness.com', 'Buffalo'], ['frisco@nexgenfitness.com', 'Frisco']
+];
+
+ ...
+
+userList.forEach(element => {
+         let email = element[0];
+         let displayName = element[1];
+         let password = 'PASSWORD'; 
+         //Add your password as string value here.
+         firebase.auth().signInWithEmailAndPassword(email, password)
+            .then(function(result) {
+            return result.user.updateProfile({
+                displayName: displayName
+            })
+        })
+     });
+```
 
 The way the function is written, each of these accounts will be given the same (hard coded) password. Once the accounts have been created, the user can always go in and change the password.
 <br /><br />

@@ -15,8 +15,6 @@ function getClientNotes(name) {
       let clientKey = `${key}`;
 
       if (clientKey == name) {
-        console.log("match");
-        console.log(result[clientKey].client_notes);
         $(document).ready(function () {
           // Push notes into page
           $(".editAppointmentsPage #clientNotes").val(result[clientKey].notes);
@@ -56,7 +54,6 @@ for (let i = 1; i <= setTotal; i++) {
 appointmentsRef.on("value", function (snapshot) {
   // Get snapshot value
   let result = snapshot.val();
-  // console.log(result);
 
   let clientKey;
   let matchingEntry;
@@ -70,9 +67,6 @@ appointmentsRef.on("value", function (snapshot) {
     if (info[0] == params) {
       matchingEntryExercises = result[clientKey].exercises;
       matchingEntryInfo = result[clientKey].info;
-
-      console.log(matchingEntryInfo);
-      console.log(matchingEntryExercises);
 
       getClientNotes(matchingEntryInfo.client.replace(/[ ,-,/]/g, "_"));
 

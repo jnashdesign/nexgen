@@ -263,7 +263,6 @@
 
     setTimeout(() => {
       $('.clientDetailLink').click(function (e) {
-        console.log(e.target.innerHTML);
         let clientName = e.target.innerHTML;
         clientName = clientName.replace(/\s/g, '_')
         window.location.replace('./client-detail.html?client=' +  clientName);

@@ -68,7 +68,6 @@ $(".planAppointmentsPage .submit").click(function () {
 });
 
 function submitAppointment(){
-        console.log('click');
 
     // Check if name, location or date are empty
     if ($('#clientName').val() == '' || $('#date').val() == '' || $('#locationName').val() == '') {
@@ -105,7 +104,6 @@ function submitAppointment(){
             // Push input values into log results array
             $('.exerciseLog .form-control').each(function (i, obj) {
                     logResults.push($(obj).val());
-                    console.log(logResults);
             });
 
             let aid;
@@ -537,8 +535,6 @@ function publishToDB(exerciseLog){
         appointmentsRef.update(exerciseLog, (error) => {
         if (error) {
             callAlert(error, 'danger')
-        } else {
-            console.log('Data saved successfully!')
         }
     });
 
