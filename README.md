@@ -1,29 +1,39 @@
 # NexGen Fitness
 ## Project Description
-NexGen fitness is in need of a web application to manage client appointments.
+The NexGen fitness app is in need of a web application to manage client appointments.
 <br /><br />
 
 ## Build/Compilation Technology Used
-This project is built using Gulp to compile and package all the HTML, CSS and Javascript files.
+This project is built using <strong>Gulp</strong> to compile and package all the HTML, CSS and Javascript files.
 <br /><br />
 
 ## Database and Authentication
 All data storage and authentication is managed through Google Firebase
 <br /><br />
 
-## How to set up and edit the project
+## How to Set Up and Edit the Project
 1. Clone the project from this repository using:
 ```
 https://github.com/jnashdesign/nexgen.git
 ```
 2. Run ```npm install``` to install all dependencies.
 3. Run the ```gulp``` command in the command line to build the app.
-4. Once the ```gulp``` command is done, it should launch a web browser and display the app locally at ```http://localhost:3000/```
+4. Once the ```gulp``` command is done, it should launch a web browser and display the app locally at ```http://localhost:3000/```.
 5. Log in and view the app.
 6. Make whatever changes you need to make
 7. Upload all the files (excluding node_modules, paackage-lock.js, package.json and this README.md file) to your hosted directory.
 <br /><br />
 
+## Changing "baseURL"
+The baseURL is set at the very top of the ```js/custom.js```. If you look there you'll find these lines:
+```
+// const baseURL = 'https://bleedblue.fitness';
+const baseURL = '';
+```
+
+Before you publish the files, make sure you update the baseURL.
+Just comment out the line that says ```const baseURL = '';``` and uncomment the line above with the URL you're publishing to.
+<br/><br/>
 ## Current Google Firebase Info
 ### Firebase Config
 ```
@@ -57,19 +67,21 @@ The security rules for this project is configured so access the database (red an
 ``` 
 <br />
 
-## Adding a new user to Firebase authentation
+## Adding a New User to Firebase Authentation
 Firebase makes authenitication and user management really easy. When you first create your project, use the step-by-step guidance Firebase provides and choose "Email/Password" as your sign-in method. There are other methods available but this is the easiest for users and the one I have set up for the project currently.
 
 Just navigate to the Authentication page and there's a button that says "Add User"
 <br /><br />
 
-## Styling and Updates
-Any changes you need to make in the future will likely be in the ```pages``` directory. Each page is named in a way that makes it's use obvious, for example (Addlocation.html, is the page you use to add a new location.)
+## Styling and Making Updates
+Any page changes you need to make in the future will likely be in the ```pages``` directory. Each page is named in a way that makes it's use obvious, for example (Addlocation.html, is the page you use to add a new location).
+
+The majority of JavaScript functions appear in ```js/custom.js``` or ```js/login.js```. There are a few functions that are specific to pages. Those functions either appear at the bottom of those pages or they have their own JS files, for example: ```plan_appointment.js```, ```view_appointment.js```.
 
 Most styling changes will be made in the ```scss/vertical-layout-light``` directory.
 <br /><br />
 ## Migration of the latest data to database
-Let me know when you are ready and I will export the database and send it over. 
+Let me know when you are ready to migrate the data recorded so far and I will export the database and provide it. 
 
 1. Save the exported JSON somewhere you can find it. 
 2. Log into your Firebase account.
@@ -80,7 +92,7 @@ Let me know when you are ready and I will export the database and send it over.
 7. Click the import button.
 <br /><br />
 
-## Migrating users and authentication info
+## Migrating Users and Authentication Info
 There are two options here:
 1. I can use the Firebase CLI to export the user data and walk you through using it in your project to import it.
 2. Use a function I've created for your convenience.
