@@ -303,7 +303,6 @@
             clientsRef.on('value', function (snapshot) {
                 // Get snapshot value
                 let result = snapshot.val();
-                //   console.log(result)
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
                 let clientInfo = urlParams.get('client');
@@ -318,7 +317,6 @@
                 let yr = fullDate[0];
                 let mo = fullDate[1];
                 let dy = fullDate[2];
-                //   console.log(result[clientInfo])
                 $('.clientDetailPage .name').html(result[clientInfo].personal.name);
                 $('.clientDetailPage .age').html(result[clientInfo].personal.age);
                 $('.clientDetailPage .dob').html(mo + '/' + dy + '/' + yr);
@@ -331,7 +329,6 @@
                 $('.clientDetailPage .status').addClass('badge badge-' + statusColor);
                 $('.clientDetailPage .status').html(result[clientInfo].status);
                 $('.clientDetailPage .location').html(result[clientInfo].location);
-                console.log(result[clientInfo]);
             });
 
             const urlSearchParams = new URLSearchParams(window.location.search);
@@ -341,7 +338,6 @@
             appointmentsRef.on('value', function (snapshot) {
                 // Get snapshot value
                 let result = snapshot.val();
-                // console.log(result);
                 // Loop through the keys
                 for (const [key, value] of Object.entries(result)) {
                     let clientKey = `${key}`;
@@ -349,7 +345,6 @@
 
                     if (info[3] == params) {
                         let matchingEntry = (result[clientKey]);
-                        console.log(matchingEntry);
                         if (matchingEntry.info.trainer.replace('-', ' ') == localStorage.getItem('name')){
                             $('body').append('<style>.editBtn {display: block;}</style>')
                         }else {

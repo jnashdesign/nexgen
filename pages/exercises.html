@@ -216,7 +216,6 @@
     $(document).ready(function () {
       var checkExist = setInterval(function () {
         if ($('.exerciseTable tbody tr').length) {
-          console.log("Exists!");
           $(".exerciseTable").fancyTable({
             inputStyle: "",
             globalSearch: true,
@@ -242,7 +241,6 @@
       setTimeout(() => {
         $('.exerciseName').click(function(e){
           let eid = e.target.id.split('_');
-          console.log(eid[1]);
         location.replace('./editExercise.html?exercise=' + eid[1]);
         });
       }, 2000);

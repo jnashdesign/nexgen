@@ -310,7 +310,6 @@
             } else {
                 statusColor = 'danger';
             }
-        //   console.log(result[trainerInfo]);
 
           let age = getAge(result[trainerInfo].personal.dob)
 
@@ -336,7 +335,6 @@
         appointmentsRef.on('value', function (snapshot) {
         // Get snapshot value
         let result = snapshot.val();
-        // console.log(result);
         let exerciseLog = [];
 
         // Loop through the keys
@@ -344,12 +342,8 @@
             let clientKey = `${key}`;
             let info = clientKey.split('|');
             let displayEdit = 'none';
-            // console.log(params)
-            // console.log(info[4])
             if (info[4] == params){
                 let matchingEntry = (result[clientKey]);
-                console.log('matchingEntry')
-                console.log(matchingEntry.info);
                 if (matchingEntry.info.trainer.replace('-', ' ') == localStorage.getItem('name')){
                     $('body').append('<style>.editBtn {display: block;}</style>')
                 }else {

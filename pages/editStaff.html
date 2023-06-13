@@ -320,8 +320,6 @@
           $('.editStaffPage #gender').val(result[trainerInfo].personal.gender);
           $('.editStaffPage #notes').val(result[trainerInfo].notes);
           $('.editStaffPage #status').val(result[trainerInfo].status);
-          console.log('status')
-          console.log(result[trainerInfo].status)
         });
 
         
@@ -329,7 +327,6 @@
 
             // Edit User
 $('.editStaffPage .submit').click(function (e) {
-    console.log('click');
     if ($('.editStaffPage #access').val() == '' ||
     $('.editStaffPage #email').val() == '' ||
     $('.editStaffPage #name').val() == '' ||
@@ -337,46 +334,44 @@ $('.editStaffPage .submit').click(function (e) {
         callAlert('Access, email, name, and location are required.', 'danger');
         return;
     } else {
-    console.log(e)
-    e.preventDefault();
+        e.preventDefault();
 
-    let access = $('.editStaffPage #access').val();
-    let dob = $('.editStaffPage #dob').val();
-    let phone = $('.editStaffPage #phone').val();
-    let email = $('.editStaffPage #email').val();
-    let name = $('.editStaffPage #name').val();
-    let key = $('.editStaffPage #name').val().replace(/ /g, "_");
-    let location = $('.editStaffPage #locationName').val();
-    let gender = $('.editStaffPage #gender').val();
-    let start_date = $('.editStaffPage #start_date').val();
-    let specialties = $('.editStaffPage #specialties').val();
-    let notes = $('.editStaffPage #notes').val();
-    let status = $('.editStaffPage #status').val();
-    console.log('click')
-            let success = 'Success! ' + name + ' has been updated.';
-            $('.editStaffPage .signInFeedback').css('display', 'block');
-            $('.editStaffPage .signInFeedback').addClass('success').text(success);
+        let access = $('.editStaffPage #access').val();
+        let dob = $('.editStaffPage #dob').val();
+        let phone = $('.editStaffPage #phone').val();
+        let email = $('.editStaffPage #email').val();
+        let name = $('.editStaffPage #name').val();
+        let key = $('.editStaffPage #name').val().replace(/ /g, "_");
+        let location = $('.editStaffPage #locationName').val();
+        let gender = $('.editStaffPage #gender').val();
+        let start_date = $('.editStaffPage #start_date').val();
+        let specialties = $('.editStaffPage #specialties').val();
+        let notes = $('.editStaffPage #notes').val();
+        let status = $('.editStaffPage #status').val();
+        let success = 'Success! ' + name + ' has been updated.';
+        $('.editStaffPage .signInFeedback').css('display', 'block');
+        $('.editStaffPage .signInFeedback').addClass('success').text(success);
 
-            // Add trainer to DB
-            trainerRef.update({
-                [key]: {
-                    access: access,
-                    location: location,
-                    notes: notes,
-                    personal: {
-                        dob: dob,
-                        email: email,
-                        gender: gender,
-                        name: name,
-                        phone: phone
-                    },
-                    specialties: specialties,
-                    start_date: start_date,
-                    status: status
-                }
-            }).then(function (res){
-                window.location.replace(baseURL + '/pages/staff.html');
-            });
+        // Add trainer to DB
+        trainerRef.update({
+            [key]: {
+                access: access,
+                location: location,
+                notes: notes,
+                personal: {
+                    dob: dob,
+                    email: email,
+                    gender: gender,
+                    name: name,
+                    phone: phone
+                },
+                specialties: specialties,
+                start_date: start_date,
+                status: status
+            }
+        }).then(function (res){
+            window.location.replace(baseURL + '/pages/staff.html');
+        });
     }
 });
 

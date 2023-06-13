@@ -26,7 +26,6 @@ exerciseRef.on('value', function (snapshot) {
 if (window.location.href.indexOf("editExercise.html") > -1) {
     const urlSearchParams = new URLSearchParams(window.location.search);
     const eid = urlSearchParams.get('exercise');
-    console.log(exerciseArray[eid].Exercise);
 
     $('#name').val(exerciseArray[eid].Exercise);
     $('#ulc').val(exerciseArray[eid].U_L_C);
