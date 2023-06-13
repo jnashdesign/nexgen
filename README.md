@@ -1,11 +1,9 @@
 # NexGen Fitness
 ## Project Description
-The NexGen fitness app is in need of a web application to manage client appointments.
-The NexGen fitness app is in need of a web application to manage client appointments.
+The NexGen fitness app is a web application to manage client appointments.
 <br /><br />
 
 ## Build/Compilation Technology Used
-This project is built using <strong>Gulp</strong> to compile and package all the HTML, CSS and Javascript files.
 This project is built using <strong>Gulp</strong> to compile and package all the HTML, CSS and Javascript files.
 <br /><br />
 
@@ -13,7 +11,6 @@ This project is built using <strong>Gulp</strong> to compile and package all the
 All data storage and authentication is managed through Google Firebase
 <br /><br />
 
-## How to Set Up and Edit the Project
 ## How to Set Up and Edit the Project
 1. Clone the project from this repository using:
 ```
