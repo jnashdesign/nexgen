@@ -263,12 +263,7 @@ exerciseRef.on('value', function (snapshot) {
                     date = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
 
                     // Add to value shown in input field
-                    console.log(ui.item.value.substring().length)
-                    // if (ui.item.value.substring().length > 10){
-                    //     ui.item.value = ui.item.value.substring(0, 10) + '... ' + ' (' + date + ')';
-                    // }else{
                         ui.item.value = ui.item.value + ' Last used:' + date;
-                    // }
                 }
             }
         });

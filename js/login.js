@@ -324,37 +324,36 @@ $(".editStaffPage .submit").click(function (e) {
 });
 
 // Function to add authentication accounts for locations
-$(document).ready(function () {
-  let userList = [
-    ["buffalo@nexgenfitness.com", "Buffalo"],
-    ["flowermound@nexgenfitness.com", "Flower Mound"],
-    ["frisco@nexgenfitness.com", "Frisco"],
-    ["southfrisco@nexgenfitness.com", "South Frisco"],
-    ["adriatica@nexgenfitness.com", "Adriatica"],
-    ["mckinney@nexgenfitness.com", "McKinney"],
-    ["nicholshills@nexgenfitness.com", "Nicols Hills"],
-    ["edmond@nexgenfitness.com", "Edmond"],
-    ["norman@nexgenfitness.com", "Norman"],
-    ["tulsa@nexgenfitness.com", "Tulsa"],
-    ["plano@nexgenfitness.com", "Plano"],
-    ["prosper@nexgenfitness.com", "Prosper"],
-    ["richardson@nexgenfitness.com", "Richardson"],
-    ["southlake@nexgenfitness.com", "Southlake"],
-    ["springfield@nexgenfitness.com", "Springfield"],
-    ["brian@nexgenfitness.com", "Brian Andrews"],
-  ];
+// $(document).ready(function () {
+//   let userList = [
+//     ["buffalo@nexgenfitness.com", "Buffalo"],
+//     ["flowermound@nexgenfitness.com", "Flower Mound"],
+//     ["frisco@nexgenfitness.com", "Frisco"],
+//     ["southfrisco@nexgenfitness.com", "South Frisco"],
+//     ["adriatica@nexgenfitness.com", "Adriatica"],
+//     ["mckinney@nexgenfitness.com", "McKinney"],
+//     ["nicholshills@nexgenfitness.com", "Nicols Hills"],
+//     ["edmond@nexgenfitness.com", "Edmond"],
+//     ["norman@nexgenfitness.com", "Norman"],
+//     ["tulsa@nexgenfitness.com", "Tulsa"],
+//     ["plano@nexgenfitness.com", "Plano"],
+//     ["prosper@nexgenfitness.com", "Prosper"],
+//     ["richardson@nexgenfitness.com", "Richardson"],
+//     ["southlake@nexgenfitness.com", "Southlake"],
+//     ["springfield@nexgenfitness.com", "Springfield"]
+//   ];
 
-  userList.forEach((element) => {
-    let email = element[0];
-    let displayName = element[1];
-    let password = "BleedBlue";
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(email, password)
-      .then(function (result) {
-        return result.user.updateProfile({
-          displayName: displayName,
-        });
-      });
-  });
-});
+//   userList.forEach((element) => {
+//     let email = element[0];
+//     let displayName = element[1];
+//     let password = "BleedBlue";
+//     firebase
+//       .auth()
+//       .signInWithEmailAndPassword(email, password)
+//       .then(function (result) {
+//         return result.user.updateProfile({
+//           displayName: displayName,
+//         });
+//       });
+//   });
+// });
