@@ -20333,7 +20333,7 @@ code {
   height: 10px;
   width: 10px;
   border-radius: 100%;
-  margin-right: 10px;
+  margin-right: 2px;
   display: inline-block;
   font-size: 1rem;
 }
@@ -22305,7 +22305,7 @@ code {
 .card .card-title.card-title-dash {
   font-style: normal;
   font-weight: 800;
-  font-size: 16px;
+  font-size: 18px;
   line-height: 22px;
   color: #1F1F1F;
   margin-bottom: 2px;
@@ -28935,6 +28935,27 @@ a {
 
 .dashboardLink {
   display: none !important;
+}
+
+.statScrollBox {
+  max-height: 180px;
+  overflow: scroll;
+}
+
+.statScrollBox .ms-3, .statScrollBox .rtl .settings-panel .sidebar-bg-options .rounded-circle, .rtl .settings-panel .sidebar-bg-options .statScrollBox .rounded-circle, .statScrollBox .rtl .settings-panel .sidebar-bg-options .color-tiles .tiles, .rtl .settings-panel .sidebar-bg-options .color-tiles .statScrollBox .tiles, .statScrollBox .rtl .settings-panel .color-tiles .sidebar-bg-options .tiles, .rtl .settings-panel .color-tiles .sidebar-bg-options .statScrollBox .tiles {
+  margin-left: 0 !important;
+}
+
+.statScrollBox .ms-3 small, .statScrollBox .rtl .settings-panel .sidebar-bg-options .rounded-circle small, .rtl .settings-panel .sidebar-bg-options .statScrollBox .rounded-circle small, .statScrollBox .rtl .settings-panel .sidebar-bg-options .color-tiles .tiles small, .rtl .settings-panel .sidebar-bg-options .color-tiles .statScrollBox .tiles small, .statScrollBox .rtl .settings-panel .color-tiles .sidebar-bg-options .tiles small, .rtl .settings-panel .color-tiles .sidebar-bg-options .statScrollBox .tiles small, .statScrollBox .ms-3 .small, .statScrollBox .rtl .settings-panel .sidebar-bg-options .rounded-circle .small, .rtl .settings-panel .sidebar-bg-options .statScrollBox .rounded-circle .small, .statScrollBox .rtl .settings-panel .sidebar-bg-options .color-tiles .tiles .small, .rtl .settings-panel .sidebar-bg-options .color-tiles .statScrollBox .tiles .small, .statScrollBox .rtl .settings-panel .color-tiles .sidebar-bg-options .tiles .small, .rtl .settings-panel .color-tiles .sidebar-bg-options .statScrollBox .tiles .small {
+  margin-left: 4px !important;
+}
+
+.loadingMessage {
+  display: none;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin: 2em auto;
+  text-align: center;
 }
 
 @media only screen and (max-width: 1000px) {

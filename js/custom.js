@@ -16,21 +16,93 @@ const trainerRef = firebase.database().ref('/people/staff');
 const locationRef = firebase.database().ref('/locations');
 const appointmentsRef= firebase.database().ref('/appointments');
 
+// Instantiate arrays
+let clientNames = [];
+let clientDetails = [];
+let appointmentDetails = [];
+let appointmentArray = [];
+
+
+
 // Check login status
 console.log('loggedIn = ' + localStorage.getItem('loggedIn'));
 
 $(document).ready(function(){
-    // Check if admin, if not, populate location and disable field
-    if (localStorage.getItem('access') !== 'Admin'){
-        $('.adminOnly').parent().css('display','none');
-        if (res.location !== location){
-            return;
+
+    function getAppointments() {
+        return new Promise(function (resolve, reject) {
+            $('.loadingMessage').show()
+          // Grab all appointment data from firebase
+          const appointmentsRef = firebase.database().ref("/appointments");
+          appointmentsRef.on("value", function (snapshot) {
+            // Get snapshot value
+            const appointmentData = snapshot.val();
+            resolve(appointmentData);
+            $('.loadingMessage').hide()
+          }, function (error) {
+            reject(error);
+          });
+        });
+      }
+      
+      // Usage
+      getAppointments()
+        .then(function (allAppointments) {
+            if ($('#clientName').length) {
+            // Add client names to autocomplete
+            $("#clientName").autocomplete({
+                source: clientNames,
+                select: function (e, ui) {
+                    let appointments = [];
+                    $('.planAppointmentsPage .appointmentTable tbody').html('');
+                    $(clientDetails).each(function (index, client) {
+                        if (client.name == ui.item.value) {
+                            $('.planAppointmentsPage #physicalProblems').val(client.physical_problems);
+                            $('.planAppointmentsPage #clientNotes').val(client.client_notes);
+
+                            if (allAppointments == null){
+                                $('.planAppointmentsPage .appointments').css('display','block');
+                                return;
+                            }else{
+                            $(document).ready(function(){
+                                $('.planAppointmentsPage .blocked').css('display','none');
+                            });
+                        
+                                // Loop through the keys
+                                for (const [key, value] of Object.entries(allAppointments)) {
+                                    
+                                    let clientKey = `${key}`;
+                                    let info = clientKey.split('|');
+
+                                    if (info[3] == client.name.replace(' ', '_')){
+                                        let matchingEntry = (allAppointments[clientKey]);
+                                        appointments.push(matchingEntry);
+                                        let dateArray = matchingEntry.info.date.split('-');
+                                        let lastUpdatedArray = matchingEntry.info.last_updated.split('-');
+                                        let date = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
+                                        let lastUpdated = lastUpdatedArray[1] + '/' + lastUpdatedArray[2] + '/' + lastUpdatedArray[0];
+                
+                                        localStorage.setItem('appointments', JSON.stringify(appointments));
+                                        $('.planAppointmentsPage .appointmentTable tbody').append('<tr><td><a target="_blank" class="mdi mdi-eye menu-icon" href="./viewAppointment.html?appointment=' + info[0] + '"></a></td><td><a class="mdi mdi-pencil menu-icon" href="./editAppointment.html?appointment=' + info[0] + '"></a></td><td>' + date + '</td><td>' + matchingEntry.info.location.replace('-', ' ') + '</td><td>' + matchingEntry.info.trainer.replace('-', ' ') + '</td><td>' + lastUpdated + '<td></tr>');
+                                    }
+                                    $('.planAppointmentsPage .appointments').css('display','block');
+                                }
+                                $('.planAppointmentsPage .appointmentTable tbody').each(function(elem,index){
+                                    var arr = $.makeArray($("tr",this).detach());
+                                    arr.reverse();
+                                    $(this).append(arr);
+                                });
+                            };
+                        }
+                    })
+                }
+            });
         }
-    }
-    appointmentsRef.on('value', function (snapshot) {
-        // Get snapshot value
-        localStorage.setItem('allAppointments', JSON.stringify(snapshot.val()));
     })
+    .catch(function (error) {
+        // Handle any errors that occurred during the retrieval
+        console.error("Error getting appointments: ", error);
+        });
 })
 
 // If not logged in, send to login page
@@ -43,12 +115,6 @@ if (document.location.href.indexOf('login.html') === -1 && localStorage.getItem(
 clientsRef.on('value', function (snapshot) {
     // Get snapshot value
     let result = snapshot.val();
-
-    // Instantiate arrays
-    let clientNames = [];
-    let clientDetails = [];
-    let appointmentDetails = [];
-    let appointmentArray = [];
 
     // Loop through clients
     for (const [key, value] of Object.entries(result)) {
@@ -89,56 +155,7 @@ clientsRef.on('value', function (snapshot) {
     })  
 
 
-    // Add client names to autocomplete
-    $("#clientName").autocomplete({
-        source: clientNames,
-        select: function (e, ui) {
-            let appointments = [];
-            $('.planAppointmentsPage .appointmentTable tbody').html('');
-            $(clientDetails).each(function (index, client) {
-                if (client.name == ui.item.value) {
-                    $('.planAppointmentsPage #physicalProblems').val(client.physical_problems);
-                    $('.planAppointmentsPage #clientNotes').val(client.client_notes);
 
-                    let result = JSON.parse(localStorage.getItem('allAppointments'));
-
-                    if (result == null){
-                        $('.planAppointmentsPage .appointments').css('display','block');
-                        return;
-                    }else{
-                    $(document).ready(function(){
-                        $('.planAppointmentsPage .blocked').css('display','none');
-                    });
-                
-                        // Loop through the keys
-                        for (const [key, value] of Object.entries(result)) {
-                            
-                            let clientKey = `${key}`;
-                            let info = clientKey.split('|');
-
-                            if (info[3] == client.name.replace(' ', '_')){
-                                let matchingEntry = (result[clientKey]);
-                                appointments.push(matchingEntry);
-                                let dateArray = matchingEntry.info.date.split('-');
-                                let lastUpdatedArray = matchingEntry.info.last_updated.split('-');
-                                let date = dateArray[1] + '/' + dateArray[2] + '/' + dateArray[0];
-                                let lastUpdated = lastUpdatedArray[1] + '/' + lastUpdatedArray[2] + '/' + lastUpdatedArray[0];
-        
-                                localStorage.setItem('appointments', JSON.stringify(appointments));
-                                $('.planAppointmentsPage .appointmentTable tbody').append('<tr><td><a target="_blank" class="mdi mdi-eye menu-icon" href="./viewAppointment.html?appointment=' + info[0] + '"></a></td><td><a class="mdi mdi-pencil menu-icon" href="./editAppointment.html?appointment=' + info[0] + '"></a></td><td>' + date + '</td><td>' + matchingEntry.info.location.replace('-', ' ') + '</td><td>' + matchingEntry.info.trainer.replace('-', ' ') + '</td><td>' + lastUpdated + '<td></tr>');
-                            }
-                            $('.planAppointmentsPage .appointments').css('display','block');
-                        }
-                        $('.planAppointmentsPage .appointmentTable tbody').each(function(elem,index){
-                            var arr = $.makeArray($("tr",this).detach());
-                            arr.reverse();
-                              $(this).append(arr);
-                          });
-                    };
-                }
-            })
-        }
-    });
 
     // Loop through client details
     clientDetails.forEach(function (res) {
@@ -152,7 +169,15 @@ clientsRef.on('value', function (snapshot) {
 
         let location = localStorage.getItem('location');
         
-
+        // Check if admin, if not, populate location and disable field
+        if (localStorage.getItem('access') !== 'Admin'){
+            $('.adminOnly').parent().css('display','none');
+            if (res.location !== location){
+                return;
+            }
+        }else{
+            $('.dashboardLink').removeClass('dashboardLink');
+        }
 
         // Clear all data in table
         $('.clientTable tbody').html('');
@@ -400,16 +425,17 @@ locationRef.on('value', function (snapshot) {
         }, 300);
     });
 
+    if ($('#locationName').length) {
+        // Add names to the autocomplete
+        $('input#locationName').autocomplete({
+            source: individualLocations
+        });
 
-    // Add names to the autocomplete
-    $('input#locationName').autocomplete({
-        source: individualLocations
-    });
-
-    // Add names to the autocomplete
-    $('input.location').autocomplete({
-        source: individualLocations
-    });
+        // Add names to the autocomplete
+        $('input.location').autocomplete({
+            source: individualLocations
+        });
+    }
 });
 
 

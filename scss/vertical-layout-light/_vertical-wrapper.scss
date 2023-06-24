@@ -402,6 +402,24 @@ a {
 .dashboardLink {
   display: none !important;
 }
+.statScrollBox {
+  max-height: 180px;
+  overflow: scroll;
+}
+.statScrollBox .ms-3 {
+  margin-left: 0 !important
+} 
+.statScrollBox .ms-3 small {
+  margin-left: 4px !important;
+}
+.loadingMessage {
+  display: none;
+  font-weight: bold;
+  font-size: 1.5em;
+  margin: 2em auto;
+  text-align: center;
+}
+
 @media only screen and (max-width: 1000px){
   .roundContainer {
     background: rgba(0, 0, 0, 0.025);

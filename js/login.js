@@ -4,6 +4,7 @@ let trainerInfo = [];
 // listen for auth status changes
 auth.onAuthStateChanged((user) => {
   console.log("auth state changed");
+  console.log(user);
   if (user) {
     localStorage.setItem("firebaseUID", user.uid);
     localStorage.setItem("loggedIn", "true");
@@ -16,22 +17,16 @@ auth.onAuthStateChanged((user) => {
       let result = snapshot.val();
       let name = localStorage.getItem("name").split(" ").join("_");
 
+      // Set localStorage for access, location and status
       localStorage.setItem("access", result[name].access);
       localStorage.setItem("location", result[name].location);
       localStorage.setItem("status", result[name].status);
+
     });
   } else {
     localStorage.setItem("loggedIn", "false");
   }
 });
-
-// Redirect if you land on the index for now
-if (
-  window.location.href.indexOf("index.html") > -1 ||
-  document.location.href.indexOf("pages") === -1
-) {
-  location.replace(baseURL + "/pages/planAppointment.html");
-}
 
 // Login Page clear storage
 if (window.location.href.indexOf("login.html") > -1) {
@@ -65,17 +60,15 @@ function submitLoginForm() {
   const password = $(".loginPage #password").val();
 
   // Log the user in
-  auth
-    .signInWithEmailAndPassword(email, password)
+  auth.signInWithEmailAndPassword(email, password)
     .then((cred) => {
       // Display feedback
       $(".loginPage .signInFeedback").css("display", "block");
       let success = "Success! Signing you in.";
       $(".loginPage .signInFeedback").addClass("success").text(success);
 
-      // Store name and email
+      // Store email from auth profile
       localStorage.setItem("email", cred.user.email),
-        localStorage.setItem("name", cred.user.displayName);
 
       // Redirect to the index page
       setTimeout(() => {
@@ -108,8 +101,8 @@ function checkUseStatus(email) {
       // Get key
       let trainerName = `${key}`;
       trainerEmail = result[trainerName].personal.email;
-
       if (email == trainerEmail) {
+        localStorage.setItem('name', result[trainerName].personal.name)
         if (result[trainerName].status == "Active") {
           location.replace(baseURL + "/pages/planAppointment.html");
         } else if (result[trainerName].status == "Inactive") {
@@ -175,7 +168,11 @@ $(".logout").click(function (e) {
 
   // Redirect back to login page
   setTimeout(() => {
-    location.replace("./login.html");
+    if (window.location.href.indexOf("index.html") > -1) {
+      location.replace("./pages/login.html");
+    }else{
+      location.replace("./login.html");
+    }
   }, 1000);
 });
 
@@ -326,20 +323,21 @@ $(".editStaffPage .submit").click(function (e) {
 // Function to add authentication accounts for locations
 // $(document).ready(function () {
 //   let userList = [
-//     ["buffalo@nexgenfitness.com", "Buffalo"],
-//     ["flowermound@nexgenfitness.com", "Flower Mound"],
-//     ["frisco@nexgenfitness.com", "Frisco"],
-//     ["southfrisco@nexgenfitness.com", "South Frisco"],
+//     ["adriatica@nexgenfitness.com", "Adriatica"]
+    // ["buffalo@nexgenfitness.com", "Buffalo"],
+    // ["flowermound@nexgenfitness.com", "Flower Mound"],
+    // ["frisco@nexgenfitness.com", "Frisco"],
+    // ["southfrisco@nexgenfitness.com", "South Frisco"],
 //     ["adriatica@nexgenfitness.com", "Adriatica"],
 //     ["mckinney@nexgenfitness.com", "McKinney"],
 //     ["nicholshills@nexgenfitness.com", "Nicols Hills"],
-//     ["edmond@nexgenfitness.com", "Edmond"],
+    // ["edmond@nexgenfitness.com", "Edmond"],
 //     ["norman@nexgenfitness.com", "Norman"],
 //     ["tulsa@nexgenfitness.com", "Tulsa"],
-//     ["plano@nexgenfitness.com", "Plano"],
+    // ["plano@nexgenfitness.com", "Plano"],
 //     ["prosper@nexgenfitness.com", "Prosper"],
 //     ["richardson@nexgenfitness.com", "Richardson"],
-//     ["southlake@nexgenfitness.com", "Southlake"],
+    // ["southlake@nexgenfitness.com", "Southlake"],
 //     ["springfield@nexgenfitness.com", "Springfield"]
 //   ];
 
