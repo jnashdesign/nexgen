@@ -93,16 +93,6 @@ const baseURL = '';
 Before you publish the files, make sure you update the baseURL.
 Just comment out the line that says ```const baseURL = '';``` and uncomment the line above with the URL you're publishing to.
 <br/><br/>
-## Changing "baseURL"
-The baseURL is set at the very top of the ```js/custom.js```. If you look there you'll find these lines:
-```
-// const baseURL = 'https://bleedblue.fitness';
-const baseURL = '';
-```
-
-Before you publish the files, make sure you update the baseURL.
-Just comment out the line that says ```const baseURL = '';``` and uncomment the line above with the URL you're publishing to.
-<br/><br/>
 
 ## Styling and Making Updates
 Any page changes you need to make in the future will likely be in the ```pages``` directory. Each page is named in a way that makes it's use obvious, for example (Addlocation.html, is the page you use to add a new location).
