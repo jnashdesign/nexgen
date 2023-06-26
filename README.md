@@ -151,7 +151,7 @@ The way the function is written, each of these accounts will be given the same (
 <br /><br />
 
 ## Managing Access
-Each user's data is managed inside the Realtime Database under ```people```. Staff user data is found in "you guessed it" ```people/staff```. Each staff member has an attribute called "access". By default, when a staff member is added, they are greated "Trainer" access. If you would like to upgrade their access to administrator, just change this value in the database to "Admin".
+Each user's data is managed inside the Realtime Database under ```people```. Staff user data is found in "you guessed it" ```people/staff```. Each staff member has an attribute called "access". By default, when a staff member is added, they are granted "Trainer" access. If you would like to upgrade their access to administrator, just change the "access" value in the database to "Admin".
 
 ***Example Staff Member***
 ```JSON
