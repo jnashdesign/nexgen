@@ -175,24 +175,7 @@ Each user's data is managed inside the Realtime Database under ```people```. Sta
   "status": "Active"
 }
 ```
-<br />
-
-## Dashboard Page
-I crated a dashboard page that shows some key metrics (numbers are always for the current year). These metrics include:
-- Appointments by Month
-- Appointments by State
-- Appointments by State and Day of the Week
-- Clients by Location
-- Appointments by Location
-- Appointments by Trainer
-
-This page automatically updates itself every time the page is loaded or refreshed. <br><br>
-***IMPORTANT NOTE***:
-Only users with the "Admin" access value can see the Dashboard link.<br><br>
-***Admin Dashboard***
-![Project Settings link](/images/readme/dashboard.png)
-
-<br><br>
+<br>
 ***IMPORTANT NOTE***: The data for the user and their login email address are tied together. When a user logs in, the app looks for a user data matching the authentication email. So if you were to change their email address, in the "edit staff" page or when editing your own profile, that login would no longer work. 
 
 For this reason, I have added the "disabled" attribute to the email input field on that page to avoid someone doing this in the future.
@@ -205,3 +188,18 @@ You would just add the attribute to the end of the input like this.
 <input id="email" type="email" class="form-control" name="email" placeholder="john.doe@nexgenfitness.com" disabled>
 
 ```
+
+## Dashboard Page
+Last but not least, I created a dashboard page that shows some key metrics (numbers are always for the current year). These metrics include:
+- Appointments by Month
+- Appointments by State
+- Appointments by State and Day of Week
+- Clients by Location
+- Appointments by Location
+- Appointments by Trainer
+
+This page automatically updates itself every time the page is loaded or refreshed. <br><br>
+***IMPORTANT NOTE***:
+Only users with the "Admin" access value can see the Dashboard link.<br><br>
+***Admin Dashboard***
+![Project Settings link](/images/readme/dashboard.png)
