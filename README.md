@@ -121,7 +121,7 @@ Most styling changes will be made in the ```scss/vertical-layout-light``` direct
 <br /><br />
 ## Migration of the latest data to database
 Let me know when you are ready to migrate the data recorded so far and I will export the database and provide it. 
-Let me know when you are ready to migrate the data recorded so far and I will export the database and provide it (an [export from 06/26/2023](./06262023_nexgenfitness-2021-default-rtdb-export.json) can be found in the root directory).
+Let me know when you are ready to migrate the data recorded so far and I will export the database and provide it (an [export from 06/26/2023](https://bleedblue.fitness/06262023_nexgenfitness-2021-default-rtdb-export.json) can be found in the root directory).
 
 1. Save the exported JSON somewhere you can find it. 
 2. Log into your Firebase account.
