@@ -1,4 +1,20 @@
 # NexGen Fitness
+## Table of Contents
+- [Project Description](#project-description)
+- [Build/Compilation Technology Used](#buildcompilation-technology-used)
+- [Database and Authentication](#database-and-authentication)
+- [How to Set Up and Edit the Project](#how-to-set-up-and-edit-the-project)
+- [Google Firebase Info](#google-firebase-info)
+- [Adding a New User to Firebase Authentation](#adding-a-new-user-to-firebase-authentation)
+- [Changing "baseURL"](#changing-baseurl)
+- [Styling and Making Updates](#styling-and-making-updates)
+- [Migration of the latest data to database](#migration-of-the-latest-data-to-database)
+- [Migrating Users and Authentication Info](#migrating-users-and-authentication-info)
+- [Managing Access](#managing-access)
+- [Dashboard Page](#dashboard-page)
+
+
+
 ## Project Description
 NexGen Fitness was tracking appointment data in spreadsheets and were in need of a web application to manage client appointments.
 <br /><br />
