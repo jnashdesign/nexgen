@@ -11,22 +11,6 @@ var inject = require('gulp-inject');
 var sourcemaps = require('gulp-sourcemaps');
 var concat = require('gulp-concat');
 var merge = require('merge-stream');
-var vftp = require("vinyl-ftp");
-
-
-var ftp = function() {
-    var conn = vftp.create({
-      host: "ftp.nupenetwork.com",
-      user: "jnashdesign@nupenetwork.com",
-      pass: "LKNupe#1911",
-      parallel: 1,
-      log: util.log
-    });
-    return gulp.src(["build/**"],{base:"build",dot:true})
-      .pipe(conn.newer("/jnashdev/consulting/nexgenfitness"))
-      .pipe(conn.dest("/jnashdev/consulting/nexgenfitness"));
-  };
-
 
 gulp.paths = {
     dist: 'dist',
